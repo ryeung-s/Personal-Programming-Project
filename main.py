@@ -48,8 +48,8 @@ def display_logo():
                     else:
                         print(line[:index])
 
-                sleep(0.05)
-                system('cls')
+                sleep(0.5)
+                clear_screen()
         
     except KeyboardInterrupt:
         print("STOPPED")
