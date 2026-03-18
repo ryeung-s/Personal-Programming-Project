@@ -45,7 +45,8 @@ def display_logo():
                     elif index > (len(list_logo[0])-40):
                         output_lines.append((" "*(index-counter)) + line[:index])
                     else:
-                        output_lines.append(line[:index])
+                        #output_lines.append(line[:index])
+                        pass
                 
                 clear_screen()
                 print('\n'.join(output_lines), end='')
