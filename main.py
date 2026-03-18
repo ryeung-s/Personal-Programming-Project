@@ -58,11 +58,13 @@
 # if __name__ == "__main__":
 #     display_logo()
 
+from os import system
 import os
 from time import sleep
 import sys
 
 def display_logo():
+    index = 1
     logo = """%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%##*#******
 @%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%##*#**++++
 @@@@@@@@@@%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%#*#******
@@ -90,29 +92,27 @@ def display_logo():
 @@@@@%%%**%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%#####%%%%%%%%%%%%%%##%#########################################################################%%=.=*#%##*#@@%@@%%##"""
     list_logo = logo.splitlines()
     counter = 40
-    max_index = len(list_logo[0])
-    index = 0
     try:
         while True:
-            # Build output in memory first
-            output_lines = []
-            for line in list_logo:
-                if index >= 40 and index <= (max_index - 40):
-                    output_lines.append((" " * (index - counter)) + line[index - counter:index])
-                elif index > (max_index - 40):
-                    output_lines.append((" " * (index - counter)) + line[:index])
-                else:
-                    output_lines.append(line[:index])
-            
-            # Clear and print all at once (reduces flicker)
-            sys.stdout.write('\033[2J\033[H' + '\n'.join(output_lines))
-            sys.stdout.flush()
-            sleep(0.05)
-            index += 1
-            if index > max_index:
-                index = 0
+            for index in range(len(list_logo[0])):
+                output_lines = []
+                for line in list_logo:
+                    if index >= 40 and index <= (len(list_logo[0])-40):
+                        output_lines.append((" "*(index-counter)) + line[index-counter:index])
+                    elif index > (len(list_logo[0])-40):
+                        output_lines.append((" "*(index-counter)) + line[:index])
+                    else:
+                        output_lines.append(line[:index])
+                
+                # Clear and print all at once (reduces flicker)
+                sys.stdout.write('\033[2J\033[H' + '\n'.join(output_lines))
+                sys.stdout.flush()
+                sleep(0.05)
+        
     except KeyboardInterrupt:
         print("STOPPED")
+        
+    index +=1
 
 if __name__ == "__main__":
     display_logo()   
