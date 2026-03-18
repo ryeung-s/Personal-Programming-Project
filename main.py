@@ -29,17 +29,18 @@ def display_logo():
 @@%%%%@%%%%%%##################################################%%%%######################***********###%################################################%%%+**#%***#@@@@@@@@@
 @@@@@%%%**%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%#####%%%%%%%%%%%%%%##%#########################################################################%%=.=*#%##*#@@%@@%%##"""
     list_logo = logo.splitlines()
-    while input() != "":
+    try:
+        while True:
+            for index in range(len(list_logo[0])):
+                for line in list_logo:
+                    #for i in range(len(line)):
+                    print(line[:index])
 
-        for index in range(len(list_logo[0])):
-            for line in list_logo:
-                #for i in range(len(line)):
-                print(line[:index])
-
-            sleep(0.1)
-            system("clear")
+                sleep(0.01)
+                system("clear")
         
-
+    except KeyboardInterrupt:
+        print("STOPPED")
         
     index +=1
 if __name__ == "__main__":
