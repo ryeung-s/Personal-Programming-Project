@@ -35,8 +35,10 @@ def display_logo():
             for index in range(len(list_logo[0])):
                 for line in list_logo:
                     #for i in range(len(line)):
-                    if index >= 40:
+                    if index >= 40 and index <= (len(list_logo[0])-40):
                         print((" "*(index-counter)) + line[index-counter:index])
+                    elif index > (len(list_logo[0])-40):
+                        print((" "*(40-index)) + line[:index])
                     else:
                         print(line[:index])
 
