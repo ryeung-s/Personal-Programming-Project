@@ -60,9 +60,7 @@
 
 import os
 from time import sleep
-
-def clear_screen():
-    print('\033[2J\033[H', end='')
+import sys
 
 def display_logo():
     logo = """%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%##*#******
@@ -96,14 +94,19 @@ def display_logo():
     index = 0
     try:
         while True:
-            clear_screen()
+            # Build output in memory first
+            output_lines = []
             for line in list_logo:
                 if index >= 40 and index <= (max_index - 40):
-                    print((" " * (index - counter)) + line[index - counter:index])
+                    output_lines.append((" " * (index - counter)) + line[index - counter:index])
                 elif index > (max_index - 40):
-                    print((" " * (index - counter)) + line[:index])
+                    output_lines.append((" " * (index - counter)) + line[:index])
                 else:
-                    print(line[:index])
+                    output_lines.append(line[:index])
+            
+            # Clear and print all at once (reduces flicker)
+            sys.stdout.write('\033[2J\033[H' + '\n'.join(output_lines))
+            sys.stdout.flush()
             sleep(0.05)
             index += 1
             if index > max_index:
