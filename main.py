@@ -1,5 +1,6 @@
 ### Personal Programming Project - Ryan Yeung
-import os
+from os import system
+from time import sleep
 def display_logo():
     logo = """%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%##*#******
 @%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%##*#**++++
@@ -29,8 +30,9 @@ def display_logo():
     list_logo = logo.splitlines()
     for line in list_logo:
         for i in range(len(line)):
-            print(line[i])
-        os.system("clear")
+            print(line[:i])
+            sleep(0.001)
+            system("clear")
 if __name__ == "__main__":
     display_logo()
 
