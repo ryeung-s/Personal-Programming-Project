@@ -29,12 +29,15 @@ def display_logo():
 @@%%%%@%%%%%%##################################################%%%%######################***********###%################################################%%%+**#%***#@@@@@@@@@
 @@@@@%%%**%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%#####%%%%%%%%%%%%%%##%#########################################################################%%=.=*#%##*#@@%@@%%##"""
     list_logo = logo.splitlines()
-    for index in range(len(list_logo[0])):
-        for line in list_logo:
-            #for i in range(len(line)):
-            print(line[:index])
+    while input() != "":
+
+        for index in range(len(list_logo[0])):
+            for line in list_logo:
+                #for i in range(len(line)):
+                print(line[:index])
 
             sleep(0.1)
+            system("clear")
         
 
         
