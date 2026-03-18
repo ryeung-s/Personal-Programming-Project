@@ -58,13 +58,14 @@
 # if __name__ == "__main__":
 #     display_logo()
 
-import curses
-import time
+import os
+from time import sleep
 
-def display_logo(stdscr):
-    curses.curs_set(0)  # Hide cursor
-    logo = """
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%##*#******
+def clear_screen():
+    print('\033[2J\033[H', end='')
+
+def display_logo():
+    logo = """%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%##*#******
 @%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%##*#**++++
 @@@@@@@@@@%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%#*#******
 @@@@@@%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%##+:-***
@@ -93,20 +94,22 @@ def display_logo(stdscr):
     counter = 40
     max_index = len(list_logo[0])
     index = 0
-    while True:
-        stdscr.clear()  # Clear in curses (smoother)
-        for line in list_logo:
-            if index >= 40 and index <= (max_index - 40):
-                stdscr.addstr((" " * (index - counter)) + line[index - counter:index] + '\n')
-            elif index > (max_index - 40):
-                stdscr.addstr((" " * (index - counter)) + line[:index] + '\n')
-            else:
-                stdscr.addstr(line[:index] + '\n')
-        stdscr.refresh()
-        time.sleep(0.05)
-        index += 1
-        if index > max_index:
-            index = 0  # Loop the animation
+    try:
+        while True:
+            clear_screen()
+            for line in list_logo:
+                if index >= 40 and index <= (max_index - 40):
+                    print((" " * (index - counter)) + line[index - counter:index])
+                elif index > (max_index - 40):
+                    print((" " * (index - counter)) + line[:index])
+                else:
+                    print(line[:index])
+            sleep(0.05)
+            index += 1
+            if index > max_index:
+                index = 0
+    except KeyboardInterrupt:
+        print("STOPPED")
 
 if __name__ == "__main__":
-    curses.wrapper(display_logo)   
+    display_logo()   
