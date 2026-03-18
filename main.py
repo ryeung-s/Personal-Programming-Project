@@ -61,7 +61,12 @@
 from os import system
 import os
 from time import sleep
-import sys
+
+def clear_screen():
+    if os.name == 'nt':
+        _ = system('cls')
+    elif os.name == 'posix':
+        _ = system('clear')
 
 def display_logo():
     index = 1
@@ -104,9 +109,9 @@ def display_logo():
                     else:
                         output_lines.append(line[:index])
                 
-                # Clear and print all at once (reduces flicker)
-                sys.stdout.write('\033[2J\033[H' + '\n'.join(output_lines))
-                sys.stdout.flush()
+                # Clear screen and print all output at once
+                clear_screen()
+                print('\n'.join(output_lines), end='')
                 sleep(0.05)
         
     except KeyboardInterrupt:
