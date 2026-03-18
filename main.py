@@ -54,7 +54,7 @@ def display_logo():
                     else:
                         outputlines.append(line[:index])
                 print("\n".join(outputlines))
-                sleep(0.05)
+                sleep(0.5)
                 clear_screen()
         
     except KeyboardInterrupt:
