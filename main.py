@@ -1,6 +1,12 @@
 ### Personal Programming Project - Ryan Yeung
 from os import system
+import os
 from time import sleep
+def clear_screen():
+    if os.name == 'nt':
+        _ = system('cls')
+    elif os.name == 'posix':
+        _ = system('clear')
 def display_logo():
     index = 1
     logo = """%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%##*#******
@@ -42,8 +48,8 @@ def display_logo():
                     else:
                         print(line[:index])
 
-                sleep(0.005)
-                system("clear")
+                sleep(0.05)
+                system('cls')
         
     except KeyboardInterrupt:
         print("STOPPED")
