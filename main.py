@@ -40,8 +40,8 @@ def display_logo():
                     elif index > (len(list_logo[0])-40):
                         print((" "*(40-index)) + line[:index])
                     else:
-                        print(line[:index])
-
+                        #print(line[:index])
+                        pass
                 sleep(0.005)
                 system("clear")
         
