@@ -29,14 +29,18 @@ def display_logo():
 @@%%%%@%%%%%%##################################################%%%%######################***********###%################################################%%%+**#%***#@@@@@@@@@
 @@@@@%%%**%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%#####%%%%%%%%%%%%%%##%#########################################################################%%=.=*#%##*#@@%@@%%##"""
     list_logo = logo.splitlines()
+    counter = 40
     try:
         while True:
             for index in range(len(list_logo[0])):
                 for line in list_logo:
                     #for i in range(len(line)):
-                    print(line[:index])
+                    if index >= 40:
+                        print((" "*(index-counter)) + line[index-counter:index])
+                    else:
+                        print(line[:index])
 
-                sleep(0.01)
+                sleep(0.005)
                 system("clear")
         
     except KeyboardInterrupt:
