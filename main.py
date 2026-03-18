@@ -42,15 +42,16 @@ def display_logo():
                 for line in list_logo:
                     #for i in range(len(line)):
                     if index >= 40 and index <= (len(list_logo[0])-40):
-                        #print((" "*(index-counter)) + line[index-counter:index])
+                        print((" "*(index-counter)) + line[index-counter:index])
                         pass
-                    #elif index > (len(list_logo[0])-40):
+                    elif index > (len(list_logo[0])-40):
                         #print((" "*(index-counter)) + line[:index])
+                        print(index)
                         pass
                     else:
                         print(line[:index])
 
-                sleep(0.5)
+                sleep(0.05)
                 clear_screen()
         
     except KeyboardInterrupt:
