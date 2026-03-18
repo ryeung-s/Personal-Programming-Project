@@ -33,8 +33,9 @@ def display_logo():
         for i in range(len(line)):
             print(line[:index])
             
-        sleep(1)
         system("clear")
+        sleep(1)
+        
         index +=1
 if __name__ == "__main__":
     display_logo()
