@@ -31,7 +31,7 @@ def display_logo():
     list_logo = logo.splitlines()
     for line in list_logo:
         #for i in range(len(line)):
-        print(line)
+        print(line[:index])
 
         sleep(0.1)
         
