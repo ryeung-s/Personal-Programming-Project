@@ -47,13 +47,13 @@ def display_logo():
                         outputlines.append((" "*(index-counter)) + line[index-counter:index])
                         pass
                     elif index >= (len(list_logo[0])-10):
-                        outputlines.append((" "*(index-counter)) + line[index:])
+                        outputlines.append((" "*(index-counter+35)) + line[index:])
                         
                         pass
                     else:
                         outputlines.append(line[:index])
                 print("\n".join(outputlines))
-                sleep(0.05)
+                sleep(0.005)
             
                 clear_screen()
             
