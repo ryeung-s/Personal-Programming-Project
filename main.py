@@ -43,7 +43,7 @@ def display_logo():
                 outputlines= []
                 for line in list_logo:
                     #for i in range(len(line)):
-                    if index > 40 and index <= (len(list_logo[0])):
+                    if index > 40:
                         outputlines.append((" "*(index-counter)) + line[index-counter:index])
                         print(index, counter, (index-counter))
                         pass
