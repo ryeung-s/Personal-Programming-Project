@@ -40,6 +40,7 @@ def display_logo():
     try:
         while True:
             for index in range(len(list_logo[0])):
+                index - 40
                 outputlines= []
                 for line in list_logo:
                     #for i in range(len(line)):
