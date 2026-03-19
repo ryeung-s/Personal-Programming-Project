@@ -63,6 +63,6 @@ def display_logo():
     except KeyboardInterrupt:
         print("STOPPED")
         
-    index +=1
+    
 if __name__ == "__main__":
     display_logo()
