@@ -49,7 +49,7 @@ def display_logo():
                         print(index, counter, (index-counter))
                         pass
                     elif index >= (len(list_logo[0])):
-                        outputlines.append((" "*(index-counter)) + line[index-counter:])
+                        outputlines.append((" "*(index-counter)) + line[index:])
                         
                         pass
                     else:
