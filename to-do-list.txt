@@ -1,0 +1,4 @@
+fix ansi escape codes [ ]
+finish last part of casino animation [ ]
+finish second part of intro animation [ ]
+fix keyboard interrupt error [ ]

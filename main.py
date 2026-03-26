@@ -2,12 +2,44 @@
 from os import system
 import os
 from time import sleep
+import sys
+from random import randint
+ESC = "\\x1b"
+CLEAR_SCREEN = f"{ESC}[2J"
+CURSOR_HOME = f"{ESC}[H"
+HIDE_CURSOR = f"{ESC}[?25l"
+SHOW_CURSOR = f"{ESC}[?25h"
+PlayingBJ = False
+PlayingPoker = False
+PlayingRoulette = False
+def typeWriter(text):
+    index = 0
+    for character in text:
+        
+        sys.stdout.write(character)
+        sys.stdout.flush()
+        if text[index-1] == text[index]:
+            sleep(randint(8, 20) / 200)
+        elif text[index].isalpha():
+            sleep(randint(1, 8) / 200)
+        else:
+            sleep(randint(6, 20) / 200)
+        index += 1
+        
 def clear_screen():
     if os.name == 'nt':
         _ = system('cls')
+        from ctypes import windll
+        k = windll.kernel32
+        k.SetConsoleMode(k.GetStdHandle(-11), 7)
     elif os.name == 'posix':
         _ = system('clear')
 def display_logo():
+    if os.name == 'nt':
+        _ = system('cls')
+        from ctypes import windll
+        k = windll.kernel32
+        k.SetConsoleMode(k.GetStdHandle(-11), 7)
     index = 1
     logo = """%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%##*#******
 @%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%##*#**++++
@@ -40,28 +72,102 @@ def display_logo():
     try:
         while True:
             for index in range(len(list_logo[0])):
+                index - 40
                 outputlines= []
                 for line in list_logo:
                     #for i in range(len(line)):
-                    if index >= 40 and index < (len(list_logo[0])-40):
-                        outputlines.append((" "*(index-counter)) + line[index-counter:index])
+                    if index > 40:
+                        print((" "*(index-counter)) + line[index-counter:index])
+                        #print(index, counter, (index-counter))
                         pass
-                    elif index >= (len(list_logo[0])-30):
-                        outputlines.append((" "*(index-counter-10)) + line[index:])
+                    elif index >= (len(list_logo[0])):
+                        print((" "*(index-counter)) + line[index:])
                         
                         pass
                     else:
-                        outputlines.append(line[:index])
-                print("\n".join(outputlines))
-                sleep(0.05)
+                        print(line[:index])
+                        pass
+                
             
-                clear_screen()
-            
+                #sys.stdout.write(CLEAR_SCREEN)
+                #sys.stdout.write(CURSOR_HOME)
+                print("\n")
+                sleep(0.01)
         
     except KeyboardInterrupt:
         print("STOPPED")
-        
-    index +=1
-if __name__ == "__main__":
-    display_logo()
+        menu()
+def menuprint():
+    if PlayingBJ:
+        menuoptions = """
+        1. Home
+        2. Continue Playing
+        3. Settings
+        4. Exit
+        """
+    elif PlayingPoker:
+        menuoptions = """
+        1. Home
+        2. Continue Playing
+        3. AI difficulty
+        4. Settings
+        5. Exit
+        """
+    elif PlayingRoulette:
+        menuoptions = """
+        1. Home
+        2. Continue Playing
+        3. Luck
+        4. Settings
+        5. Exit
+        """
+    else:
+        menuoptions = """
+        1. Play Blackjack
+        2. Play Poker
+        3. Play Roulette
+        4. Settings
+        5. Exit
+        """
+    return menuoptions
+def menu():
+    menuoptions = menuprint()
     
+    menulist = menuoptions.splitlines()
+    for line in menulist:
+        for chr in line:
+            typeWriter(chr)
+        print("\n")
+    for i in range(len(menulist)):
+        menulist[i] = menulist[i].strip()
+        menulist[i] = menulist[i].replace(" ", "")
+    menulist.pop(0)
+    menulist.pop(-1)
+    subs = {}
+    for i in range(len(menulist)):
+        x = menulist[i][2:]
+        subs[str(i+1)] = eval(x)
+        
+    x = input()
+    if x in subs:
+        subs[x]()
+        
+def PlayBlackjack():
+    print("Playing Blackjack")
+    pass
+def PlayPoker():
+    print("Playing Poker")
+    pass
+def PlayRoulette():
+    print("Playing Roulette")
+
+    pass
+def Settings():
+    print("Settings")
+    pass
+def Exit():
+    print("Exiting")
+    pass   
+if __name__ == "__main__":
+    # display_logo()
+    menu()
