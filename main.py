@@ -89,8 +89,8 @@ def display_logo():
                         pass
                 
             
-                #sys.stdout.write(CLEAR_SCREEN)
-                #sys.stdout.write(CURSOR_HOME)
+                sys.stdout.write(CLEAR_SCREEN)
+                sys.stdout.write(CURSOR_HOME)
                 print("\n")
                 sleep(0.01)
         
