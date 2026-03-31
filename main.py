@@ -92,7 +92,7 @@ def display_logo():
                 frame = "\033[H" + "\n".join(buffer)
                 sys.stdout.write(frame)
                 sys.stdout.flush()
-                sleep(0.016)  
+                sleep(0.006)  
             clear_screen()
                 
         
