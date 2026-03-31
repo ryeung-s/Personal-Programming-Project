@@ -169,5 +169,5 @@ def Exit():
     print("Exiting")
     pass   
 if __name__ == "__main__":
-    # display_logo()
+    display_logo()
     menu()
