@@ -71,13 +71,13 @@ def display_logo():
     counter = 40
     try:
         while True:
-            for index in range(len(list_logo[0])):
-                index - 40
+            for index in range(len(list_logo[0])+40):
+                
                 buffer= []
 
                 for line in list_logo:
                     #for i in range(len(line)):
-                    print(index, counter, (index-counter))
+                    
                     if index > 40:
                         buffer.append((" "*(index-counter)) + line[index-counter:index])
                         #print(index, counter, (index-counter))
