@@ -92,7 +92,7 @@ def display_logo():
                 sys.stdout.write(frame)
                 sys.stdout.flush()
                 sleep(delay)  
-                clear_screen()
+                
             clear_screen()
                 
         
