@@ -89,9 +89,11 @@ def display_logo():
                         buffer.append(line[:index])
                         pass
                 
-                sleep(0.016)       
-                sys.stdout.write(CLEAR_SCREEN + CURSOR_HOME)
-                
+                frame = "\033[H" + "\n".join(buffer)
+                sys.stdout.write(frame)
+                sys.stdout.flush()
+                sleep(0.016)  
+            clear_screen()
                 
         
     except KeyboardInterrupt:
