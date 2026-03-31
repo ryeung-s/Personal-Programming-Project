@@ -86,7 +86,7 @@ def display_logo():
 
                         pass
                     else:
-                        buffer.append(line[:index])
+                        #buffer.append(line[:index])
                         pass
                 
                 frame = "\033[H" + "\n".join(buffer)
