@@ -4,7 +4,7 @@ import os
 from time import sleep
 import sys
 from random import randint
-ESC = "\\x1b"
+ESC = "\x1b"
 CLEAR_SCREEN = f"{ESC}[2J"
 CURSOR_HOME = f"{ESC}[H"
 HIDE_CURSOR = f"{ESC}[?25l"
@@ -88,11 +88,11 @@ def display_logo():
                         print(line[:index])
                         pass
                 
-            
+                sleep(0.09)       
                 sys.stdout.write(CLEAR_SCREEN)
                 sys.stdout.write(CURSOR_HOME)
                 print("\n")
-                sleep(0.01)
+                
         
     except KeyboardInterrupt:
         print("STOPPED")
