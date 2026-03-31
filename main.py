@@ -87,7 +87,10 @@ def display_logo():
                         buffer.append(line[(len(list_logo[0])-index):] + (" "*(index-counter-index)) + line[index:])
                         #print(index, len(list_logo[0]), (len(list_logo[0])-index))
                         delay = 0.1
-                        
+                    else:
+                        buffer.append(line[:index])
+                        #print(index, index)
+                        delay = 0.016    
                 
                 frame = "\033[H" + "\n".join(buffer)
                 sys.stdout.write(frame)
