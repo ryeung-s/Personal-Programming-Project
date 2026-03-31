@@ -88,9 +88,8 @@ def display_logo():
                         print(line[:index])
                         pass
                 
-                sleep(0.09)       
-                sys.stdout.write(CLEAR_SCREEN)
-                sys.stdout.write(CURSOR_HOME)
+                sleep(0.01)       
+                clear_screen()
                 
                 
         
