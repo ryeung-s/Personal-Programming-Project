@@ -91,7 +91,7 @@ def display_logo():
                 sleep(0.09)       
                 sys.stdout.write(CLEAR_SCREEN)
                 sys.stdout.write(CURSOR_HOME)
-                print("\n")
+                
                 
         
     except KeyboardInterrupt:
