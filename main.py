@@ -84,7 +84,7 @@ def display_logo():
                         #print(index, counter, (index-counter))
                         delay = 0.016
                     elif index >= (len(list_logo[0])) or index <= 40:
-                        buffer.append(line[(len(list_logo[0])-index):] + (" "*(index-counter-index)) + line[index:])
+                        buffer.append(line[(len(list_logo[0])-index):]+(" "*index)) ###+ (" "*(index-counter-index)) + line[index:] ###
                         #print(index, len(list_logo[0]), (len(list_logo[0])-index))
                         delay = 0.1
                 
