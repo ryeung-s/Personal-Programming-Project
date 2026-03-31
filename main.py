@@ -71,8 +71,8 @@ def display_logo():
     counter = 40
     try:
         while True:
-            for index in range(len(list_logo[0])):
-                index - 40
+            for index in range(len(list_logo[0])+40):
+                
                 buffer= []
 
                 for line in list_logo:
@@ -92,7 +92,7 @@ def display_logo():
                 frame = "\033[H" + "\n".join(buffer)
                 sys.stdout.write(frame)
                 sys.stdout.flush()
-                sleep(0.06)  
+                sleep(0.016)  
             clear_screen()
                 
         
