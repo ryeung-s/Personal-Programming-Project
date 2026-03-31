@@ -73,23 +73,24 @@ def display_logo():
         while True:
             for index in range(len(list_logo[0])):
                 index - 40
-                outputlines= []
+                buffer= []
+
                 for line in list_logo:
                     #for i in range(len(line)):
                     if index > 40:
-                        print((" "*(index-counter)) + line[index-counter:index])
+                        buffer.append((" "*(index-counter)) + line[index-counter:index])
                         #print(index, counter, (index-counter))
                         pass
                     elif index >= (len(list_logo[0])):
-                        print((" "*(index-counter)) + line[index:])
-                        
+                        buffer.append((" "*(index-counter)) + line[index:])
+
                         pass
                     else:
-                        print(line[:index])
+                        buffer.append(line[:index])
                         pass
                 
                 sleep(0.016)       
-                clear_screen()
+                sys.stdout.write(CLEAR_SCREEN + CURSOR_HOME)
                 
                 
         
