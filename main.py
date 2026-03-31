@@ -81,12 +81,12 @@ def display_logo():
                         buffer.append((" "*(index-counter)) + line[index-counter:index])
                         #print(index, counter, (index-counter))
                         pass
-                    elif index >= (len(list_logo[0])) or index < 40:
-                        buffer.append((" "*(index-counter)) + line[index:])
+                    elif index >= (len(list_logo[0])):
+                        buffer.append(line[:index] + " "*(index-counter) + line[index:])
 
                         pass
-                    else:
-                        #buffer.append(line[:index])
+                    elif index <= 40:
+                        buffer.append(line[:index])
                         pass
                 
                 frame = "\033[H" + "\n".join(buffer)
