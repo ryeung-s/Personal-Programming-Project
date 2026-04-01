@@ -77,7 +77,7 @@ def display_logo():
 
                 for line in list_logo:
                     #for i in range(len(line)):
-                    if index > 40:
+                    if index > 40 and index < (len(list_logo[0])):
                         buffer.append((" "*(index-counter)) + line[index-counter:index])
                         #print(index, counter, (index-counter))
                         pass
