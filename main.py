@@ -82,7 +82,7 @@ def display_logo():
                         #print(index, counter, (index-counter))
                         pass
                     elif index >= (len(list_logo[0])):
-                        buffer.append(line[:160-index] + " "*(160-index) + line[index-counter:index])
+                        buffer.append(line[:160-index])
                         #print(index, counter, (index-counter))
                         pass
                     elif index <= 40:
@@ -91,8 +91,9 @@ def display_logo():
                 
                 frame = "\033[H" + "\n".join(buffer)
                 sys.stdout.write(frame)
-                sys.stdout.flush()
+                #sys.stdout.flush()
                 sleep(0.016)  
+                clear_screen()
             clear_screen()
                 
         
