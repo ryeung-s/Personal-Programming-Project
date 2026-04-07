@@ -80,19 +80,22 @@ def display_logo():
                     if index > 40 and index < (len(list_logo[0])):
                         buffer.append((" "*(index-counter)) + line[index-counter:index])
                         #print(index, counter, (index-counter))
+                        delay = 0.016
                         pass
                     elif index >= (len(list_logo[0])):
                         #buffer.append(line[:index-180])
-                        print(index, counter, (index-counter),index-180)
+                        print(index, counter, (index-counter),index-160)
+                        delay = 1
                         pass
                     elif index <= 40:
                         buffer.append(line[:index])
+                        delay = 0.016
                         pass
                 
                 frame = "\033[H" + "\n".join(buffer)
                 sys.stdout.write(frame)
                 sys.stdout.flush()
-                sleep(0.06)
+                sleep(delay)
             sleep(100)      
             clear_screen()
         
