@@ -78,14 +78,14 @@ def display_logo():
                 for line in list_logo:
                     #for i in range(len(line)):
                     if index > 40 and index < (len(list_logo[0])):
-                        buffer.append((" "*(index-counter)) + line[index-counter:index])
-                        #print(index, counter, (index-counter))
-                        delay = 0.016
+                        #buffer.append((" "*(index-counter)) + line[index-counter:index])
+                        print(index, counter, (index-counter),index-160)
+                        delay = 1
                         pass
                     elif index >= (len(list_logo[0])):
                         #buffer.append(line[:index-180])
                         print(index, counter, (index-counter),index-160)
-                        delay = 1
+                        delay = 2
                         pass
                     elif index <= 40:
                         buffer.append(line[:index])
@@ -96,7 +96,7 @@ def display_logo():
                 sys.stdout.write(frame)
                 sys.stdout.flush()
                 sleep(delay)
-            sleep(100)      
+
             clear_screen()
         
     except KeyboardInterrupt:
