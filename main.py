@@ -92,9 +92,9 @@ def display_logo():
                 frame = "\033[H" + "\n".join(buffer)
                 sys.stdout.write(frame)
                 sys.stdout.flush()
-                sleep(0.06)  
+                sleep(0.06)
+            sleep(100)      
             clear_screen()
-                
         
     except KeyboardInterrupt:
         print("STOPPED")
