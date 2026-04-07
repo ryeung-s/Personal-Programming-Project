@@ -83,7 +83,7 @@ def display_logo():
                         
                         pass
                     elif index >= (len(list_logo[0])):
-                        buffer.append(line[:index-173] + (" "*173) + line[index:])
+                        buffer.append(line[:index-173] + (" "*173) + line[index])
                         #print(index, counter, (index-counter),(index-173),len(list_logo[0]))
                         
                         pass
