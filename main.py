@@ -78,17 +78,17 @@ def display_logo():
                 for line in list_logo:
                     #for i in range(len(line)):
                     if index > 40 and index < (len(list_logo[0])):
-                        #buffer.append((" "*(index-counter)) + line[index-counter:index])
-                        print(index, counter, (index-counter),(index-160),len(list_logo[0])+40)
+                        buffer.append((" "*(index-counter)) + line[index-counter:index])
+                        #print(index, counter, (index-counter),(index-160),len(list_logo[0])+40)
                         delay = 0.4
                         pass
                     elif index >= (len(list_logo[0])):
-                        #buffer.append(line[:index-180])
-                        print(index, counter, (index-counter),(index-160),len(list_logo[0])+40)
+                        buffer.append(line[:index-173])
+                        #print(index, counter, (index-counter),(index-173),len(list_logo[0]))
                         delay = 0.8
                         pass
                     elif index <= 40:
-                        #buffer.append(line[:index])
+                        buffer.append(line[:index])
                         delay = 0.016
                         pass
                 
