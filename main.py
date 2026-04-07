@@ -70,6 +70,7 @@ def display_logo():
     list_logo = logo.splitlines()
     counter = 40
     try:
+        loop = 0
         while True:
             for index in range(len(list_logo[0])+40):
                 
@@ -81,22 +82,22 @@ def display_logo():
                         buffer.append((" "*(index-counter)) + line[index-counter:index])
                         #print(index, counter, (index-counter),(index-160),len(list_logo[0])+40)
                         
-                        pass
-                    elif index >= (len(list_logo[0])):
-                        buffer.append(line[:index-173] + (" "*173) + line[index])
+                        
+                    elif index >= len(list_logo[0]) and loop >= 1:
+                        buffer.append(line[:index-173] + (" "*133) + line[index-counter:])
                         #print(index, counter, (index-counter),(index-173),len(list_logo[0]))
                         
-                        pass
-                    elif index <= 40:
+                        
+                    elif index <= 40 and loop == 0:
                         buffer.append(line[:index])
                         
-                        pass
+                        
                 
                 frame = "\033[H" + "\n".join(buffer)
                 sys.stdout.write(frame)
                 sys.stdout.flush()
                 sleep(0.016)
-
+            loop += 1
             clear_screen()
         
     except KeyboardInterrupt:
