@@ -179,7 +179,7 @@ def Exit():
 
 
     for i in range(randint(3, 6)):
-        clear_screen()
+        
         typeWriter("...")
         
     exit()
