@@ -21,7 +21,7 @@ def typeWriter(text):
         sys.stdout.flush()
        
         if text[index-2] == text[index-1]:
-            sleep(randint(8, 50) / 200)
+            sleep(randint(8, 500) / 200)
         
         elif text[index].isalpha():
             sleep(randint(1, 20) / 200)
@@ -142,7 +142,7 @@ def menu():
     menulist = menuoptions.splitlines()
     for line in menulist:
 
-        typeWriter(line)
+        print(line)
             
 
         print("\n")
