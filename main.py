@@ -180,10 +180,8 @@ def Exit():
     typeWriter("Exiting")
     print("\n")
     for i in range(randint(0,7)):
-        sys.stdout.write('\x1b[1A')
-        sys.stdout.write('\x1b[2K')
         typeWriter("...")
-        
+        print("\r")
         
         
     exit()
