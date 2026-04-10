@@ -180,9 +180,9 @@ def Exit():
     typeWriter("Exiting")
     print("\n")
     for i in range(randint(0,7)):
-        typeWriter("."*randint(1, 10) + "\r")
-
-        
+        typeWriter("."*randint(9,10))
+        print("                  \r", end='') 
+        sleep(0.5)
     exit()
     pass   
 if __name__ == "__main__":
