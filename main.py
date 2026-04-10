@@ -141,11 +141,13 @@ def menu():
     
     menulist = menuoptions.splitlines()
     for line in menulist:
+        count = 0
         for chr in line:
             typeWriter(chr)
-            print(index, len(line))
-            if index == len(line)-1:
-                sleep(randint(1, 3))
+            
+            if count == len(line)-1:
+                sleep(randint(1, 2))
+            count += 1
         print("\n")
     for i in range(len(menulist)):
         menulist[i] = menulist[i].strip()
