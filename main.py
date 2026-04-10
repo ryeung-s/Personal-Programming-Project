@@ -172,6 +172,7 @@ def PlayRoulette():
     pass
 def Settings():
     print("Settings")
+    
     pass
 def Exit():
     print("Exiting")
