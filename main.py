@@ -85,14 +85,13 @@ def display_logo():
                         
                     elif index >= len(list_logo[0]):
                         buffer.append(line[:index-173] + (" "*133))
-                        
-                        
-                        
+                    
+                    print(index)    
                     #elif index <= 40 and loop == 0:
                         #buffer.append(line[:index])
                         
                         
-                    print(index)
+                index = 40    
                 frame = "\033[H" + "\n".join(buffer)
                 sys.stdout.write(frame)
                 sys.stdout.flush()
