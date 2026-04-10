@@ -176,7 +176,10 @@ def Settings():
     
     pass
 def Exit():
-    
+    typeWriter("Exiting")
+    for i in range(randint(0,7)):
+        typeWriter("...")
+        
     exit()
     pass   
 if __name__ == "__main__":
