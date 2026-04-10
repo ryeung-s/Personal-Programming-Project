@@ -180,8 +180,8 @@ def Exit():
     typeWriter("Exiting")
     print("\n")
     for i in range(randint(0,7)):
-        typeWriter("...")
-        print("\r")
+        typeWriter("...\r")
+
         
         
     exit()
