@@ -175,8 +175,15 @@ def Settings():
     
     pass
 def Exit():
-    print("Exiting")
+    typeWriter("Exiting")
+
+
+    for i in range(randint(3, 6)):
+        clear_screen()
+        typeWriter("...")
+        
+    exit()
     pass   
 if __name__ == "__main__":
     display_logo()
-    menu()
+    
