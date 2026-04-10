@@ -79,19 +79,19 @@ def display_logo():
                 for line in list_logo:
                     #for i in range(len(line)):
                     if index < (len(list_logo[0])):
-                        buffer.append((" "*(index+40-counter)) + line[40+index-counter:40+index])
+                        buffer.append((" "*(index-counter)) + line[index-counter:index])
                         #print(index, counter, (index-counter),(index-160),len(list_logo[0])+40)
                         
                         
                     elif index >= len(list_logo[0]):
                         buffer.append(line[:index-173] + (" "*133))
-                    
-                    print(index)    
+                    index = 40
+                        
                     #elif index <= 40 and loop == 0:
                         #buffer.append(line[:index])
                         
                         
-                index = 40    
+                    
                 frame = "\033[H" + "\n".join(buffer)
                 sys.stdout.write(frame)
                 sys.stdout.flush()
