@@ -171,17 +171,11 @@ def PlayRoulette():
 
     pass
 def Settings():
-    print("Settings")
+    typeWriter("Settings")
     
     pass
 def Exit():
-    typeWriter("Exiting")
-
-
-    for i in range(randint(3, 6)):
-        
-        typeWriter("...")
-        
+    
     exit()
     pass   
 if __name__ == "__main__":
