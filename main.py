@@ -1,4 +1,5 @@
 ### Personal Programming Project - Ryan Yeung
+from operator import index
 from os import system
 import os
 from time import sleep
@@ -18,11 +19,10 @@ def typeWriter(text):
         
         sys.stdout.write(character)
         sys.stdout.flush()
-        print(index, len(text))
+       
         if text[index-1] == text[index]:
             sleep(randint(8, 20) / 200)
-        elif index == len(text)-1:
-            sleep(randint(1, 3))
+        
         elif text[index].isalpha():
             sleep(randint(1, 8) / 200)
         else:
@@ -143,6 +143,9 @@ def menu():
     for line in menulist:
         for chr in line:
             typeWriter(chr)
+            print(index, len(line))
+            if index == len(line)-1:
+                sleep(randint(1, 3))
         print("\n")
     for i in range(len(menulist)):
         menulist[i] = menulist[i].strip()
