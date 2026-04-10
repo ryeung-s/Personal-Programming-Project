@@ -92,7 +92,7 @@ def display_logo():
                         #buffer.append(line[:index])
                         
                         
-                
+                    print(index)
                 frame = "\033[H" + "\n".join(buffer)
                 sys.stdout.write(frame)
                 sys.stdout.flush()
