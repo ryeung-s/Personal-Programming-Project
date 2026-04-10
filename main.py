@@ -17,19 +17,20 @@ def typeWriter(text):
     index = 0
     for character in text:
         
-        sys.stdout.write(character)
-        sys.stdout.flush()
-       
-        if text[index-2] == text[index-1]:
-            sleep(randint(8, 500) / 200)
         
+       
+        if text[index-1] == text[index]:
+            sleep(randint(8, 50) / 200)
+        elif text[index].isupper():
+            sleep(randint(10, 60) / 200)
         elif text[index].isalpha():
             sleep(randint(1, 20) / 200)
         else:
             sleep(randint(6, 50) / 200)
         
         index += 1
-        
+        sys.stdout.write(character)
+        sys.stdout.flush()
 def clear_screen():
     if os.name == 'nt':
         _ = system('cls')
@@ -142,7 +143,7 @@ def menu():
     menulist = menuoptions.splitlines()
     for line in menulist:
 
-        print(line)
+        typeWriter(line)
             
 
         print("\n")
