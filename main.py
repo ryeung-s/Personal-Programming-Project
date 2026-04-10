@@ -21,12 +21,12 @@ def typeWriter(text):
         sys.stdout.flush()
        
         if text[index-1] == text[index]:
-            sleep(randint(8, 20) / 200)
+            sleep(randint(8, 30) / 200)
         
         elif text[index].isalpha():
-            sleep(randint(1, 8) / 200)
+            sleep(randint(1, 20) / 200)
         else:
-            sleep(randint(6, 20) / 200)
+            sleep(randint(6, 50) / 200)
         
         index += 1
         
