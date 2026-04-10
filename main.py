@@ -177,8 +177,12 @@ def Settings():
     pass
 def Exit():
     typeWriter("Exiting")
+    
     for i in range(randint(0,7)):
+        print("\n")
         typeWriter("...")
+        sys.stdout.write('\x1b[1A')
+        sys.stdout.write('\x1b[2K')
         
     exit()
     pass   
