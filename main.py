@@ -13,6 +13,7 @@ SHOW_CURSOR = f"{ESC}[?25h"
 PlayingBJ = False
 PlayingPoker = False
 PlayingRoulette = False
+typing_speed = 500
 def typeWriter(text):
     index = 0
     for character in text:
@@ -20,13 +21,13 @@ def typeWriter(text):
         
        
         if text[index-1] == text[index]:
-            sleep(randint(8, 50) / 200)
+            sleep(randint(8, 50) / typing_speed)
         elif text[index].isupper():
-            sleep(randint(10, 60) / 200)
+            sleep(randint(10, 60) / typing_speed)
         elif text[index].isalpha():
-            sleep(randint(1, 20) / 200)
+            sleep(randint(1, 20) / typing_speed)
         else:
-            sleep(randint(6, 50) / 200)
+            sleep(randint(6, 50) / typing_speed)
         
         index += 1
         sys.stdout.write(character)
@@ -177,12 +178,13 @@ def Settings():
     pass
 def Exit():
     typeWriter("Exiting")
-    
+    print("\n")
     for i in range(randint(0,7)):
-        print("\n")
-        typeWriter("...")
         sys.stdout.write('\x1b[1A')
         sys.stdout.write('\x1b[2K')
+        typeWriter("...")
+        
+        
         
     exit()
     pass   
