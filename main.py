@@ -142,8 +142,7 @@ def menu():
     menulist = menuoptions.splitlines()
     for line in menulist:
 
-        for chr in line:
-            typeWriter(chr)
+        typeWriter(line)
             
 
         print("\n")
