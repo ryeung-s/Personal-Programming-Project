@@ -29,17 +29,9 @@ def typeWriter(text):
 def clear_screen():
     if os.name == 'nt':
         _ = system('cls')
-        from ctypes import windll
-        k = windll.kernel32
-        k.SetConsoleMode(k.GetStdHandle(-11), 7)
     elif os.name == 'posix':
         _ = system('clear')
 def display_logo():
-    if os.name == 'nt':
-        _ = system('cls')
-        from ctypes import windll
-        k = windll.kernel32
-        k.SetConsoleMode(k.GetStdHandle(-11), 7)
     index = 1
     logo = """%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%##*#******
 @%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%##*#**++++
@@ -72,20 +64,20 @@ def display_logo():
     try:
         loop = 0
         while True:
-            for index in range(len(list_logo[0])+40):
+            for index in range(len(list_logo[0])):
                 
                 buffer= []
 
                 for line in list_logo:
                     #for i in range(len(line)):
-                    if index < (len(list_logo[0])):
+                    if index < (len(list_logo[0])) and index > 40:
                         buffer.append((" "*(index-counter)) + line[index-counter:index])
                         #print(index, counter, (index-counter),(index-160),len(list_logo[0])+40)
                         
                         
-                    elif index >= len(list_logo[0]):
-                        buffer.append(line[:index-173] + (" "*133))
-                    
+                    elif index <= 40:
+                        buffer.append(line[:index] + (" "*(133)))
+
                         
                     #elif index <= 40 and loop == 0:
                         #buffer.append(line[:index])
@@ -97,7 +89,7 @@ def display_logo():
                 sys.stdout.flush()
                 sleep(0.016)
             loop += 1
-            clear_screen()
+
         
     except KeyboardInterrupt:
         print("STOPPED")
