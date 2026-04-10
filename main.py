@@ -85,7 +85,7 @@ def display_logo():
                         
                     elif index >= len(list_logo[0]):
                         buffer.append(line[:index-173] + (" "*133))
-                    index = 40
+                    
                         
                     #elif index <= 40 and loop == 0:
                         #buffer.append(line[:index])
