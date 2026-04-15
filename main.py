@@ -13,6 +13,7 @@ SHOW_CURSOR = f"{ESC}[?25h"
 PlayingBJ = False
 PlayingPoker = False
 PlayingRoulette = False
+openSettings = False
 typing_speed = 500
 def typeWriter(text):
     index = 0
@@ -104,8 +105,9 @@ CTRL-C to skip animation                          CTRL-C to skip animation      
         print("STOPPED")
         sleep(1)
         clear_screen()
-        menu()
+        menu(subroutine=True)
 def menuprint():
+    global PlayingBJ, PlayingPoker, PlayingRoulette, openSettings
     if PlayingBJ:
         menuoptions = """
         1. Home
@@ -118,8 +120,9 @@ def menuprint():
         1. Home
         2. Continue Playing
         3. AI difficulty
-        4. Settings
-        5. Exit
+        4. Luck
+        5. Settings
+        6. Exit
         """
     elif PlayingRoulette:
         menuoptions = """
@@ -127,6 +130,14 @@ def menuprint():
         2. Continue Playing
         3. Luck
         4. Settings
+        5. Exit
+        """
+    elif openSettings:
+        menuoptions = """
+        1. Back
+        2. Change typing speed
+        3. Music
+        4. Reset settings
         5. Exit
         """
     else:
@@ -137,8 +148,10 @@ def menuprint():
         4. Settings
         5. Exit
         """
+    
     return menuoptions
-def menu():
+def menu(subroutine):
+    global PlayingBJ, PlayingPoker, PlayingRoulette, openSettings
     menuoptions = menuprint()
     
     menulist = menuoptions.splitlines()
@@ -148,43 +161,93 @@ def menu():
             
 
         print("\n")
-    for i in range(len(menulist)):
-        menulist[i] = menulist[i].strip()
-        menulist[i] = menulist[i].replace(" ", "")
-    menulist.pop(0)
-    menulist.pop(-1)
-    subs = {}
-    for i in range(len(menulist)):
-        x = menulist[i][2:]
-        subs[str(i+1)] = eval(x)
-        
-    x = input()
-    if x in subs:
-        subs[x]()
-        
+    PlayingBJ = False
+    PlayingPoker = False
+    PlayingRoulette = False
+    openSettings = False   
+    if subroutine == True:
+        for i in range(len(menulist)):
+            menulist[i] = menulist[i].strip()
+            menulist[i] = menulist[i].replace(" ", "")
+        menulist.pop(0)
+        menulist.pop(-1)
+        funcs = {}
+        for i in range(len(menulist)):
+            x = menulist[i][2:]
+            
+            funcs[str(i+1)] = eval(x)
+        while x not in funcs:    
+            x = input()
+            if x in funcs:
+                clear_screen()
+                funcs[x]()
+
+            else:
+                invalidinput()
+    else:
+        choice = "a"
+        while validinput(choice, "not choice.isdigit()"):
+            choice = input()
+            invalidinput()
+        return choice
+def invalidinput():
+    typeWriter("Invalid input")
+    print("\n")
+def validinput(choice, parameters):
+    if eval(parameters):
+        return True
+    else:
+        invalidinput()
 def PlayBlackjack():
+    global PlayingBJ
+    PlayingBJ = True
     print("Playing Blackjack")
     pass
 def PlayPoker():
+    global PlayingPoker
+    PlayingPoker = True
     print("Playing Poker")
     pass
 def PlayRoulette():
+    global PlayingRoulette
+    PlayingRoulette = True
     print("Playing Roulette")
 
     pass
 def Settings():
-    typeWriter("Settings")
+    global openSettings
     
+    openSettings = True
+    print("\n")
+    typeWriter("Settings")
+    option = menu(subroutine=False)
+    if option == "1":
+        openSettings = False
+        menu(subroutine=True)
     pass
 def Exit():
     typeWriter("Exiting")
     print("\n")
     for i in range(randint(0,7)):
-        typeWriter("."*randint(9,10))
-        print("                  \r", end='') 
-        sleep(0.5)
+        typeWriter("."*randint(3,9))
+        
+        print("\033[A           \n                  \033[A")
+        
     exit()
-    pass   
+    pass
+def Changetypingspeed(typing_speed):
+    typeWriter("Current typing speed: " + str(typing_speed))
+    print("\n")
+    typeWriter("Enter new typing speed (1-1000%): ")
+    print("\n")
+    x = input()
+    if validinput(x, "x.isdigit() and int(x) >= 1 and int(x) <= 1000"):
+        typing_speed = int(x)
+        typeWriter("Typing speed changed to " + str(typing_speed))
+        print("\n")
+    else:
+        invalidinput()
+    return typing_speed
 if __name__ == "__main__":
     display_logo()
     
