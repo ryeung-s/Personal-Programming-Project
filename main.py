@@ -192,6 +192,9 @@ def invalidinput():
     print("\n")
 def validinput(option, parameters):
     print("yo")
+    print(option)
+    option = option
+    print(option)
     while not eval(parameters):
         print(parameters)
         invalidinput()
