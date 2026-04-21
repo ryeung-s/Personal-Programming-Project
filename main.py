@@ -176,6 +176,7 @@ def menu(subroutine, parameters):
             x = menulist[i][2:]
             
             funcs[str(i+1)] = eval(x)
+        x = input()
         x = validinput(option=x, parameters="x in funcs")
         clear_screen()
         funcs[x]()
@@ -189,7 +190,7 @@ def invalidinput():
     typeWriter("Invalid input")
     print("\n")
 def validinput(option, parameters):
-    option = input()
+
     while not eval(parameters):
         print(parameters)
         invalidinput()
