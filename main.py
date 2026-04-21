@@ -189,6 +189,7 @@ def invalidinput():
     typeWriter("Invalid input")
     print("\n")
 def validinput(option, parameters):
+    option = input()
     while not eval(parameters):
         print(parameters)
         invalidinput()
