@@ -178,9 +178,9 @@ def menu(subroutine, parameters):
             funcs[str(i+1)] = eval(x)
         x = input()
         print("here")
-        x = validinput(option=x, parameters="x in funcs")
+        option = validinput(option=x, parameters="x in funcs")
         clear_screen()
-        funcs[x]()
+        funcs[option]()
 
     else:
         option = input()
