@@ -150,7 +150,7 @@ def menuprint():
         """
     
     return menuoptions
-def menu(subroutine):
+def menu(subroutine, parameters):
     global PlayingBJ, PlayingPoker, PlayingRoulette, openSettings
     menuoptions = menuprint()
     
@@ -185,8 +185,8 @@ def menu(subroutine):
             else:
                 invalidinput()
     else:
-        choice = "a"
-        while validinput(choice, "not choice.isdigit()"):
+        choice = None
+        while validinput(choice, parameters):
             choice = input()
             invalidinput()
         return choice
@@ -220,7 +220,7 @@ def Settings():
     openSettings = True
     print("\n")
     typeWriter("Settings")
-    option = menu(subroutine=False)
+    option = menu(subroutine=False, parameters="not choice.isdigit()")
     if option == "1":
         openSettings = False
         menu(subroutine=True)
