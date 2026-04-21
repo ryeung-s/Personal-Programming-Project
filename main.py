@@ -223,7 +223,7 @@ def Settings():
     option = menu(subroutine=False, parameters="not choice.isdigit()")
     if option == "1":
         openSettings = False
-        menu(subroutine=True)
+        menu(subroutine=True, parameters=None)
     pass
 def Exit():
     typeWriter("Exiting")
