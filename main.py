@@ -176,7 +176,7 @@ def menu(subroutine, parameters):
             x = menulist[i][2:]
             
             funcs[str(i+1)] = eval(x)
-        while x not in funcs:    
+        while validinput(option="x", parameters="x not in funcs"):    
             x = input()
             if x in funcs:
                 clear_screen()
