@@ -176,28 +176,23 @@ def menu(subroutine, parameters):
             x = menulist[i][2:]
             
             funcs[str(i+1)] = eval(x)
-        while validinput(option="x", parameters="x not in funcs"):    
-            x = input()
-            if x in funcs:
-                clear_screen()
-                funcs[x]()
+        x = validinput(option="x", parameters="x in funcs")
+        clear_screen()
+        funcs[x]()
 
-            else:
-                invalidinput()
     else:
         option = input()
-        while validinput(option, parameters):
-            invalidinput()
-            option = input()
+        option = validinput(option, parameters)
+        
         return option
 def invalidinput():
     typeWriter("Invalid input")
     print("\n")
 def validinput(option, parameters):
-    if eval(parameters):
-        return True
-    else:
-        return option
+    while not eval(parameters):
+        invalidinput()
+        option = input()
+    return option
 def PlayBlackjack():
     global PlayingBJ
     PlayingBJ = True
@@ -220,7 +215,7 @@ def Settings():
     openSettings = True
     print("\n")
     typeWriter("Settings")
-    option = menu(subroutine=False, parameters="not option.isdigit()")
+    option = menu(subroutine=False, parameters="option.isdigit()")
     if option == "1":
         openSettings = False
         menu(subroutine=True, parameters=None)
