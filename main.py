@@ -185,19 +185,19 @@ def menu(subroutine, parameters):
             else:
                 invalidinput()
     else:
-        choice = input()
-        while validinput(choice, parameters):
+        option = input()
+        while validinput(option, parameters):
             invalidinput()
-            choice = input()
-        return choice
+            option = input()
+        return option
 def invalidinput():
     typeWriter("Invalid input")
     print("\n")
-def validinput(choice, parameters):
+def validinput(option, parameters):
     if eval(parameters):
         return True
     else:
-        invalidinput()
+        return option
 def PlayBlackjack():
     global PlayingBJ
     PlayingBJ = True
@@ -220,7 +220,7 @@ def Settings():
     openSettings = True
     print("\n")
     typeWriter("Settings")
-    option = menu(subroutine=False, parameters="not choice.isdigit()")
+    option = menu(subroutine=False, parameters="not option.isdigit()")
     if option == "1":
         openSettings = False
         menu(subroutine=True, parameters=None)
