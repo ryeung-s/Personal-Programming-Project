@@ -105,7 +105,7 @@ CTRL-C to skip animation                          CTRL-C to skip animation      
         print("STOPPED")
         sleep(1)
         clear_screen()
-        menu(subroutine=True)
+        menu(subroutine=True, parameters=None)
 def menuprint():
     global PlayingBJ, PlayingPoker, PlayingRoulette, openSettings
     if PlayingBJ:
