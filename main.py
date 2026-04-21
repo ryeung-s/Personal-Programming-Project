@@ -176,7 +176,7 @@ def menu(subroutine, parameters):
             x = menulist[i][2:]
             
             funcs[str(i+1)] = eval(x)
-        x = validinput(option="x", parameters="x in funcs")
+        x = validinput(option=x, parameters="x in funcs")
         clear_screen()
         funcs[x]()
 
