@@ -190,6 +190,7 @@ def invalidinput():
     print("\n")
 def validinput(option, parameters):
     while not eval(parameters):
+        print(parameters)
         invalidinput()
         option = input()
     return option
