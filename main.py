@@ -185,10 +185,10 @@ def menu(subroutine, parameters):
             else:
                 invalidinput()
     else:
-        choice = None
+        choice = input()
         while validinput(choice, parameters):
-            choice = input()
             invalidinput()
+            choice = input()
         return choice
 def invalidinput():
     typeWriter("Invalid input")
