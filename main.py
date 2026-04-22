@@ -242,7 +242,7 @@ def Changetypingspeed(typing_speed):
     typeWriter("Enter new typing speed (1-1000%): ")
     print("\n")
     x = input()
-    if validinput(x, "x.isdigit() and int(x) >= 1 and int(x) <= 1000"):
+    if validinput(x, "option.isdigit() and int(option) >= 1 and int(option) <= 1000"):
         typing_speed = int(x)
         typeWriter("Typing speed changed to " + str(typing_speed))
         print("\n")
