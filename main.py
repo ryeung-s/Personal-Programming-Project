@@ -224,7 +224,7 @@ def Settings():
         menu(subroutine=True, parameters=None)
     elif option == "2":
         global typing_speed
-        typing_speed = Changetypingspeed(typing_speed)
+        typing_speed = Changetypingspeed(typing_speed)*50
         Settings()
 def Exit():
     typeWriter("Exiting")
