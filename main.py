@@ -222,7 +222,10 @@ def Settings():
     if option == "1":
         openSettings = False
         menu(subroutine=True, parameters=None)
-    pass
+    elif option == "2":
+        global typing_speed
+        typing_speed = Changetypingspeed(typing_speed)
+        Settings()
 def Exit():
     typeWriter("Exiting")
     print("\n")
