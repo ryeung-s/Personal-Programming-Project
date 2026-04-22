@@ -244,12 +244,12 @@ def Changetypingspeed(typing_speed):
     x = input()
     if validinput(x, "option.isdigit() and int(option) >= 1 and int(option) <= 1000"):
         typing_speed = int(x)
-        return typing_speed
+        
         typeWriter("Typing speed changed to " + str(typing_speed))
         print("\n")
     else:
         invalidinput()
-    
+    return typing_speed
 if __name__ == "__main__":
     display_logo()
     
