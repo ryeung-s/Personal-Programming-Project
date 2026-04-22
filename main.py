@@ -177,25 +177,20 @@ def menu(subroutine, parameters):
             
             funcs[str(i+1)] = eval(x)
         x = input()
-        print("here")
-        option = validinput(option=x, parameters="option in funcs", var1=funcs)
+        option = validinput(option=x, parameters="x in funcs")
         clear_screen()
-        funcs[option]()
+        funcs[x]()
 
     else:
-        x = input()
-        option = validinput(x, parameters)
+        option = input()
+        option = validinput(option, parameters)
         
         return option
 def invalidinput():
     typeWriter("Invalid input")
     print("\n")
-def validinput(option, parameters, var1):
-    print("yo")
-    print(option)
-    
+def validinput(option, parameters):
     while not eval(parameters):
-        print(parameters)
         invalidinput()
         option = input()
     return option
