@@ -183,8 +183,8 @@ def menu(subroutine, parameters):
         funcs[option]()
 
     else:
-        option = input()
-        option = validinput(option, parameters)
+        x = input()
+        option = validinput(x, parameters)
         
         return option
 def invalidinput():
