@@ -226,6 +226,11 @@ def Settings():
         global typing_speed
         typing_speed = Changetypingspeed(typing_speed)*50
         Settings()
+    elif option == "3":
+        typeWriter("Music settings coming soon!")
+        print("\n")
+        sleep(1)
+        Settings()
 def Exit():
     typeWriter("Exiting")
     print("\n")
