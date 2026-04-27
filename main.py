@@ -255,6 +255,8 @@ def Changetypingspeed(typing_speed):
     else:
         invalidinput()
     return typing_speed
-if __name__ == "__main__":
+def home():
+    main()
+def main():
     display_logo()
-    
+main()
