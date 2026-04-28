@@ -15,12 +15,10 @@ PlayingPoker = False
 PlayingRoulette = False
 openSettings = False
 typing_speed = 500
+previous_menu = ""
 def typeWriter(text):
     index = 0
     for character in text:
-        
-        
-       
         if text[index-1] == text[index]:
             sleep(randint(8, 50) / typing_speed)
         elif text[index].isupper():
@@ -150,7 +148,7 @@ def menuprint():
         """
     
     return menuoptions
-def menu(subroutine, parameters):
+def menu(subroutine=True, parameters=None, prevfunction=""):
     global PlayingBJ, PlayingPoker, PlayingRoulette, openSettings
     menuoptions = menuprint()
     
@@ -257,6 +255,8 @@ def Changetypingspeed(typing_speed):
     return typing_speed
 def home():
     main()
+def back():
+    pass
 def main():
     display_logo()
 main()
