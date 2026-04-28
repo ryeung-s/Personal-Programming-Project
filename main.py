@@ -103,7 +103,7 @@ CTRL-C to skip animation                          CTRL-C to skip animation      
         print("STOPPED")
         sleep(1)
         clear_screen()
-        menu(subroutine=True, parameters=None)
+        menu()
 def menuprint():
     global PlayingBJ, PlayingPoker, PlayingRoulette, openSettings
     if PlayingBJ:
@@ -219,7 +219,7 @@ def Settings():
     option = menu(subroutine=False, parameters="option.isdigit()")
     if option == "1":
         openSettings = False
-        menu(subroutine=True, parameters=None)
+        menu()
     elif option == "2":
         global typing_speed
         typing_speed = Changetypingspeed(typing_speed)*50
