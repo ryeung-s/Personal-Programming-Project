@@ -198,7 +198,31 @@ def PlayBlackjack():
     global PlayingBJ
     PlayingBJ = True
     print("Playing Blackjack")
-    pass
+def createCards():
+    suits = ['♠', '♥', '♦', '♣']
+    rank = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]
+    cards = []
+    deck = {}
+    for suit in suits:
+        for r in rank:
+            cards.append(r + suit)
+    for card in cards:
+        x = draw_card(rank, suit)
+        cards[card] = x
+    return cards
+def draw_card(rank, suit):
+    
+    space = " " if rank != "10" else ""
+    
+    return [
+        "┌─────────┐",
+        f"│ {rank}{space}      │",
+        "│         │",
+        f"│    {suit}    │",
+        "│         │",
+        f"│       {space}{rank} │",
+        "└─────────┘"
+    ]
 def PlayPoker():
     global PlayingPoker
     PlayingPoker = True
