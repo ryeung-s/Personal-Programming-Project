@@ -225,7 +225,7 @@ def Settings():
         typing_speed = Changetypingspeed(typing_speed)*50
         Settings()
     elif option == "3":
-        typeWriter("Music settings coming soon!")
+        typeWriter("Music settings coming soon")
         print("\n")
         sleep(1)
         Settings()
