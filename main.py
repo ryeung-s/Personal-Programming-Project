@@ -4,7 +4,8 @@ from os import system
 import os
 from time import sleep
 import sys
-from random import randint
+from random import randint, shuffle
+
 ESC = "\x1b"
 CLEAR_SCREEN = f"{ESC}[2J"
 CURSOR_HOME = f"{ESC}[H"
@@ -198,6 +199,20 @@ def PlayBlackjack():
     global PlayingBJ
     PlayingBJ = True
     print("Playing Blackjack")
+    num_players = input("Enter number of players (1-4): ")
+    num_players = validinput(num_players, "option.isdigit() and 1 <= int(option) <= 4")
+    makeBJcards()
+def makeBJcards():
+    deck = draw_cards()
+    decks = []
+    num_decks = input("Enter number of decks (1-8): ")
+    num_decks = validinput(num_decks, "option.isdigit() and 1 <= int(option) <= 8")
+    for i in range(int(num_decks)):
+        for card in deck:
+            decks.append(card)
+    shuffle(decks)
+    print(decks)
+    
 def createCards():
     suits = ['♠', '♥', '♦', '♣']
     rank = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]
@@ -206,23 +221,38 @@ def createCards():
     for suit in suits:
         for r in rank:
             cards.append(r + suit)
-    for card in cards:
-        x = draw_card(rank, suit)
-        cards[card] = x
     return cards
-def draw_card(rank, suit):
-    
-    space = " " if rank != "10" else ""
-    
-    return [
-        "┌─────────┐",
-        f"│ {rank}{space}      │",
-        "│         │",
-        f"│    {suit}    │",
-        "│         │",
-        f"│       {space}{rank} │",
-        "└─────────┘"
-    ]
+def draw_cards():
+    cards = createCards()
+    deck = {}
+    for card in cards:
+        if "10" in card:
+            x = f"""
+            ┌─────────┐
+            │{card}      │
+            │         │
+            │         │
+            │    {card[-1]}    │
+            │         │
+            │         │
+            │      {card}│
+            └─────────┘
+            """
+            
+        else:
+            x = f"""
+            ┌─────────┐
+            │{card}       │
+            │         │
+            │         │
+            │    {card[-1]}    │
+            │         │
+            │         │
+            │       {card}│
+            └─────────┘
+            """
+        deck[card] = x
+    return deck
 def PlayPoker():
     global PlayingPoker
     PlayingPoker = True
