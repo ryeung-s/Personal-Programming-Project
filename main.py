@@ -193,9 +193,11 @@ def PlayBlackjack():
     num_players = input("Enter number of players (1-4): ")
     num_players = validinput(num_players, "option.isdigit() and 1 <= int(option) <= 4")
     decks = makeBJcards()
+    create_players(num_players)
     for i in range(int(num_players)):
         print("Player " + str(i+1) + ": " + deal_card(decks))
-        
+def create_players(num_players):
+    pass
 def deal_card(decks):
     card = decks[0]
     decks.pop(0)
@@ -312,4 +314,4 @@ def main():
     print(CLEAR_SCREEN + CURSOR_HOME)
     display_logo()
 
-makeBJcards()
+main()
