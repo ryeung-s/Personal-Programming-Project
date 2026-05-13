@@ -17,6 +17,12 @@ PlayingRoulette = False
 openSettings = False
 typing_speed = 500
 previous_menu = ""
+class Player:
+    def __init__(self, name):
+        self.name = name
+        self.hand = []
+        self.money = 1000
+    
 def typeWriter(text):
     index = 0
     for character in text:
@@ -197,7 +203,12 @@ def PlayBlackjack():
     for i in range(int(num_players)):
         print("Player " + str(i+1) + ": " + deal_card(decks))
 def create_players(num_players):
-    pass
+    global players
+    players = []
+    for i in range(int(num_players)):
+        name = input("Enter name for player " + str(i+1) + ": ")
+        players[i] = Player(name)
+
 def deal_card(decks):
     card = decks[0]
     decks.pop(0)
