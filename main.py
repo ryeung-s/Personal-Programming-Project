@@ -64,17 +64,17 @@ CTRL-C to skip animation             CTRL-C to skip animation
         while True:
             for index in range(len(list_logo[1])):
                 
-                buffer= []
+                buffer= ["\n", "\n", "\n", "\n", "\n"]
 
                 for line in list_logo:
                     #for i in range(len(line)):
                     if index <= (len(list_logo[1])) and index > counter:
-                        buffer.append((" "*(index-counter)) + line[index-counter:index])
+                        buffer.append(((" ")*50)+(" "*(index-counter)) + line[index-counter:index])
                         #print(index, counter, (index-counter),(index-160),len(list_logo[0])+40)
                         
                         
                     elif index <= counter:
-                        buffer.append(line[:index] + (" "*(len(list_logo[1])-counter)))
+                        buffer.append(((" ")*50)+line[:index] + (" "*(len(list_logo[1])-counter)))
 
                         
                     #elif index <= 40 and loop == 0:
