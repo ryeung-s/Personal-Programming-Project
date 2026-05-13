@@ -204,8 +204,7 @@ def makeBJcards():
     shuffle(decks)
     print(decks)
     for i in decks:
-        pass
-    
+        pass    
 def createCards():
     suits = ['♠', '♥', '♦', '♣']
     rank = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]
