@@ -306,5 +306,7 @@ def home():
 def back():
     pass
 def main():
+    print(CLEAR_SCREEN + CURSOR_HOME)
     display_logo()
+
 main()
