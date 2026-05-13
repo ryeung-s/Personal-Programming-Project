@@ -203,9 +203,6 @@ def makeBJcards():
             decks.append(card)
     shuffle(decks)
     print(decks)
-    for card in decks:
-
-        pass    
 def createCards():
     suits = ['♠', '♥', '♦', '♣']
     rank = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]
@@ -244,7 +241,7 @@ def draw_cards():
             └─────────┘
             """
         deck[card] = x
-    print(deck)
+    
     return deck
 def PlayPoker():
     global PlayingPoker
@@ -308,4 +305,4 @@ def main():
     print(CLEAR_SCREEN + CURSOR_HOME)
     display_logo()
 
-main()
+makeBJcards()
