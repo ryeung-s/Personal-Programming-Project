@@ -208,7 +208,7 @@ def create_players(num_players):
     for i in range(int(num_players)):
         name = input("Enter name for player " + str(i+1) + ": ")
         players[i] = Player(name)
-
+    print(players)
 def deal_card(decks):
     card = decks[0]
     decks.pop(0)
@@ -325,4 +325,4 @@ def main():
     print(CLEAR_SCREEN + CURSOR_HOME)
     display_logo()
 
-main()
+PlayBlackjack()
