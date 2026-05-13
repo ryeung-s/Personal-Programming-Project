@@ -192,7 +192,7 @@ def PlayBlackjack():
     print("Playing Blackjack")
     num_players = input("Enter number of players (1-4): ")
     num_players = validinput(num_players, "option.isdigit() and 1 <= int(option) <= 4")
-    makeBJcards()
+    decks = makeBJcards()
 def makeBJcards():
     deck = draw_cards()
     decks = []
@@ -203,7 +203,8 @@ def makeBJcards():
             decks.append(card)
     shuffle(decks)
     print(decks)
-    for i in decks:
+    for card in decks:
+        
         pass    
 def createCards():
     suits = ['♠', '♥', '♦', '♣']
