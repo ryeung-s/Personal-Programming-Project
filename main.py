@@ -214,7 +214,7 @@ def create_players(num_players):
         name = input("Enter name for player " + str(i+1) + ": ")
         players.append(Player(name))
 
-    print(players[0])
+    
 def deal_card(decks):
     card = decks[0]
     decks.pop(0)
