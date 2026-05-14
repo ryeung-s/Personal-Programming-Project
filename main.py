@@ -211,10 +211,9 @@ def create_players(num_players):
     print(playerdict["Player 1"])
     for i in range(int(num_players)):
         name = input("Enter name for player " + str(i+1) + ": ")
+        playerdict["Player " + str(i+1)] = Player(name)
 
-        
-
-    print(players)
+    print(playerdict["Player 1"].name)
 def deal_card(decks):
     card = decks[0]
     decks.pop(0)
