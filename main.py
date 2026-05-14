@@ -22,7 +22,8 @@ class Player:
         self.name = name
         self.hand = []
         self.money = 1000
-    
+    def __str__(self):
+        return f"{self.name} (Money: {self.money}, Hand: {self.hand})"
 def typeWriter(text):
     index = 0
     for character in text:
@@ -211,9 +212,9 @@ def create_players(num_players):
     
     for i in range(int(num_players)):
         name = input("Enter name for player " + str(i+1) + ": ")
-        
+        players.append(Player(name))
 
-    print(playerdict["Player 1"].name)
+    print(players[1])
 def deal_card(decks):
     card = decks[0]
     decks.pop(0)
