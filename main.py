@@ -208,7 +208,7 @@ def create_players(num_players):
     global players
     players = []
     playerdict = {Player("Player " + str(i+1)).name: Player("Player " + str(i+1)) for i in range(int(num_players))}
-    print(playerdict)
+    print(playerdict["Player 1"])
     for i in range(int(num_players)):
         name = input("Enter name for player " + str(i+1) + ": ")
 
