@@ -213,9 +213,6 @@ def create_players(num_players):
     for i in range(int(num_players)):
         name = input("Enter name for player " + str(i+1) + ": ")
         players.append(Player(name))
-        x = randint(500, 1500)
-        print(x)
-        players[i].money = x
 
 
     
