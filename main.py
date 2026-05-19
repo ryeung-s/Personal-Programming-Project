@@ -221,8 +221,8 @@ def create_players(num_players):
     for player in players:
         
         print(f"""
-Player {i}:  {player.name} 
-$:           {player.money} 
+            Player {i}:  {player.name} 
+            $:           {player.money} 
 Hand:        {player.hand})""")
         i += 1
 
