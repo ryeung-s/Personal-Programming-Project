@@ -17,6 +17,8 @@ PlayingRoulette = False
 openSettings = False
 typing_speed = 500
 previous_menu = ""
+
+
 class Player:
     def __init__(self, name):
         self.name = name
@@ -215,11 +217,14 @@ def create_players(num_players):
         players.append(Player(name))
 
 
-    
+    i = 1 
     for player in players:
-        print(player.name)
-        print(player.money)
-        print(player.hand)
+        
+        print(f"""
+Player {i}:  {player.name} 
+$:           {player.money} 
+Hand:        {player.hand})""")
+        i += 1
 
 def deal_card(decks):
     card = decks[0]
