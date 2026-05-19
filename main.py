@@ -4,7 +4,7 @@ from os import system
 import os
 from time import sleep
 import sys
-from random import randint, shuffle
+from random import randint, random, shuffle
 
 ESC = "\x1b"
 CLEAR_SCREEN = f"{ESC}[2J"
@@ -208,13 +208,22 @@ def PlayBlackjack():
 def create_players(num_players):
     global players
     players = []
-    
+
     
     for i in range(int(num_players)):
         name = input("Enter name for player " + str(i+1) + ": ")
         players.append(Player(name))
+        x = random.randint(500, 1500)
+        print(x)
+        players[i].money = x
+
 
     
+    for player in players:
+        print(player.name)
+        print(player.money)
+        print(player.hand)
+
 def deal_card(decks):
     card = decks[0]
     decks.pop(0)
