@@ -220,13 +220,14 @@ def create_players(num_players):
     i = 1 
     for player in players:
         
-        print(f"""
+        printplayerinfo(i, player)
+        i += 1
+def printplayerinfo(i, player):
+    print(f"""
             Player {i}:  {player.name} 
             $:         {player.money} 
             Hand:      {player.hand}
 """)
-        i += 1
-
 def deal_card(decks):
     card = decks[0]
     decks.pop(0)
