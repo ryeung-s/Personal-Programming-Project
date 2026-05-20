@@ -222,8 +222,9 @@ def create_players(num_players):
         
         print(f"""
             Player {i}:  {player.name} 
-            $:           {player.money} 
-            Hand:        {player.hand})""")
+            $:         {player.money} 
+            Hand:      {player.hand}
+""")
         i += 1
 
 def deal_card(decks):
