@@ -228,7 +228,7 @@ def create_players(num_players):
 def printplayerinfo(players):
     spaces = 10
     
-    names_line = (" "*(spaces-len([p.name for p in players]))).join([f"Player {i+1}: {p.name}" for i, p in enumerate(players)])
+    names_line = (" "*(spaces)).join([f"Player {i+1}: {p.name}" for i, p in enumerate(players)])
     hands_line = (" "*(spaces-4)).join([f"Hand: {" ".join(p.hand)}" for p in players])
     money_line = (" "*(spaces+4)).join([f"$: {p.money}" for p in players])
     
@@ -254,7 +254,7 @@ def makeBJcards():
     return decks
 def createCards():
     suits = ['♠', '♥', '♦', '♣']
-    rank = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]
+    rank = ["2", "3", "4", "5", "6", "7", "8", "9", "X", "J", "Q", "K", "A"]
     cards = []
     for suit in suits:
         for r in rank:
