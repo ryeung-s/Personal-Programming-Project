@@ -223,7 +223,7 @@ def create_players(num_players):
         
         
 def printplayerinfo(players):
-    names_line = " | ".join([f"Player {i+1}: {p.name} Hand: {' '.join(p.hand)}" for i, p in enumerate(players)])
+    names_line = (" "*(64//len(players))).join([f"Player {i+1}: {p.name}" for i, p in enumerate(players)])
     money_line = " | ".join([f"Player {i+1} $: {p.money}" for i, p in enumerate(players)])
     
     print(names_line)
