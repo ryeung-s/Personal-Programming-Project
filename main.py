@@ -354,4 +354,4 @@ def main():
     print(CLEAR_SCREEN + CURSOR_HOME)
     display_logo()
 
-main()
+PlayBlackjack()
