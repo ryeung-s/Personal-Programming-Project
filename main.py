@@ -207,7 +207,7 @@ def PlayBlackjack():
 
     for i in range(int(num_players)):
         deal_card(decks, 2, players[i])
-        printplayerinfo(i+1, players[i])
+    printplayerinfo(players)
 def create_players(num_players):
     global players
     players = []
@@ -222,14 +222,12 @@ def create_players(num_players):
     
         
         
-def printplayerinfo(i, player):
-    print(
-f"""
-            Player {i}:  {player.name} 
-            Hand:      {" ".join(player.hand)}
-            $:         {player.money}
-            
-""",)
+def printplayerinfo(players):
+    names_line = " | ".join([f"Player {i+1}: {p.name} Hand: {' '.join(p.hand)}" for i, p in enumerate(players)])
+    money_line = " | ".join([f"Player {i+1} $: {p.money}" for i, p in enumerate(players)])
+    
+    print(names_line)
+    print(money_line)
 def deal_card(decks, num_cards, player):
     
     for _ in range(num_cards):
