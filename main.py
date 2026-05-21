@@ -219,10 +219,9 @@ def create_players(num_players):
 
 
     i = 1 
-    for player in players:
+    
         
-        printplayerinfo(i, player)
-        i += 1
+        
 def printplayerinfo(i, player):
     print(
 f"""
