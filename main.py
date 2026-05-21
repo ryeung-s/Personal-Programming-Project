@@ -227,8 +227,8 @@ def printplayerinfo(i, player):
     print(
 f"""
             Player {i}:  {player.name} 
-            Hand:      {player.hand}
-            $:         {" ".join(player.money)} 
+            Hand:      {" ".join(player.hand)}
+            $:         {player.money}
             
 """)
 def deal_card(decks, num_cards, player):
