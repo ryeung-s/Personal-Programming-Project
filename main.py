@@ -229,7 +229,7 @@ f"""
             Hand:      {" ".join(player.hand)}
             $:         {player.money}
             
-""", end= "")
+""",)
 def deal_card(decks, num_cards, player):
     
     for _ in range(num_cards):
