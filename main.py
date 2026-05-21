@@ -226,7 +226,7 @@ def printplayerinfo(players):
     spaces = 64//len(players)
     names_line = (" "*(spaces)).join([f"Player {i+1}: {p.name}" for i, p in enumerate(players)])
     hands_line = (" "*(spaces)).join([f"Hand: {p.hand}" for p in players])
-    money_line = (" "*(spaces)).join([f"Player {i+1} $: {p.money}" for i, p in enumerate(players)])
+    money_line = (" "*(spaces)).join([f"$: {p.money}" for p in players])
     
     print(names_line)
     print(hands_line)   
