@@ -226,11 +226,13 @@ def create_players(num_players):
         
         
 def printplayerinfo(players):
-    spaces = 10
+    max_name = max(len(p.name) for p in players)
+    max_hand = max(len(" ".join(p.hand)) for p in players)
+
     
-    names_line = (" "*(spaces)).join([f"Player {i+1}: {p.name}" for i, p in enumerate(players)])
-    hands_line = (" "*(spaces-4)).join([f"Hand: {" ".join(p.hand)}" for p in players])
-    money_line = (" "*(spaces+4)).join([f"$: {p.money}" for p in players])
+    names_line = [f"{f'Player{i+1}: {p.name}':<{max_name+10}'}" for i, p in enumerate(players)]
+    hands_line = [f"{'Hand: ' + ' '.join(p.hand):<{max_hand+10}}" for p in players]
+    money_line = [f"{'Money: ' + str(p.money):<{max_name+10}}" for p in players]
     
     print(names_line)
     print(hands_line)   
