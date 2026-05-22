@@ -26,21 +26,7 @@ class Player:
         self.money = 1000
     def __str__(self):
         return f"{self.name} (Money: {self.money}, Hand: {self.hand})"
-def typeWriter(text):
-    index = 0
-    for character in text:
-        if text[index-1] == text[index]:
-            sleep(randint(8, 50) / typing_speed)
-        elif text[index].isupper():
-            sleep(randint(10, 60) / typing_speed)
-        elif text[index].isalpha():
-            sleep(randint(1, 20) / typing_speed)
-        else:
-            sleep(randint(6, 50) / typing_speed)
-        
-        index += 1
-        sys.stdout.write(character)
-        sys.stdout.flush()
+
 def clear_screen():
     if os.name == 'nt':
         _ = system('cls')
@@ -156,7 +142,7 @@ def menu(subroutine=True, parameters=None, prevfunction=""):
     menulist = menuoptions.splitlines()
     for line in menulist:
 
-        typeWriter(line)
+        print(line)
             
 
         print("\n")
@@ -188,7 +174,7 @@ def menu(subroutine=True, parameters=None, prevfunction=""):
         
         return option
 def invalidinput():
-    typeWriter("Invalid input")
+    print("Invalid input")
     print("\n")
 def validinput(option, parameters):
     while not eval(parameters):
@@ -198,8 +184,8 @@ def validinput(option, parameters):
 def PlayBlackjack():
     global PlayingBJ
     PlayingBJ = True
-    typeWriter("Playing Blackjack")
-    num_players = input(typeWriter("Enter number of players (1-4): "))
+    print("Playing Blackjack")
+    num_players = input(print("Enter number of players (1-4): "))
     num_players = validinput(num_players, "option.isdigit() and 1 <= int(option) <= 4")
     decks = makeBJcards()
 
@@ -214,9 +200,9 @@ def create_players(num_players):
 
     
     for i in range(int(num_players)):
-        name = input(typeWriter("Enter name for player " + str(i+1) + ": "))
+        name = input(print("Enter name for player " + str(i+1) + ": "))
         while len(name) > 10:
-            name = input(typeWriter("Name must be 10 characters or less. Enter name for player " + str(i+1) + ": "))
+            name = input(print("Name must be 10 characters or less. Enter name for player " + str(i+1) + ": "))
         
         players.append(Player(name))
 
@@ -305,12 +291,12 @@ def draw_cards():
 def PlayPoker():
     global PlayingPoker
     PlayingPoker = True
-    typeWriter("Playing Poker")
+    print("Playing Poker")
     pass
 def PlayRoulette():
     global PlayingRoulette
     PlayingRoulette = True
-    typeWriter("Playing Roulette")
+    print("Playing Roulette")
 
     pass
 def Settings():
@@ -318,7 +304,7 @@ def Settings():
     
     openSettings = True
     print("\n")
-    typeWriter("Settings")
+    print("Settings")
     option = menu(subroutine=False, parameters="option.isdigit()")
     if option == "1":
         openSettings = False
@@ -328,30 +314,30 @@ def Settings():
         typing_speed = Changetypingspeed(typing_speed)*50
         Settings()
     elif option == "3":
-        typeWriter("Music settings coming soon")
+        print("Music settings coming soon")
         print("\n")
         sleep(1)
         Settings()
 def Exit():
-    typeWriter("Exiting")
+    print("Exiting")
     print("\n")
     for i in range(randint(0,7)):
-        typeWriter("."*randint(3,9))
+        print("."*randint(3,9))
         
         print("\033[A           \n                  \033[A")
         
     exit()
     pass
 def Changetypingspeed(typing_speed):
-    typeWriter("Current typing speed: " + str(typing_speed))
+    print("Current typing speed: " + str(typing_speed))
     print("\n")
-    typeWriter("Enter new typing speed (1-1000%): ")
+    print("Enter new typing speed (1-1000%): ")
     print("\n")
     x = input()
     if validinput(x, "option.isdigit() and int(option) >= 1 and int(option) <= 1000"):
         typing_speed = int(x)
         
-        typeWriter("Typing speed changed to " + str(typing_speed))
+        print("Typing speed changed to " + str(typing_speed))
         print("\n")
     else:
         invalidinput()
