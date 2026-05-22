@@ -198,15 +198,15 @@ def validinput(option, parameters):
 def PlayBlackjack():
     global PlayingBJ
     PlayingBJ = True
-    print("Playing Blackjack")
-    num_players = input("Enter number of players (1-4): ")
+    typeWriter("Playing Blackjack")
+    num_players = input(typeWriter("Enter number of players (1-4): "))
     num_players = validinput(num_players, "option.isdigit() and 1 <= int(option) <= 4")
     decks = makeBJcards()
 
     create_players(num_players)
 
     for i in range(int(num_players)):
-        deal_card(decks, 2, players[i])
+        deal_card(decks, players[i])
     printplayerinfo(players)
 def create_players(num_players):
     global players
@@ -214,9 +214,9 @@ def create_players(num_players):
 
     
     for i in range(int(num_players)):
-        name = input("Enter name for player " + str(i+1) + ": ")
+        name = input(typeWriter("Enter name for player " + str(i+1) + ": "))
         while len(name) > 10:
-            name = input("Name must be 10 characters or less. Enter name for player " + str(i+1) + ": ")
+            name = input(typeWriter("Name must be 10 characters or less. Enter name for player " + str(i+1) + ": "))
         
         players.append(Player(name))
 
@@ -237,12 +237,20 @@ def printplayerinfo(players):
     print(names_line)
     print(hands_line)   
     print(money_line)
-def deal_card(decks, num_cards, player):
+def printBJinfo():
+    pass
+def printDealerInfo():
+    print(f"Dealer: {Dealer.name} (Hand: {' '.join(Dealer.hand)})")
+def createDealer():
+    global Dealer
+    Dealer = Player("Dealer")
+    players.append(Dealer)
+
+def deal_card(decks, player):
     
-    for _ in range(num_cards):
-        card = decks[0]
-        decks.pop(0)
-        player.hand.append(card)
+    card = decks[0]
+    decks.pop(0)
+    player.hand.append(card)
     
 def makeBJcards():
     deck = draw_cards()
@@ -297,12 +305,12 @@ def draw_cards():
 def PlayPoker():
     global PlayingPoker
     PlayingPoker = True
-    print("Playing Poker")
+    typeWriter("Playing Poker")
     pass
 def PlayRoulette():
     global PlayingRoulette
     PlayingRoulette = True
-    print("Playing Roulette")
+    typeWriter("Playing Roulette")
 
     pass
 def Settings():
