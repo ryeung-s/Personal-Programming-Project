@@ -120,10 +120,9 @@ def menuprint():
     elif openSettings:
         menuoptions = """
         1. Back
-        2. Change typing speed
-        3. Music
-        4. Reset settings
-        5. Exit
+        2. Music
+        3. Reset settings
+        4. Exit
         """
     else:
         menuoptions = """
@@ -185,7 +184,7 @@ def PlayBlackjack():
     global PlayingBJ
     PlayingBJ = True
     print("Playing Blackjack")
-    num_players = input(print("Enter number of players (1-4): "))
+    num_players = input("Enter number of players (1-4): ")
     num_players = validinput(num_players, "option.isdigit() and 1 <= int(option) <= 4")
     decks = makeBJcards()
 
@@ -200,9 +199,9 @@ def create_players(num_players):
 
     
     for i in range(int(num_players)):
-        name = input(print("Enter name for player " + str(i+1) + ": "))
+        name = input("Enter name for player " + str(i+1) + ": ")
         while len(name) > 10:
-            name = input(print("Name must be 10 characters or less. Enter name for player " + str(i+1) + ": "))
+            name = input("Name must be 10 characters or less. Enter name for player " + str(i+1) + ": ")
         
         players.append(Player(name))
 
@@ -310,10 +309,6 @@ def Settings():
         openSettings = False
         menu()
     elif option == "2":
-        global typing_speed
-        typing_speed = Changetypingspeed(typing_speed)*50
-        Settings()
-    elif option == "3":
         print("Music settings coming soon")
         print("\n")
         sleep(1)
@@ -328,20 +323,7 @@ def Exit():
         
     exit()
     pass
-def Changetypingspeed(typing_speed):
-    print("Current typing speed: " + str(typing_speed))
-    print("\n")
-    print("Enter new typing speed (1-1000%): ")
-    print("\n")
-    x = input()
-    if validinput(x, "option.isdigit() and int(option) >= 1 and int(option) <= 1000"):
-        typing_speed = int(x)
-        
-        print("Typing speed changed to " + str(typing_speed))
-        print("\n")
-    else:
-        invalidinput()
-    return typing_speed
+
 def home():
     main()
 def back():
