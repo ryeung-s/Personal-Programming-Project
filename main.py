@@ -189,10 +189,13 @@ def PlayBlackjack():
     decks = makeBJcards()
 
     create_players(num_players)
+    for i in range(2):
+        for i in range(int(num_players)):
+            print(CLEAR_SCREEN + CURSOR_HOME)
+            deal_card(decks, players[i])
+            printplayerinfo(players)
+            sleep(0.5)
 
-    for i in range(int(num_players)):
-        deal_card(decks, players[i])
-    printplayerinfo(players)
 def create_players(num_players):
     global players
     players = []
@@ -228,7 +231,7 @@ def printplayerinfo(players):
 def printBJinfo():
     pass
 def printDealerInfo(players):
-    print(f"Dealer: {players[0].name} Hand: {' '.join(players[0].hand)}")
+    print(f"Dealer:{' '.join(players[0].hand)}")
 def createDealer():
     global Dealer
     Dealer = Player("Dealer")
