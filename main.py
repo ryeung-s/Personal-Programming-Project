@@ -194,7 +194,7 @@ def PlayBlackjack():
             print(CURSOR_HOME+CLEAR_SCREEN)
             deal_card(decks, player)
             printplayerinfo(players)
-            print(player.hand)
+            print(player.name)
             sleep(0.5)
             
 def create_players(num_players):
@@ -206,7 +206,7 @@ def create_players(num_players):
         print(CLEAR_SCREEN + CURSOR_HOME)
         name = input("Name must be 10 characters or less, can be empty. Enter name for player " + str(i+1) + ": ")
         
-        name = validinput(name + str(i+1) + ": ", "len(option) <= 10")
+        name = validinput(name, "len(option) <= 10")
         
         players.append(Player(name))
         
@@ -232,7 +232,7 @@ def printplayerinfo(players):
 def printBJinfo():
     pass
 def printDealerInfo(players):
-    print(f"Dealer:{' '.join(players[0].hand)}")
+    print(f"Dealer: {' '.join(players[0].hand)}")
 def createDealer():
     global Dealer
     Dealer = Player("Dealer")
