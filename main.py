@@ -190,12 +190,13 @@ def PlayBlackjack():
 
     create_players(num_players)
     for i in range(2):
-        for i in range(int(num_players)):
+        for player in players:
             print(CURSOR_HOME+CLEAR_SCREEN)
-            deal_card(decks, players[i])
+            deal_card(decks, player)
             printplayerinfo(players)
+            
             sleep(0.5)
-
+    print(players)
 def create_players(num_players):
     global players
     players = []
