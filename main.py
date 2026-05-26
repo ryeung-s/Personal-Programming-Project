@@ -199,7 +199,7 @@ def create_players(num_players):
 
     
     for i in range(int(num_players)):
-        print(c)
+        print(CLEAR_SCREEN + CURSOR_HOME)
         name = input("Name must be 10 characters or less, can be empty. Enter name for player " + str(i+1) + ": ")
         
         name = validinput(name + str(i+1) + ": ", "len(option) <= 10")
