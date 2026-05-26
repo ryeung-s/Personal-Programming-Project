@@ -197,7 +197,7 @@ def create_players(num_players):
     global players
     players = []
 
-    
+    createDealer()
     for i in range(int(num_players)):
         print(CLEAR_SCREEN + CURSOR_HOME)
         name = input("Name must be 10 characters or less, can be empty. Enter name for player " + str(i+1) + ": ")
