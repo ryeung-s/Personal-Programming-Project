@@ -199,9 +199,8 @@ def create_players(num_players):
 
     
     for i in range(int(num_players)):
-        name = input("Enter name for player " + str(i+1) + ": ")
-        while len(name) > 10:
-            name = input("Name must be 10 characters or less. Enter name for player " + str(i+1) + ": ")
+        
+        name = validinput("Name must be 10 characters or less, can be empty. Enter name for player " + str(i+1) + ": ", "len(option) <= 10")
         
         players.append(Player(name))
 
@@ -214,7 +213,7 @@ def printplayerinfo(players):
     max_name = max(len(p.name) for p in players) + 10
     max_hand = max(len(" ".join(p.hand)) for p in players)
 
-    printDealerInfo()
+    printDealerInfo(players)
     names_line = " ".join(f"{f'Player {i+1}: '}{p.name:<{max_name}}" for i, p in enumerate(players) if p.name != "Dealer")
     hands_line = " ".join(f"{'Hand: ' + ' '.join(p.hand):<{max_name+10}}" for p in players if p.name != "Dealer")
     money_line = " ".join(f"{'Money: ' + str(p.money):<{max_name+10}}" for p in players if p.name != "Dealer")
@@ -224,8 +223,8 @@ def printplayerinfo(players):
     print(money_line)
 def printBJinfo():
     pass
-def printDealerInfo():
-    print(f"Dealer: {Dealer.name} (Hand: {' '.join(Dealer.hand)})")
+def printDealerInfo(players):
+    print(f"Dealer: {players[0].name} Hand: {' '.join(players[0].hand)}")
 def createDealer():
     global Dealer
     Dealer = Player("Dealer")
