@@ -244,8 +244,10 @@ def BJturn(player):
             print("1. Split")
             print("2. Hit")
             print("3. Stand")
+            print("4. Double down")
             option = input()
-            option = validinput(option, "option in ['1', '2', '3']")
+            option = validinput(option, "option in ['1', '2', '3', '4']")
+            option = int(option)
         while int(player.hand[0][:-1]) + int(player.hand[1][:-1]) < 21:
             
             pass
