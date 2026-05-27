@@ -237,6 +237,14 @@ def createDealer():
     global Dealer
     Dealer = Player("Dealer")
     players.append(Dealer)
+def BJturn(player):
+    if player.name != "Dealer":
+        print(f"Player {players.index(player) + 1}: {player.name}'s turn")
+        if player.hand[0][:-1] == player.hand[1][:-1]:
+            player
+        while int(player.hand[0][:-1]) + int(player.hand[1][:-1]) < 21:
+            
+            pass
 
 def deal_card(decks, player):
     
