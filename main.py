@@ -241,7 +241,11 @@ def BJturn(player):
     if player.name != "Dealer":
         print(f"Player {players.index(player) + 1}: {player.name}'s turn")
         if player.hand[0][:-1] == player.hand[1][:-1]:
-            player
+            print("1. Split")
+            print("2. Hit")
+            print("3. Stand")
+            option = input()
+            option = validinput(option, "option in ['1', '2', '3']")
         while int(player.hand[0][:-1]) + int(player.hand[1][:-1]) < 21:
             
             pass
