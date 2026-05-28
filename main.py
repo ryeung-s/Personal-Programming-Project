@@ -194,7 +194,7 @@ def PlayBlackjack():
             print(CURSOR_HOME+CLEAR_SCREEN)
             deal_card(decks, player)
             printplayerinfo(players)
-            print(player.name)
+            
             sleep(0.5)
             
 def create_players(num_players):
