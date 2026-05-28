@@ -232,10 +232,13 @@ def printplayerinfo(players):
             padded = f"{cards:<24}"
             player_hands.append(padded)
 
-    
+    player_hands = []
     names_line = " ".join(f"{f'Player {i+1}: '}{p.name:<{max_name}}" for i, p in enumerate(players) if p.name != "Dealer")
     money_line = " ".join(f"{'Money: ' + str(p.money):<{max_name+10}}" for p in players if p.name != "Dealer")
-    print(deck[players[0].hand[0]], deck[players[1].hand[0]])
+    player_hands.append(deck[players[0].hand[0]])
+    player_hands.append(deck[players[0].hand[0]])
+
+    print(" ".join(player_hands))
     #print("".join(player_hands), end="\r")
     #print(names_line)
     #print(money_line)
@@ -293,29 +296,29 @@ def draw_cards():
     for card in cards:
         if "10" in card:
             x = f"""
-            ┌─────────┐
-            │{card}      │
-            │         │
-            │         │
-            │    {card[-1]}    │
-            │         │
-            │         │
-            │      {card}│
-            └─────────┘
-            """
+┌─────────┐
+│{card}      │
+│         │
+│         │
+│    {card[-1]}    │
+│         │
+│         │
+│      {card}│
+└─────────┘
+"""
             
         else:
             x = f"""
-            ┌─────────┐
-            │{card}       │
-            │         │
-            │         │
-            │    {card[-1]}    │
-            │         │
-            │         │
-            │       {card}│
-            └─────────┘
-            """
+┌─────────┐
+│{card}       │
+│         │
+│         │
+│    {card[-1]}    │
+│         │
+│         │
+│       {card}│
+└─────────┘
+"""
         deck[card] = x
     
     return deck
