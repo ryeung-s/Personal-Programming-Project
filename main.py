@@ -195,8 +195,7 @@ def PlayBlackjack():
             deal_card(decks, player)
             printplayerinfo(players)
             
-            sleep(0.5)
-            
+            sleep(0.5)           
 def create_players(num_players):
     global players
     players = []
@@ -213,10 +212,7 @@ def create_players(num_players):
 
 
 
-    i = 1 
-    
-        
-        
+    i = 1      
 def printplayerinfo(players):
     max_name = max(len(p.name) for p in players) + 10
     max_hand = max(len(" ".join(p.hand)) for p in players)
@@ -232,21 +228,19 @@ def printplayerinfo(players):
             padded = f"{cards:<24}"
             player_hands.append(padded)
 
-    player_hands = []
+    
     names_line = " ".join(f"{f'Player {i+1}: '}{p.name:<{max_name}}" for i, p in enumerate(players) if p.name != "Dealer")
     money_line = " ".join(f"{'Money: ' + str(p.money):<{max_name+10}}" for p in players if p.name != "Dealer")
-    player_hands.append(deck[players[0].hand[0]])
-    player_hands.append(deck[players[0].hand[0]])
-    row = []
-    column = []    
-    for row in range(9):
-        for line in player_hands[0].splitlines():
-            row.append(line)
-        column.append(row)
-    for line in column:
-        print(" ".join(line))
+    
+    finalhands = []
+    for hands in player_hands:
+        finalhands.append(hands.splitlines())
+    
+    for i in range(len(finalhands[0])):
 
-
+        line = "   ".join(hand[i] if i != 0 else hand[i-1] for hand in finalhands)
+        print(line)
+    #print(hand[0])
     #print(" ".join(player_hands))
     #print("".join(player_hands), end="\r")
     #print(names_line)
@@ -273,13 +267,11 @@ def BJturn(player):
         while int(player.hand[0][:-1]) + int(player.hand[1][:-1]) < 21:
             
             pass
-
 def deal_card(decks, player):
     
     card = decks[0]
     decks.pop(0)
-    player.hand.append(card)
-    
+    player.hand.append(card)   
 def makeBJcards():
     deck = draw_cards()
     decks = []
@@ -367,7 +359,6 @@ def Exit():
         
     exit()
     pass
-
 def home():
     main()
 def back():
