@@ -239,8 +239,8 @@ def printplayerinfo(players):
     player_hands.append(deck[players[0].hand[0]])
     row = []
     column = []    
-    for line in player_hands[0].splitlines():
-        for cards in player_hands:
+    for row in range(9):
+        for line in player_hands[0].splitlines():
             row.append(line)
         column.append(row)
     for line in column:
