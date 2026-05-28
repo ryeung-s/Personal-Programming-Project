@@ -238,13 +238,16 @@ def printplayerinfo(players):
     player_hands.append(deck[players[0].hand[0]])
     player_hands.append(deck[players[0].hand[0]])
     row = []
-    for cards in player_hands:
-        
-        for line in player_hands[0].splitlines():
+    column = []    
+    for line in player_hands[0].splitlines():
+        for cards in player_hands:
             row.append(line)
+        column.append(row)
+    for line in column:
+        print(" ".join(line))
 
 
-    print(" ".join(player_hands))
+    #print(" ".join(player_hands))
     #print("".join(player_hands), end="\r")
     #print(names_line)
     #print(money_line)
