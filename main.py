@@ -237,6 +237,12 @@ def printplayerinfo(players):
     money_line = " ".join(f"{'Money: ' + str(p.money):<{max_name+10}}" for p in players if p.name != "Dealer")
     player_hands.append(deck[players[0].hand[0]])
     player_hands.append(deck[players[0].hand[0]])
+    row = []
+    for cards in player_hands:
+        
+        for line in player_hands[0].splitlines():
+            row.append(line)
+
 
     print(" ".join(player_hands))
     #print("".join(player_hands), end="\r")
