@@ -295,22 +295,7 @@ def draw_cards():
     cards = createCards()
     deck = {}
     for card in cards:
-        if "10" in card:
-            x = f"""
-┌─────────┐
-│{card}      │
-│         │
-│         │
-│    {card[-1]}    │
-│         │
-│         │
-│      {card}│
-└─────────┘
-"""
-            
-        else:
-            x = f"""
-┌─────────┐
+        x = f"""┌─────────┐
 │{card}       │
 │         │
 │         │
@@ -318,8 +303,7 @@ def draw_cards():
 │         │
 │         │
 │       {card}│
-└─────────┘
-"""
+└─────────┘"""
         deck[card] = x
     
     return deck
