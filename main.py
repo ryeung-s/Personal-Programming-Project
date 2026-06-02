@@ -242,8 +242,8 @@ def printplayerinfo(players):
     #print(hand[0])
     #print(" ".join(player_hands))
     #print("".join(player_hands), end="\r")
-    #print(names_line)
-    #print(money_line)
+    print(names_line)
+    print(money_line)
 def printBJinfo():
     pass
 def printDealerInfo(players):
