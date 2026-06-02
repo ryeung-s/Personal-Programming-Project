@@ -237,7 +237,7 @@ def printplayerinfo(players):
         finalhands.append(hands.splitlines())
     
     for i in range(len(finalhands[0])):
-            line = "   ".join(hand[i] for hand in finalhands if i != 0 if len(hand) > 0) 
+            line = "   ".join(hand[i] for hand in finalhands if i < len(hand)) 
             print(line)
     #print(hand[0])
     #print(" ".join(player_hands))
@@ -294,7 +294,8 @@ def draw_cards():
     cards = createCards()
     deck = {}
     for card in cards:
-        x = f"""┌─────────┐
+        x = f"""
+┌─────────┐
 │{card}       │
 │         │
 │         │
@@ -302,7 +303,8 @@ def draw_cards():
 │         │
 │         │
 │       {card}│
-└─────────┘"""
+└─────────┘
+"""
         deck[card] = x
     
     return deck
