@@ -230,7 +230,7 @@ def printplayerinfo(players):
 
     
     names_line = " ".join(f"{f'Player {i}: '}{p.name:<{max_name}}" for i, p in enumerate(players) if p.name != "Dealer")
-    hands_line = " ".join(f"{f'Hand:{p.hand}'}{"".join(p.hand):<{max_hand+10}}" for p in players if p.name != "Dealer")
+    hands_line = " ".join(f"Hand: {' '.join(p.hand)}" for p in players if p.name != "Dealer")
     money_line = " ".join(f"{'Money: ' + str(p.money):<{max_name+10}}" for p in players if p.name != "Dealer")
     
     finalhands = []
@@ -242,7 +242,7 @@ def printplayerinfo(players):
     #if len(finalhands[0]) == 
     print(names_line)
     print(money_line)
-    print(hands_line)
+    print(f"{hands_line:<{max_name+10}}")
     #print(hand[0])
     #print(" ".join(player_hands))
     #print("".join(player_hands), end="\r")
