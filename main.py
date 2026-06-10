@@ -196,14 +196,14 @@ def PlayBlackjack():
             if i == 0:
                 player.hand.append("""
 ┌─────────┐
-│{card}       │
 │         │
 │         │
-│    {card[-1]}    │
 │         │
 │         │
-│       {card}│
-└─────────┘                                   
+│         │
+│         │
+           
+                                              
 """)
 
             printplayerinfo(players)
