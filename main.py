@@ -189,8 +189,8 @@ def PlayBlackjack():
     decks = makeBJcards()
 
     create_players(num_players)
-    for i in range(2):
-        for player in players:
+    for player in players:      
+        for i in range(2):
             print(CURSOR_HOME+CLEAR_SCREEN)
             deal_card(decks, player)
             printplayerinfo(players)
