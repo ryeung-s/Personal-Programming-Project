@@ -234,12 +234,12 @@ def printplayerinfo(players):
     player_hands = []
     for player in players:
         if player.name != "Dealer":
-        
-            cards = " ".join(deck[card] for card in player.hand)
-        
+            
+            #cards = " ".join(deck[card] for card in player.hand)
+            print(player.hand)
 
-            padded = f"{cards:<24}"
-            player_hands.append(padded)
+            #padded = f"{cards:<24}"
+            #player_hands.append(padded)
 
     
     names_line = " ".join(f"{f'Player {i}: '}{p.name:<{max_name}}" for i, p in enumerate(players) if p.name != "Dealer")
