@@ -195,15 +195,15 @@ def PlayBlackjack():
             deal_card(decks, player)
             if i == 0:
                 player.hand.append("""
-┌─────────┐
-│         │
-│         │
-│         │
-│         │
-│         │
-│         │
            
-                                              
+           
+           
+           
+           
+           
+           
+           
+           
 """)
 
             printplayerinfo(players)
