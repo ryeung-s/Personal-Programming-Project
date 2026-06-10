@@ -239,8 +239,10 @@ def printplayerinfo(players):
     for hands in player_hands:
         finalhands.append(hands.splitlines())
     for i in range(len(finalhands[0])):
-        line = ("   ".join(finalhands[row][i] for row, h in enumerate(hands)) in len(finalhands) < 1)
-        print(line)
+        line = ("   ".join(hand[i] for hand in finalhands if i < len(hand)))
+        lines = [hand[i] for hand in finalhands if i < len(hand)]
+        print(lines)
+
     #if len(finalhands[0]) == 
     print(names_line)
     print(money_line)
