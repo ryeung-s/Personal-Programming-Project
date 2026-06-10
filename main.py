@@ -193,6 +193,9 @@ def PlayBlackjack():
         for player in players:
             print(CURSOR_HOME+CLEAR_SCREEN)
             deal_card(decks, player)
+            if i == 0:
+                player
+
             printplayerinfo(players)
             
             sleep(0.5)           
@@ -239,6 +242,7 @@ def printplayerinfo(players):
     for i in range(len(finalhands[0])):
         line = ("   ".join(hand[i] for hand in finalhands if i < len(hand)))
         print(line)
+    #if len(finalhands[0]) == 
     print(names_line)
     print(money_line)
     print(hands_line)
@@ -269,7 +273,6 @@ def BJturn(player):
             
             pass
 def deal_card(decks, player):
-    
     card = decks[0]
     decks.pop(0)
     player.hand.append(card)   
@@ -308,7 +311,7 @@ def draw_cards():
 └─────────┘
 """
         deck[card] = x
-    
+
     return deck
 def PlayPoker():
     global PlayingPoker
