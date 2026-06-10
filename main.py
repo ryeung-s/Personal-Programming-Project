@@ -237,7 +237,7 @@ def printplayerinfo(players):
     
     for hands in player_hands:
         finalhands.append(hands.splitlines())
-    print(finalhands)
+    
     for i in range(len(finalhands[0])):
         line = ("   ".join(hand[i] for hand in finalhands if i < len(hand)))
         print(line)
