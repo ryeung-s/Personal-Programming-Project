@@ -194,7 +194,17 @@ def PlayBlackjack():
             print(CURSOR_HOME+CLEAR_SCREEN)
             deal_card(decks, player)
             if i == 0:
-                player
+                player.hand.append("""
+┌─────────┐
+│{card}       │
+│         │
+│         │
+│    {card[-1]}    │
+│         │
+│         │
+│       {card}│
+└─────────┘                                   
+""")
 
             printplayerinfo(players)
             
