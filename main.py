@@ -242,7 +242,7 @@ def printplayerinfo(players):
     #if len(finalhands[0]) == 
     print(names_line)
     print(money_line)
-    print(hands_line)
+    print("".join(hands_line))
     #print(hand[0])
     #print(" ".join(player_hands))
     #print("".join(player_hands), end="\r")
