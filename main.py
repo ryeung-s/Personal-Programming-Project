@@ -232,11 +232,15 @@ def printplayerinfo(players):
     money_line = " ".join(f"{'Money: ' + str(p.money):<{max_name+10}}" for p in players if p.name != "Dealer")
     
     finalhands = []
-    
-    for hands in player_hands:
-        for i in range(len(finalhands[0])):
-            line = "   ".join(hand[i] for hand in hands if i < 1)
-        print(line)
+    if not player_hands or not player_hands[0]:
+        return
+    for row_i in range(len(player_hands[0][0])):  # height of a card
+        line_parts = []
+        for card_blocks in player_hands:          # each player's cards
+            # card_blocks is like: [card0_lines, card1_lines, ...]
+            # stitch across that player's cards for this row
+            line_parts.append("  ".join(card[line][row_i] for card in card_blocks))
+        print("   ".join(line_parts))
     #for i in range(len(finalhands[0])):
         #row = "  ".join(finalhands[cardind][i] for cardind,p in enumerate(finalhands) if i < len(p))
 
