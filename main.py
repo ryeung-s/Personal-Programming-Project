@@ -17,7 +17,7 @@ PlayingRoulette = False
 openSettings = False
 typing_speed = 500
 previous_menu = ""
-
+finalhands = []
 
 class Player:
     def __init__(self, name):
@@ -226,16 +226,15 @@ def printplayerinfo(players):
             cards = " ".join(deck[card] for card in player.hand)
         
 
-            # padded = f"{cards:<24}"
-            # player_hands.append(padded)
+            padded = f"{cards:<24}"
+            player_hands.append(padded)
 
     
     names_line = " ".join(f"{f'Player {i}: '}{p.name:<{max_name}}" for i, p in enumerate(players) if p.name != "Dealer")
     hands_line = " ".join(f"{(h := f'Hand: {' '.join(p.hand)}'):<{max_hand+21}}" for p in players if p.name != "Dealer")
     money_line = " ".join(f"{'Money: ' + str(p.money):<{max_name+10}}" for p in players if p.name != "Dealer")
-    
+
     finalhands = []
-    
     for hands in player_hands:
         finalhands.append(hands.splitlines())
 
