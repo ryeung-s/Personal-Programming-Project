@@ -229,12 +229,16 @@ def printplayerinfo(players):
     #         padded = f"{cards:<24}"
     #         player_hands.append(padded)
     player_hands = []
-    for player in players:
-        if player.name != "Dealer":
-            for i in range(9):
+    card_height = len(deck[player.hand[0]].splitlines())
 
-
-                print("  ".join(deck[card][i] for card in player.hand))
+    for row_i in range(card_height):
+        print(
+            "   ".join(
+                "  ".join(deck[c].splitlines()[row_i] for c in p.hand)
+                for p in players
+                if p.name != "Dealer"
+            )
+        )
     names_line = " ".join(f"{f'Player {i}: '}{p.name:<{max_name}}" for i, p in enumerate(players) if p.name != "Dealer")
     hands_line = " ".join(f"{(h := f'Hand: {' '.join(p.hand)}'):<{max_hand+21}}" for p in players if p.name != "Dealer")
     money_line = " ".join(f"{'Money: ' + str(p.money):<{max_name+10}}" for p in players if p.name != "Dealer")
