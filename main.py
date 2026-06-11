@@ -243,7 +243,7 @@ def printplayerinfo(players):
         #print(line)
         for hand in finalhands: 
             if i  < len(hand):
-                print(hand[i])
+                
     #if len(finalhands[0]) == 
     print(names_line)
     print(money_line)
