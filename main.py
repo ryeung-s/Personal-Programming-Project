@@ -220,16 +220,19 @@ def printplayerinfo(players):
 
     printDealerInfo(players)
     player_hands = []
+    # for player in players:
+    #     if player.name != "Dealer":
+        
+    #         cards = " ".join(deck[card] for card in player.hand)
+        
+
+    #         padded = f"{cards:<24}"
+    #         player_hands.append(padded)
+
     for player in players:
         if player.name != "Dealer":
-        
-            cards = " ".join(deck[card] for card in player.hand)
-        
 
-            padded = f"{cards:<24}"
-            player_hands.append(padded)
-
-    
+            player_hands.append(play)
     names_line = " ".join(f"{f'Player {i}: '}{p.name:<{max_name}}" for i, p in enumerate(players) if p.name != "Dealer")
     hands_line = " ".join(f"{(h := f'Hand: {' '.join(p.hand)}'):<{max_hand+21}}" for p in players if p.name != "Dealer")
     money_line = " ".join(f"{'Money: ' + str(p.money):<{max_name+10}}" for p in players if p.name != "Dealer")
@@ -238,10 +241,6 @@ def printplayerinfo(players):
     for hands in player_hands:
         finalhands.append(hands.splitlines())
 
-    for i in range(len(finalhands[0])):
-    
-        line = ("   ".join(hand[i] for hand in finalhands if i < len(hand)))
-        print(line)
     
     #if len(finalhands[0]) == 
     print(names_line)
