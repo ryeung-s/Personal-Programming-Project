@@ -247,7 +247,8 @@ def printplayerinfo(players):
     print(f"{hands_line:<{max_name+10}}")
     #print(hand[0])
     #print(" ".join(player_hands))
-    #print("".join(player_hands), end="\r")
+    #print("".join(player_hands), end="\r")4
+    
     
 def printBJinfo():
     pass
