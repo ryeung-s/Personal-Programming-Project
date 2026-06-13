@@ -21,7 +21,7 @@ CARD_BACK = """
 │░░░░░░░░░│
 │░░░░░░░░░│
 └─────────┘
-""".strip("\n")
+"""
 
 PlayingBJ = False
 PlayingPoker = False
@@ -268,9 +268,12 @@ def printBJinfo():
 def printDealerInfo(players):
     cards = players[0].hand
     card_height = len(deck[cards[0]].splitlines())
-
-    for row_i in range(card_height):
-        print(" ".join(deck[c].splitlines()[row_i] for c in cards))
+    if len(cards) > 2:
+        for row_i in range(card_height):
+            print(" ".join(deck[c].splitlines()[row_i] for c in cards))
+    else:
+        for row_i in range(card_height):
+            dealerhand = list(zip())
     print(f"Dealer: {' '.join(players[0].hand)}")
 
 def createDealer():
