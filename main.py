@@ -254,7 +254,11 @@ def printplayerinfo(players):
 def printBJinfo():
     pass
 def printDealerInfo(players):
-    print(' '.join(deck[c] for c in players[0].hand))
+    cards = players[0].hand
+    card_height = len(deck[cards[0]].splitlines())
+
+    for row_i in range(card_height):
+        print(" ".join(deck[c].splitlines()[row_i] for c in cards))
     print(f"Dealer: {' '.join(players[0].hand)}")
 
 def createDealer():
