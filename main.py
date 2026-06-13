@@ -218,16 +218,11 @@ def printplayerinfo(players):
     max_name = max(len(p.name) for p in players) + 10
     max_hand = max(len(" ".join(p.hand)) for p in players)
 
-    printDealerInfo(players)
-    player_hands = []
-    # for player in players:
-    #     if player.name != "Dealer":
-        
-    #         cards = " ".join(deck[card] for card in player.hand)
-        
 
-    #         padded = f"{cards:<24}"
-    #         player_hands.append(padded)
+    display_players = [p for p in players if p.name != "Dealer"]
+    dealer = next()
+    printDealerInfo(players)
+    
     player_hands = []
     for player in players:
         if player.name != "Dealer":
@@ -245,18 +240,9 @@ def printplayerinfo(players):
     hands_line = " ".join(f"{(h := f'Hand: {' '.join(p.hand)}'):<{max_hand+21}}" for p in players if p.name != "Dealer")
     money_line = " ".join(f"{'Money: ' + str(p.money):<{max_name+10}}" for p in players if p.name != "Dealer")
 
-    finalhands = []
-    for hands in player_hands:
-        finalhands.append(hands.splitlines())
-
-    
-    #if len(finalhands[0]) == 
     print(names_line)
     print(money_line)
     print(f"{hands_line:<{max_name+10}}")
-    #print(hand[0])
-    #print(" ".join(player_hands))
-    #print("".join(player_hands), end="\r")4
     
     
 def printBJinfo():
