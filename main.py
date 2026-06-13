@@ -220,9 +220,16 @@ def printplayerinfo(players):
 
 
     display_players = [p for p in players if p.name != "Dealer"]
-    dealer = next()
-    printDealerInfo(players)
-    
+    dealer = next((p for p in players if p.name == 'Dealer'), None)
+
+    if dealer:
+        printDealerInfo(players)
+    if display_players:
+        first_card = display_players[0].hand[0]
+        card_lines = deck[first_card].splitlines()
+        card_height = len(card_lines)
+
+        
     player_hands = []
     for player in players:
         if player.name != "Dealer":
