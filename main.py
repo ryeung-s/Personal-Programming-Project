@@ -211,8 +211,8 @@ def PlayBlackjack():
             print()
             print()
             printplayerinfo(players)
-            
-            sleep(0.5)           
+            sleep(0.5)
+        BJturn(player)           
 def create_players(num_players):
     global players
     players = []
@@ -282,18 +282,17 @@ def createDealer():
     players.append(Dealer)
 def BJturn(player):
     if player.name != "Dealer":
-        print(f"Player {players.index(player) + 1}: {player.name}'s turn")
-        if player.hand[0][:-1] == player.hand[1][:-1]:
-            print("1. Split")
-            print("2. Hit")
-            print("3. Stand")
-            print("4. Double down")
-            option = input()
-            option = validinput(option, "option in ['1', '2', '3', '4']")
-            option = int(option)
         while int(player.hand[0][:-1]) + int(player.hand[1][:-1]) < 21:
-            
-            pass
+            print(f"Player {players.index(player) + 1}: {player.name}'s turn")
+            print("1. Hit")
+            print("2. Stand")
+            print("3. Double down")
+            if player[0].hand[0][0] in "AKQJ":
+                print("4. Insurance")
+            option = input()
+            option = validinput(option, "option in '1234'")
+            option = int(option)
+        
 def deal_card(decks, player):
     card = decks[0]
     decks.pop(0)
