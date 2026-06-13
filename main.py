@@ -271,10 +271,13 @@ def printDealerInfo(players):
     if len(cards) > 2:
         for row_i in range(card_height):
             print(" ".join(deck[c].splitlines()[row_i] for c in cards))
+        print(f"Dealer: {' '.join(players[0].hand)}")
     else:
+        dealerhand = list(zip(CARD_BACK, players[0].hand[0]))
         for row_i in range(card_height):
-            dealerhand = list(zip())
-    print(f"Dealer: {' '.join(players[0].hand)}")
+            for thing in row_i:
+                print(str(thing))
+        print(f"Dealer: {players[0].hand[0]} ")
 
 def createDealer():
     global Dealer
