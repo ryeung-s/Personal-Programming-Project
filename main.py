@@ -11,6 +11,18 @@ CLEAR_SCREEN = f"{ESC}[2J"
 CURSOR_HOME = f"{ESC}[H"
 HIDE_CURSOR = f"{ESC}[?25l"
 SHOW_CURSOR = f"{ESC}[?25h"
+
+CARD_BACK = """
+┌─────────┐
+│░░░░░░░░░│
+│░░░░░░░░░│
+│░░░░░░░░░│
+│░░░░░░░░░│
+│░░░░░░░░░│
+│░░░░░░░░░│
+└─────────┘
+""".strip("\n")
+
 PlayingBJ = False
 PlayingPoker = False
 PlayingRoulette = False
