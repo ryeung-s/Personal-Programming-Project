@@ -254,8 +254,9 @@ def printplayerinfo(players):
 def printBJinfo():
     pass
 def printDealerInfo(players):
+    print(' '.join(deck[c] for c in players[0].hand))
     print(f"Dealer: {' '.join(players[0].hand)}")
-    
+
 def createDealer():
     global Dealer
     Dealer = Player("Dealer")
