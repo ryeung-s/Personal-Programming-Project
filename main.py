@@ -231,7 +231,7 @@ def create_players(num_players):
 
     i = 1      
 def printplayerinfo(players):
-    max_name = max(len(p.name) for p in players) + 12
+    max_name = max(len(p.name) for p in players) + 16
     max_hand = max(len(" ".join(p.hand)) for p in players)
 
 
@@ -256,7 +256,7 @@ def printplayerinfo(players):
             player_hands = []
     
     names_line = " ".join(f"{f'Player {i}: '}{p.name:<{max_name}}" for i, p in enumerate(players) if p.name != "Dealer")
-    hands_line = " ".join(f"{(h := f'Hand: {' '.join(p.hand)}'):<{max_hand+23}}" for p in players if p.name != "Dealer")
+    hands_line = " ".join(f"{(h := f'Hand: {' '.join(p.hand)}'):<{max_hand+27}}" for p in players if p.name != "Dealer")
     money_line = " ".join(f"{'Money: ' + str(p.money):<{max_name+10}}" for p in players if p.name != "Dealer")
 
     print(names_line)
