@@ -231,7 +231,7 @@ def create_players(num_players):
 
     i = 1      
 def printplayerinfo(players):
-    max_name = max(len(p.name) for p in players) + 10
+    max_name = max(len(p.name) for p in players) + 20
     max_hand = max(len(" ".join(p.hand)) for p in players)
 
 
