@@ -321,7 +321,7 @@ def draw_cards():
     cards = createCards()
     deck = {}
     for card in cards:
-        if card[0] != "10":
+        if card[:-1] != "10":
             x = f"""
 ┌───────────┐
 │{card}         │
@@ -336,13 +336,13 @@ def draw_cards():
         else:
             x = f"""
 ┌───────────┐
-│{card}     │
+│{card}        │
 │           │
 │           │
 │     {card[-1]}     │
 │           │
 │           │
-│     {card}│
+│        {card}│
 └───────────┘
 """
         deck[card] = x
