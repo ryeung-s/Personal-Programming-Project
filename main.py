@@ -255,6 +255,7 @@ def printBJinfo():
     pass
 def printDealerInfo(players):
     print(f"Dealer: {' '.join(players[0].hand)}")
+    
 def createDealer():
     global Dealer
     Dealer = Player("Dealer")
