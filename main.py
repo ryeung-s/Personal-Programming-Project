@@ -274,9 +274,8 @@ def printDealerInfo(players):
         print(f"Dealer: {' '.join(players[0].hand)}")
     else:
         dealerhand = list(zip(CARD_BACK, players[0].hand[0]))
-        for row_i in range(card_height):
-            for thing in row_i:
-                print(str(thing))
+        for row in dealerhand:
+            print(row)
         print(f"Dealer: {players[0].hand[0]} ")
 
 def createDealer():
