@@ -310,7 +310,7 @@ def makeBJcards():
     return decks
 def createCards():
     suits = ['♠', '♥', '♦', '♣']
-    rank = ["2", "3", "4", "5", "6", "7", "8", "9", "X", "J", "Q", "K", "A"]
+    rank = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]
     cards = []
     for suit in suits:
         for r in rank:
@@ -321,7 +321,8 @@ def draw_cards():
     cards = createCards()
     deck = {}
     for card in cards:
-        x = f"""
+        if card[0] != "10":
+            x = f"""
 ┌───────────┐
 │{card}         │
 │           │
@@ -330,6 +331,18 @@ def draw_cards():
 │           │
 │           │
 │         {card}│
+└───────────┘
+"""
+        else:
+            x = f"""
+┌───────────┐
+│{card}     │
+│           │
+│           │
+│     {card[-1]}     │
+│           │
+│           │
+│     {card}│
 └───────────┘
 """
         deck[card] = x
