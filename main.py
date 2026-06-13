@@ -20,6 +20,7 @@ CARD_BACK = """
 │░░░░░░░░░│
 │░░░░░░░░░│
 │░░░░░░░░░│
+│░░░░░░░░░│
 └─────────┘
 """
 
@@ -275,7 +276,7 @@ def printDealerInfo(players):
     else:
         dealerhand = list(zip(CARD_BACK.splitlines(), deck[players[0].hand[0]].splitlines()))
         for row in dealerhand:
-            print(row)
+            print(str(row))
         print(f"Dealer: {players[0].hand[0]} ")
 
 def createDealer():
