@@ -194,6 +194,9 @@ def PlayBlackjack():
             print(CURSOR_HOME)
             clear_screen()
             deal_card(decks, player)
+            print()
+            print()
+            print()
             printplayerinfo(players)
             
             sleep(0.5)           
