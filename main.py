@@ -229,7 +229,10 @@ def printplayerinfo(players):
         card_lines = deck[first_card].splitlines()
         card_height = len(card_lines)
 
-        
+    player_lines = []
+    for p in display_players:
+        hand_cards = p.hand
+        lines    
     player_hands = []
     for player in players:
         if player.name != "Dealer":
