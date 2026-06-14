@@ -208,7 +208,7 @@ def PlayBlackjack():
             print(f"Player {c+1}: {player.name}")
             print(f"Money: {player.money}")
             betamnt = input("Bet amount: ")
-            betamnt = validinput(betamnt, "option.isdigit() and int(betamnt) <= player.money")
+            betamnt = validinput(betamnt, "option not == "" and option.isdigit() and int(betamnt) <= player.money")
         player.bet = int(betamnt)      
         for i in range(2):
             print(CURSOR_HOME)
