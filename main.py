@@ -290,6 +290,7 @@ def createDealer():
     Dealer = Player("Dealer")
     players.append(Dealer)
     Dealer.money = 100000000000000000000000000000000
+    print(Dealer.name)
 def BJturn(player):
     bust = False
     BlackJack = True
