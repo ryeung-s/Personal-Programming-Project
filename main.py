@@ -329,9 +329,10 @@ def BJturn(player):
                     at21 = True
                     BlackJack = False
             elif optimal_score > 21:
-                bust = 21
+                bust = True
             else:
                 stand = turnprint(player)
+            printplayerinfo(players)
 def turnprint(player):
     stand = False    
     print(f"Player {players.index(player)}: {player.name}'s turn")
