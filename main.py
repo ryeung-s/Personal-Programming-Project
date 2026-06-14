@@ -200,9 +200,11 @@ def PlayBlackjack():
     num_players = input("Enter number of players (1-4): ")
     num_players = validinput(num_players, "option.isdigit() and 1 <= int(option) <= 4")
     decks = makeBJcards()
-
+    bet = 0
     create_players(num_players)
-    for player in players:      
+    for player in players:
+        bet = int(input("bet amount: "))
+              
         for i in range(2):
             print(CURSOR_HOME)
             clear_screen()
@@ -304,7 +306,7 @@ def BJturn(player):
                     "J" : "10",
                     "Q" : "10",
                     "K" : "10",}
-    while not bust and not BlackJack and not at21:
+    while not bust and not BlackJack and not at21 and not stand:
         optimal_score = sumofcards + 10 if ("A" in playerhand and sumofcards + 10 <= 21) else sumofcards
         if optimal_score == 21:
             if len(playerhand) == 2:
@@ -316,8 +318,9 @@ def BJturn(player):
         elif optimal_score > 21:
             bust = 21
         else:
-            option = turnprint(player)
-def turnprint(player):    
+            stand = turnprint(player)
+def turnprint(player):
+    stand = False    
     print(f"Player {players.index(player) + 1}: {player.name}'s turn")
     print("1. Hit")
     print("2. Stand")
@@ -329,6 +332,10 @@ def turnprint(player):
     option = int(option)
     if option == 1:
         deal_card(player)
+    elif option == 2:
+        stand = True
+    elif option == 3:
+        pass
 def deal_card(decks, player):
     card = decks[0]
     decks.pop(0)
