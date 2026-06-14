@@ -282,6 +282,13 @@ def createDealer():
     players.append(Dealer)
 def BJturn(player):
     over21 = False
+    BlackJack = True
+    at21 = True
+    playerhand = []
+    convertedplayerhand = []
+    for hand in player.hand:
+        playerhand.append(hand[:-1])
+        convertedplayerhand.append(rankvaluepair[hand[:-1]])
     rankvaluepair = {"A" : "1",
                     "2" : "2",
                     "3" : "3",
@@ -295,8 +302,10 @@ def BJturn(player):
                     "J" : "10",
                     "Q" : "10",
                     "K" : "10",}
-    while not over21:
-        
+    while not over21 and not BlackJack and not at21:
+        if "A" in playerhand:
+            if sum(int(cardvalue) for cardvalue in convertedplayerhand) == 21:
+                BlackJack = True
         print(f"Player {players.index(player) + 1}: {player.name}'s turn")
         print("1. Hit")
         print("2. Stand")
