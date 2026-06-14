@@ -283,7 +283,9 @@ def createDealer():
 def BJturn(player):
     over21 = False
     BlackJack = True
-    at21 = True
+    at21 = False
+    
+    sumofcards = sum(int(cardvalue) for cardvalue in convertedplayerhand)
     playerhand = []
     convertedplayerhand = []
     for hand in player.hand:
@@ -304,18 +306,30 @@ def BJturn(player):
                     "K" : "10",}
     while not over21 and not BlackJack and not at21:
         if "A" in playerhand:
-            if sum(int(cardvalue) for cardvalue in convertedplayerhand) == 21:
+            if sumofcards == 21 or sumofcards + 10 == 21:
                 BlackJack = True
-        print(f"Player {players.index(player) + 1}: {player.name}'s turn")
-        print("1. Hit")
-        print("2. Stand")
-        print("3. Double down")
-        if player[0].hand[0][0] in "AKQJ":
-            print("4. Insurance")
-        option = input()
-        option = validinput(option, "option in '1234'")
-        option = int(option)
-    
+            elif sumofcards > 21:
+                over21 = True
+            else:
+                option = turnprint(player) 
+        else:
+            if sumofcards == 21:
+                at21 = True
+            elif sumofcards > 21:
+                over21 = True
+            else:
+                option = turnprint(player)
+def turnprint(player):    
+    print(f"Player {players.index(player) + 1}: {player.name}'s turn")
+    print("1. Hit")
+    print("2. Stand")
+    print("3. Double down")
+    if player[0].hand[0][0] in "AKQJ":
+        print("4. Insurance")
+    option = input()
+    option = validinput(option, "option in '1234'")
+    option = int(option)
+    return option
 def deal_card(decks, player):
     card = decks[0]
     decks.pop(0)
