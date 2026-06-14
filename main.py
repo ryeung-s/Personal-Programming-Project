@@ -293,50 +293,52 @@ def createDealer():
     players.append(Dealer)
     Dealer.money = 100000000000000000000000000000000
 def BJturn(player):
-    bust = False
-    BlackJack = True
-    at21 = False
-    rankvaluepair = {"A" : "1",
-                    "2" : "2",
-                    "3" : "3",
-                    "4" : "4",
-                    "5" : "5",
-                    "6" : "6",
-                    "7" : "7",
-                    "8" : "8",
-                    "9" : "9",
-                    "10": "10",
-                    "J" : "10",
-                    "Q" : "10",
-                    "K" : "10",}
-    
-    playerhand = []
-    convertedplayerhand = []
-    for hand in player.hand:
-        playerhand.append(hand[:-1])
-        convertedplayerhand.append(rankvaluepair[hand[:-1]])
-    sumofcards = sum(int(cardvalue) for cardvalue in convertedplayerhand)
-    
-    while not bust and not BlackJack and not at21 and not stand:
-        optimal_score = sumofcards + 10 if ("A" in playerhand and sumofcards + 10 <= 21) else sumofcards
-        if optimal_score == 21:
-            if len(playerhand) == 2:
-                BlackJack = True
-                at21 = False
+    if player.name != "Dealer":
+        bust = False
+        BlackJack = False
+        at21 = False
+        stand = False
+        rankvaluepair = {"A" : "1",
+                        "2" : "2",
+                        "3" : "3",
+                        "4" : "4",
+                        "5" : "5",
+                        "6" : "6",
+                        "7" : "7",
+                        "8" : "8",
+                        "9" : "9",
+                        "10": "10",
+                        "J" : "10",
+                        "Q" : "10",
+                        "K" : "10",}
+        
+        playerhand = []
+        convertedplayerhand = []
+        for hand in player.hand:
+            playerhand.append(hand[:-1])
+            convertedplayerhand.append(rankvaluepair[hand[:-1]])
+        sumofcards = sum(int(cardvalue) for cardvalue in convertedplayerhand)
+        
+        while not bust and not BlackJack and not at21 and not stand:
+            optimal_score = sumofcards + 10 if ("A" in playerhand and sumofcards + 10 <= 21) else sumofcards
+            if optimal_score == 21:
+                if len(playerhand) == 2:
+                    BlackJack = True
+                    at21 = False
+                else:
+                    at21 = True
+                    BlackJack = False
+            elif optimal_score > 21:
+                bust = 21
             else:
-                at21 = True
-                BlackJack = False
-        elif optimal_score > 21:
-            bust = 21
-        else:
-            stand = turnprint(player)
+                stand = turnprint(player)
 def turnprint(player):
     stand = False    
-    print(f"Player {players.index(player) + 1}: {player.name}'s turn")
+    print(f"Player {players.index(player)}: {player.name}'s turn")
     print("1. Hit")
     print("2. Stand")
     print("3. Double down")
-    if player[0].hand[0][0] in "AKQJ":
+    if Dealer.hand[0][0] in "AKQJ10":
         print("4. Insurance")
     option = input()
     option = validinput(option, "option in '1234'")
