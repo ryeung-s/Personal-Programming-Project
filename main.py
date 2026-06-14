@@ -201,14 +201,14 @@ def PlayBlackjack():
     num_players = input("Enter number of players (1-4): ")
     num_players = validinput(num_players, "option.isdigit() and 1 <= int(option) <= 4")
     decks = makeBJcards()
-    bet = 0
+    betamnt = 0
     create_players(num_players)
     for c, player in enumerate(players):
         if player.name != "Dealer":
-            print(f"Player {c+1}: {player.name}")
+            print(f"Player {c}: {player.name}")
             print(f"Money: {player.money}")
             betamnt = input("Bet amount: ")
-            betamnt = validinput(betamnt, "option not == "" and option.isdigit() and int(betamnt) <= player.money")
+            betamnt = validinput(betamnt, "option not == "" and option.isdigit() and int(option) <= player.money")
         player.bet = int(betamnt)      
         for i in range(2):
             print(CURSOR_HOME)
