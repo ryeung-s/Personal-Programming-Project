@@ -195,7 +195,7 @@ def validinput(option, parameters, player=None):
         option = input()
     return option
 def PlayBlackjack():
-    global PlayingBJ
+    global PlayingBJ, decks
     PlayingBJ = True
     print("Playing Blackjack")
     num_players = input("Enter number of players (1-4): ")
@@ -355,6 +355,7 @@ def deal_card(player):
     decks.pop(0)
     player.hand.append(card)   
 def makeBJcards():
+    global decks
     deck = draw_cards()
     decks = []
     num_decks = input("Enter number of decks (1-8): ")
