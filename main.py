@@ -38,7 +38,7 @@ class Player:
         self.hand = []
         self.money = 1000
     def __str__(self):
-        return f"{self.name} (Money: {self.money}, Hand: {self.hand})"
+        return f"{self.name} (Money: {self.money}, Hand: {self.hand}, Bet: {self.bet})"
 
 def clear_screen():
     if os.name == 'nt':
@@ -203,8 +203,9 @@ def PlayBlackjack():
     bet = 0
     create_players(num_players)
     for player in players:
-        bet = int(input("bet amount: "))
-              
+        betamnt = input("bet amount: ")
+        betamnt = validinput(betamnt, "option.isdigit() and int(betamnt) <= player.money")
+        player.bet = int(betamnt)      
         for i in range(2):
             print(CURSOR_HOME)
             clear_screen()
@@ -258,8 +259,10 @@ def printplayerinfo(players):
     names_line = " ".join(f"{f'Player {i}: '}{p.name:<{max_name}}" for i, p in enumerate(players) if p.name != "Dealer")
     hands_line = " ".join(f"{(h := f'Hand: {' '.join(p.hand)}'):<{32}}" for p in players if p.name != "Dealer")
     money_line = " ".join(f"{'Money: ' + str(p.money):<{max_name+10}}" for p in players if p.name != "Dealer")
+    bet_line = " ".join(f"{'Bet Amount: ' + str(p.bet):<{max_name+10}}" for p in players if p.name != "Dealer")
     print(names_line)
     print(money_line)
+    print(bet_line)
     print(f"{hands_line:<{max_name+10}}")
     
     
