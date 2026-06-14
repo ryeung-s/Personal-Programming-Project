@@ -215,7 +215,7 @@ def PlayBlackjack():
         for i in range(2):
             print(CURSOR_HOME)
             clear_screen()
-            deal_card(decks, player)
+            deal_card(player)
             print()
             print()
             print()
