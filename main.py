@@ -349,7 +349,8 @@ def turnprint(player):
         stand = True
     elif option == 3:
         pass
-def deal_card(decks, player):
+def deal_card(player):
+    global decks
     card = decks[0]
     decks.pop(0)
     player.hand.append(card)   
