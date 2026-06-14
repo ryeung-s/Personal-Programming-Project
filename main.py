@@ -189,7 +189,7 @@ def menu(subroutine=True, parameters=None, prevfunction=""):
 def invalidinput():
     print("Invalid input")
     print("\n")
-def validinput(option, parameters):
+def validinput(option, parameters, player=None):
     while not eval(parameters):
         invalidinput()
         option = input()
@@ -208,8 +208,9 @@ def PlayBlackjack():
             print(f"Player {c}: {player.name}")
             print(f"Money: {player.money}")
             betamnt = input("Bet amount: ")
-            betamnt = validinput(betamnt, "option != '' and option.isdigit() and int(option) <= player.money")
+            betamnt = validinput(betamnt, "option != '' and option.isdigit() and int(option) <= player.money", player)
             player.bet = int(betamnt)
+            player.money = player.money - player.bet
     for player in players:      
         for i in range(2):
             print(CURSOR_HOME)
