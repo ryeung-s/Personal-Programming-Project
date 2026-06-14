@@ -281,7 +281,7 @@ def createDealer():
     Dealer = Player("Dealer")
     players.append(Dealer)
 def BJturn(player):
-    over21 = False
+    bust = False
     BlackJack = True
     at21 = False
     
@@ -304,21 +304,19 @@ def BJturn(player):
                     "J" : "10",
                     "Q" : "10",
                     "K" : "10",}
-    while not over21 and not BlackJack and not at21:
-        if "A" in playerhand:
-            if sumofcards == 21 or sumofcards + 10 == 21:
+    while not bust and not BlackJack and not at21:
+        optimal_score = sumofcards + 10 if ("A" in playerhand and sumofcards + 10 <= 21) else sumofcards
+        if optimal_score == 21:
+            if len(playerhand) == 2:
                 BlackJack = True
-            elif sumofcards > 21:
-                over21 = True
+                at21 = False
             else:
-                option = turnprint(player) 
-        else:
-            if sumofcards == 21:
                 at21 = True
-            elif sumofcards > 21:
-                over21 = True
-            else:
-                option = turnprint(player)
+                BlackJack = False
+        elif optimal_score > 21:
+            bust = 21
+        else:
+            option = turnprint(player)
 def turnprint(player):    
     print(f"Player {players.index(player) + 1}: {player.name}'s turn")
     print("1. Hit")
@@ -329,7 +327,8 @@ def turnprint(player):
     option = input()
     option = validinput(option, "option in '1234'")
     option = int(option)
-    return option
+    if option == 1:
+        deal_card(player)
 def deal_card(decks, player):
     card = decks[0]
     decks.pop(0)
