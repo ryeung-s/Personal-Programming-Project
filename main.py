@@ -34,9 +34,10 @@ finalhands = []
 
 class Player:
     def __init__(self, name):
-        self.name = name
+        self.name = "name"
         self.hand = []
         self.money = 1000
+        self.bet = 0
     def __str__(self):
         return f"{self.name} (Money: {self.money}, Hand: {self.hand}, Bet: {self.bet})"
 
@@ -203,7 +204,7 @@ def PlayBlackjack():
     bet = 0
     create_players(num_players)
     for c, player in enumerate(players):
-        if player.name != "Dealer":
+        if player.name == "Dealer":
             print(f"Player {c+1}: {player.name}")
             print(f"Money: {player.money}")
             betamnt = input("Bet amount: ")
@@ -288,6 +289,7 @@ def createDealer():
     global Dealer
     Dealer = Player("Dealer")
     players.append(Dealer)
+    Dealer.money = 100000000000000000000000000000000
 def BJturn(player):
     bust = False
     BlackJack = True
