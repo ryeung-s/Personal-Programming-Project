@@ -13,15 +13,15 @@ HIDE_CURSOR = f"{ESC}[?25l"
 SHOW_CURSOR = f"{ESC}[?25h"
 
 CARD_BACK = """
-┌───────────┐
-│░░░░░░░░░░░│
-│░░░░░░░░░░░│
-│░░░░░░░░░░░│
-│░░░░░░░░░░░│
-│░░░░░░░░░░░│
-│░░░░░░░░░░░│
-│░░░░░░░░░░░│
-└───────────┘
+┌─────────┐
+│░░░░░░░░░│
+│░░░░░░░░░│
+│░░░░░░░░░│
+│░░░░░░░░░│
+│░░░░░░░░░│
+│░░░░░░░░░│
+│░░░░░░░░░│
+└─────────┘
 """
 
 PlayingBJ = False
@@ -342,13 +342,13 @@ def turnprint(player):
     if Dealer.hand[0][0] in "AKQJ10":
         print("4. Insurance")
     option = input()
-    option = validinput(option, "option in '1234'")
-    option = int(option)
-    if option == 1:
+    choice = validinput(option, "option in '1234'")
+    choice = int(choice)
+    if choice == 1:
         deal_card(player)
-    elif option == 2:
+    elif choice == 2:
         stand = True
-    elif option == 3:
+    elif choice == 3:
         pass
 def deal_card(player):
     global decks
