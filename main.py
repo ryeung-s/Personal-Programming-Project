@@ -270,7 +270,11 @@ def printplayerinfo(players):
     print(money_line)
     print(bet_line)
     print(f"{hands_line:<{max_name+10}}")
-    
+def get_player_hand_width(p):
+    card_width = len(deck[p.hand[0]].splitlines()[0])
+    cards_width = (len(p.hand)*card_width) + (len(p.hand)-1)
+    name_info_width = len(p.name)+16
+
     
 def printBJinfo():
     pass
