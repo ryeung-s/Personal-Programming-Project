@@ -241,8 +241,6 @@ def create_players(num_players):
 
     i = 1      
 def printplayerinfo(players):
-    max_name = max(len(p.name) for p in players) + 16
-    max_hand = max(len(" ".join(p.hand)) for p in players)
 
 
     display_players = [p for p in players if p.name != "Dealer"]
@@ -270,7 +268,7 @@ def printplayerinfo(players):
     print(names_line)
     print(money_line)
     print(bet_line)
-    print(f"{hands_line:<{max_name+10}}")
+    print(hands_line)
 def get_player_hand_width(p):
     if len(p.hand) > 0:
         card_width = len(deck[p.hand[0]].splitlines()[0])
