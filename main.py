@@ -260,12 +260,13 @@ def printplayerinfo(players):
                 line = []
                 for p in display_players:
                     phand = "  ".join(deck[c].splitlines()[row_i] for c in p.hand)
-                    line.append(phand)
+                    p_width = get_player_hand_width(p)
+                    line.append(f"{phand:<{p_width}}")
                 print("     ".join(line))
-    names_line = " ".join(f"{f'Player {i}: '}{p.name:<{max_name}}" for i, p in enumerate(players) if p.name != "Dealer")
-    hands_line = " ".join(f"{(h := f'Hand: {' '.join(p.hand)}'):<{32}}" for p in players if p.name != "Dealer")
-    money_line = " ".join(f"{'Money: ' + str(p.money):<{max_name+10}}" for p in players if p.name != "Dealer")
-    bet_line = " ".join(f"{'Bet Amount: ' + str(p.bet):<{max_name+10}}" for p in players if p.name != "Dealer")
+    names_line = " ".join(f"{f'Player {i}: '}{p.name:<{get_player_hand_width(p)-10}}" for i, p in enumerate(players) if p.name != "Dealer")
+    hands_line = " ".join(f"{(h := f'Hand: {' '.join(p.hand)}'):<{get_player_hand_width(p)}}" for p in players if p.name != "Dealer")
+    money_line = " ".join(f"{'Money: ' + str(p.money):<{get_player_hand_width(p)}}" for p in players if p.name != "Dealer")
+    bet_line = " ".join(f"{'Bet Amount: ' + str(p.bet):<{get_player_hand_width(p)}}" for p in players if p.name != "Dealer")
     print(names_line)
     print(money_line)
     print(bet_line)
