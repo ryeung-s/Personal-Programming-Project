@@ -272,10 +272,11 @@ def printplayerinfo(players):
     print(bet_line)
     print(f"{hands_line:<{max_name+10}}")
 def get_player_hand_width(p):
-    card_width = len(deck[p.hand[0]].splitlines()[0])
-    cards_width = (len(p.hand)*card_width) + (len(p.hand)-1)
-    name_info_width = len(p.name)+16
-    return max(cards_width, name_info_width)
+    if len(p.hand) > 0:
+        card_width = len(deck[p.hand[0]].splitlines()[0])
+        cards_width = (len(p.hand)*card_width) + (len(p.hand)-1)
+        name_info_width = len(p.name)+16
+        return max(cards_width, name_info_width)
     
 def printBJinfo():
     pass
