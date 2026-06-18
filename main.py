@@ -260,20 +260,22 @@ def printplayerinfo(players):
                 for p in display_players:
                     phand = "  ".join(deck[c].splitlines()[row_i] for c in p.hand)
                     p_width = get_player_hand_width(p)
-                    line.append(f"{phand:<{p_width}}")
+                    if p_width != None:
+                        line.append(f"{phand:<{p_width}}")
                 print("     ".join(line))
-            names_line = " ".join(f"{f'Player {i}: '}{p.name:<{get_player_hand_width(p)-10}}" for i, p in enumerate(players) if p.name != "Dealer")
-            hands_line = " ".join(f"{(h := f'Hand: {' '.join(p.hand)}'):<{get_player_hand_width(p)}}" for p in players if p.name != "Dealer")
-            money_line = " ".join(f"{'Money: ' + str(p.money):<{get_player_hand_width(p)}}" for p in players if p.name != "Dealer")
-            bet_line = " ".join(f"{'Bet Amount: ' + str(p.bet):<{get_player_hand_width(p)}}" for p in players if p.name != "Dealer")
-            print(names_line)
-            print(money_line)
-            print(bet_line)
-            print(hands_line)
+            if p_width != None:
+                names_line = " ".join(f"{f'Player {i}: '}{p.name:<{get_player_hand_width(p)-6}}" for i, p in enumerate(players) if p.name != "Dealer")
+                hands_line = " ".join(f"{(h := f'Hand: {' '.join(p.hand)}'):<{get_player_hand_width(p)+4}}" for p in players if p.name != "Dealer")
+                money_line = " ".join(f"{'Money: ' + str(p.money):<{get_player_hand_width(p)+4}}" for p in players if p.name != "Dealer")
+                bet_line = " ".join(f"{'Bet Amount: ' + str(p.bet):<{get_player_hand_width(p)+4}}" for p in players if p.name != "Dealer")
+                print(names_line)
+                print(money_line)
+                print(bet_line)
+                print(hands_line)
 def get_player_hand_width(p):
     if len(p.hand) > 0:
-        card_width = len(deck[p.hand[0]].splitlines()[0])
-        cards_width = (len(p.hand)*card_width) + (len(p.hand)-1)
+        card_width = len(deck[p.hand[0]].splitlines()[1])
+        cards_width = (len(p.hand)*card_width) + 2*(len(p.hand)-1)
         name_info_width = len(p.name)+16
         return max(cards_width, name_info_width)
     
@@ -346,22 +348,27 @@ def BJturn(player):
                     player.bet -= 1
                     printplayerinfo(players)
                 sleep(0.2)
-            if at21:
-                print("21!!")
-                sleep(0.2)
+            # if at21:
+            #     print("21!!")
+            #     sleep(0.2)
                 
-                newmoney = player.money + (2*player.bet)
-                while newmoney != player.money:
-                    player.money += 1
-                    printplayerinfo(players)
-                print(f"+{player.bet}")
-                player.bet = 0
-                sleep(0.2)
-            if BlackJack:
-                print("BLACKJACK!!!")
-                sleep(0.2)
-                player.money = player.money + player.bet + math.floor(((3/2) * player.bet)) 
-                print(f"+{math.floor(((3/2) * player.bet))}")
+            #     newmoney = player.money + (2*player.bet)
+            #     while newmoney != player.money:
+            #         player.money += 1
+            #         printplayerinfo(players)
+            #     player.money = newmoney
+            #     print(f"+{player.bet}")
+            #     player.bet = 0
+            #     sleep(0.2)
+            # if BlackJack:
+            #     print("BLACKJACK!!!")
+            #     sleep(0.2)
+            #     newmoney = player.money + player.bet + math.floor(((3/2) * player.bet))
+            #     while newmoney != player.money:
+            #         player.money += 1
+            #         printplayerinfo(players) 
+            #     player.money = newmoney
+            #     print(f"+{math.floor(((3/2) * player.bet))}")
 def turnprint(player):
     stand = False    
     print(f"Player {players.index(player)}: {player.name}'s turn")
