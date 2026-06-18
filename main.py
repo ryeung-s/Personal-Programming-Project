@@ -5,6 +5,7 @@ import os
 from time import sleep
 import sys
 from random import randint, random, shuffle
+import math
 
 ESC = "\x1b"
 CLEAR_SCREEN = f"{ESC}[2J"
@@ -318,12 +319,13 @@ def BJturn(player):
         
         playerhand = []
         convertedplayerhand = []
-        for hand in player.hand:
-            playerhand.append(hand[:-1])
-            convertedplayerhand.append(rankvaluepair[hand[:-1]])
-        sumofcards = sum(int(cardvalue) for cardvalue in convertedplayerhand)
+        
         
         while not bust and not BlackJack and not at21 and not stand:
+            for hand in player.hand:
+                playerhand.append(hand[:-1])
+                convertedplayerhand.append(rankvaluepair[hand[:-1]])
+            sumofcards = sum(int(cardvalue) for cardvalue in convertedplayerhand)
             optimal_score = sumofcards + 10 if ("A" in playerhand and sumofcards + 10 <= 21) else sumofcards
             if optimal_score == 21:
                 if len(playerhand) == 2:
@@ -337,16 +339,30 @@ def BJturn(player):
             else:
                 stand = turnprint(player)
             printplayerinfo(players)
+            if bust:
+                print("BUST")
+                sleep(0.2)
+                player.bet = 0
+                sleep(0.2)
+            if at21:
+                print("21!!")
+                sleep(0.2)
+                player.money = player.money + (2*player.bet)
+                player.bet = 0
+                sleep(0.2)
+            if BlackJack:
+                print("BLACKJACK!!!")
+                sleep(0.2)
+                player.money = player.money + player.bet + math.floor(((3/2) * player.bet)) 
+                print(f"+{math.floor(((3/2) * player.bet))}")
 def turnprint(player):
     stand = False    
     print(f"Player {players.index(player)}: {player.name}'s turn")
     print("1. Hit")
     print("2. Stand")
     print("3. Double down")
-    if Dealer.hand[0][0] in "AKQJ10":
-        print("4. Insurance")
     option = input()
-    choice = validinput(option, "option in '1234'")
+    choice = validinput(option, "option in '123'")
     choice = int(choice)
     if choice == 1:
         deal_card(player)
@@ -354,6 +370,7 @@ def turnprint(player):
         stand = True
     elif choice == 3:
         pass
+    return stand
 def deal_card(player):
     global decks
     card = decks[0]
