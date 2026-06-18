@@ -349,10 +349,11 @@ def BJturn(player):
             if at21:
                 print("21!!")
                 sleep(0.2)
-                for i in range(player.bet):
-                    player.bet -= 1
+                
+                newmoney = player.money + (2*player.bet)
+                while newmoney != player.money:
+                    player.money += 1
                     printplayerinfo(players)
-                player.money = player.money + (2*player.bet)
                 print(f"+{player.bet}")
                 player.bet = 0
                 sleep(0.2)
