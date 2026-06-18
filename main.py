@@ -342,11 +342,16 @@ def BJturn(player):
             if bust:
                 print("BUST")
                 sleep(0.2)
-                player.bet = 0
+                for i in range(player.bet):
+                    player.bet -= 1
+                    printplayerinfo(players)
                 sleep(0.2)
             if at21:
                 print("21!!")
                 sleep(0.2)
+                for i in range(player.bet):
+                    player.bet -= 1
+                    printplayerinfo(players)
                 player.money = player.money + (2*player.bet)
                 print(f"+{player.bet}")
                 player.bet = 0
