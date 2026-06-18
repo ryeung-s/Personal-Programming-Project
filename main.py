@@ -348,6 +348,7 @@ def BJturn(player):
                 print("21!!")
                 sleep(0.2)
                 player.money = player.money + (2*player.bet)
+                print(f"+{player.bet}")
                 player.bet = 0
                 sleep(0.2)
             if BlackJack:
