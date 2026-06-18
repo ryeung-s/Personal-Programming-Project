@@ -242,7 +242,7 @@ def create_players(num_players):
 
     i = 1      
 def printplayerinfo(players):
-
+    clear_screen()
 
     display_players = [p for p in players if p.name != "Dealer"]
     dealer = next((p for p in players if p.name == 'Dealer'), None)
