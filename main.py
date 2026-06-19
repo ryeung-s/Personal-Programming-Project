@@ -377,7 +377,7 @@ def BJturn(player):
             if bust:
                 print("BUST")
                 sleep(2)
-                for i in range(player.bet):
+                for b in range(player.bet):
                     player.bet -= 1
                     printplayerinfo(players)
                 sleep(0.2)
