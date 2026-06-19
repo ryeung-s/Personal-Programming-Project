@@ -376,16 +376,12 @@ def BJturn(player):
             else:
                 stand = turnprint(player, optimal_score)
             printplayerinfo(players)
-            sleepdelay = 1/player.bet if player.bet > 0 else 0
+        sleepdelay = 1/player.bet if player.bet > 0 else 0
         if bust:
             print("BUST")
             sleep(2)
             player.bet
             
-            for b in range(player.bet):
-                player.bet -= 1
-                print(printplayerinfo(players))
-                sleep(sleepdelay)
             player.bet = 0
             sleep(0.2)
         #if at21:
