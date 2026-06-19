@@ -225,8 +225,7 @@ def PlayBlackjack():
             printplayerinfo(players)
             sleep(0.5)
     for player in players:
-        BJturn(player)
-        clear_screen()           
+        BJturn(player)           
 def create_players(num_players):
     global players
     players = []
