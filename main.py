@@ -345,12 +345,13 @@ def BJturn(player):
                         "Q" : "10",
                         "K" : "10",}
         
-        playerhand = []
-        convertplayerhand = []
-        convertedplayerhand = []
+        
         
         
         while not bust and not BlackJack and not at21 and not stand:
+            playerhand = []
+            convertplayerhand = []
+            convertedplayerhand = []
             for hand in player.hand:
                 playerhand.append(hand[:-1])
                 print(playerhand)
@@ -360,7 +361,7 @@ def BJturn(player):
                 print(rankvaluepair[card])
                 convertedplayerhand.append(int(rankvaluepair[card]))
                     
-                sleep(5)
+                sleep(1)
             sumofcards = sum(convertedplayerhand)
             optimal_score = sumofcards + 10 if ("A" in playerhand and sumofcards + 10 <= 21) else sumofcards
             print(optimal_score)
