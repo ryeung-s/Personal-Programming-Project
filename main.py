@@ -354,13 +354,9 @@ def BJturn(player):
             for hand in player.hand:
                 playerhand.append(hand[:-1])
                 print(playerhand)
-                print(hand[:-1])    
-                convertplayerhand.append(rankvaluepair[hand[:-1]])
-                print(convertplayerhand)
-                for cardvalue in convertplayerhand:
+                for card in playerhand:
+                    convertedplayerhand.append(int(rankvaluepair[card]))
                     print(convertedplayerhand)
-                    convertedplayerhand.append(int(cardvalue))
-                
             sumofcards = sum(convertedplayerhand)
             optimal_score = sumofcards + 10 if ("A" in playerhand and sumofcards + 10 <= 21) else sumofcards
             print(optimal_score)
