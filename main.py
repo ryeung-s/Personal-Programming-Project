@@ -366,13 +366,13 @@ def BJturn(player):
             else:
                 stand = turnprint(player)
             printplayerinfo(players)
-            if bust:
-                print("BUST")
-                sleep(2)
-                for b in range(player.bet):
-                    player.bet -= 1
-                    printplayerinfo(players)
-                sleep(0.2)
+        if bust:
+            print("BUST")
+            sleep(2)
+            for b in range(player.bet):
+                player.bet -= 1
+                printplayerinfo(players)
+            sleep(0.2)
             # if at21:
             #     print("21!!")
             #     sleep(0.2)
