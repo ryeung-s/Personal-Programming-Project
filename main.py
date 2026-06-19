@@ -262,7 +262,7 @@ def printplayerinfo(players):
                 for p in display_players:
                     phand = "  ".join(deck[c].splitlines()[row_i] for c in p.hand)
                     p_width = get_player_hand_width(p)
-                    if p_width != None:
+                    if p_width != None and not getattr(p, 'bust', False):
                         line.append(f"{phand:<{p_width}}")
                 print("     ".join(line))
             if p_width != None:
@@ -284,7 +284,7 @@ def printplayerinfo(players):
                     for p in players
                 )
                 money_line = " ".join(
-                    f"{'Money: ' + str(p.money):<{get_player_hand_width(p)+4}}" + Style.RESET_ALL
+                    f"{'Money: ' + str(p.money):<{get_player_hand_width(p)+4}}"
                     if (p.name != "Dealer" and not getattr(p, 'bust', False)) 
                     else " " * (get_player_hand_width(p) + 4)
                     if p.name != "Dealer"
@@ -292,17 +292,17 @@ def printplayerinfo(players):
                     for p in players
                 )
                 bet_line = " ".join(
-                    f"{'Bet Amount: ' + str(p.bet):<{get_player_hand_width(p)+4}}" + Style.RESET_ALL  
+                    f"{'Bet Amount: ' + str(p.bet):<{get_player_hand_width(p)+4}}" 
                     if (p.name != "Dealer" and not getattr(p, 'bust', False)) 
                     else " " * (get_player_hand_width(p) + 4)
                     if p.name != "Dealer"
                     else "" 
                     for p in players
                 )
-                print(Fore.WHITE + names_line)
-                print(Fore.WHITE + money_line)
-                print(Fore.WHITE + bet_line)
-                print(Fore.WHITE + hands_line)
+                print(names_line)
+                print(money_line)
+                print(bet_line)
+                print(hands_line)
 def get_player_hand_width(p):
     if len(p.hand) > 0:
         card_width = len(deck[p.hand[0]].splitlines()[1])
@@ -377,10 +377,7 @@ def BJturn(player):
         if bust:
             print("BUST")
             sleep(2)
-            for b in range(player.bet):
-                player.bet -= 1
-                printplayerinfo(players)
-                sleep(0.05)
+            player.bet = 0
             sleep(0.2)
             # if at21:
             #     print("21!!")
