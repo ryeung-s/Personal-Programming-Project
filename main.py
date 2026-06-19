@@ -401,14 +401,14 @@ def BJturn(player):
             sleep(0.2)
             
             newmoney = player.money + player.bet + math.floor(((3/2) * player.bet))
-            
+            total_bet = player.bet
             while newmoney != player.money:
                 player.money += 1
                 player.bet -= 1
                 printplayerinfo(players)
                 sleep(sleepdelay) 
             player.money = newmoney
-            print(f"+{math.floor(((3/2) * player.bet))}")
+            print(f"+{math.floor(((3/2) * total_bet))}")
 def turnprint(player, optimal_score):
     print("")
     print("Optimal Score: " + str(optimal_score))
