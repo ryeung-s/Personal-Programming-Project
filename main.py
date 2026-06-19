@@ -331,7 +331,6 @@ def createDealer():
     players.append(Dealer)
     Dealer.money = 100000000000000000000000000000000
 def BJturn(player):
-    global bust
     if player.name != "Dealer":
         bust = False
         BlackJack = False
