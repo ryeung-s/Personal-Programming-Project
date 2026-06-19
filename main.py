@@ -359,6 +359,7 @@ def BJturn(player):
             sumofcards = sum(convertedplayerhand)
             optimal_score = sumofcards + 10 if ("A" in playerhand and sumofcards + 10 <= 21) else sumofcards
             print(optimal_score)
+            print(playerhand)
             if optimal_score == 21:
                 if len(playerhand) == 2:
                     BlackJack = True
