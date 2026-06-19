@@ -353,6 +353,8 @@ def BJturn(player):
         while not bust and not BlackJack and not at21 and not stand:
             for hand in player.hand:
                 playerhand.append(hand[:-1])
+                print(playerhand)
+                print(hand[:-1])
                 convertplayerhand.append(rankvaluepair[hand[:-1]])
                 for cardvalue in convertplayerhand:
                     convertedplayerhand.append(int(cardvalue))
