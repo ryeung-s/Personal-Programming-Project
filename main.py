@@ -270,11 +270,12 @@ def printplayerinfo(players):
                     f"{f'Player {i}: '}{pl.name:<{get_player_hand_width(pl)-6}}"
                     if pl.name != "Dealer" 
                     else " "* (get_player_hand_width(p) + len(f"Player {i}: ") - 6)
+                    if p.name != "Dealer" 
+                    else ""
                     for i, pl in enumerate(players)
                 )
                 
                 hands_line = " ".join(
-                    (Fore.WHITE if not getattr(pl, 'bust', False) else Fore.RED) +
                     f"{(h := f'Hand: {' '.join(pl.hand)}'):<{get_player_hand_width(pl)+4}}"
                     if pl.name != "Dealer" else ""
                     for pl in players
