@@ -268,7 +268,7 @@ def printplayerinfo(players):
             if p_width != None:
                 names_line = " ".join(
                     Fore.WHITE + f"{f'Player {i}: '}{p.name:<{get_player_hand_width(p)-6}}" 
-                    if p.name != "Dealer" and not getattr(p, 'bust', False)
+                    if (p.name != "Dealer" and not getattr(p, 'bust', False))
                     else (Fore.RED + f"{f'Player {i}: '}{p.name:<{get_player_hand_width(p)-6}}")
                     if p.name != "Dealer" 
                     else ""
@@ -277,7 +277,7 @@ def printplayerinfo(players):
                 
                 hands_line = " ".join(
                     Fore.WHITE + f"{(h := f'Hand: {' '.join(p.hand)}'):<{get_player_hand_width(p)+4}}"  
-                    if (p.name != "Dealer" and not bust) 
+                    if (p.name != "Dealer" and not getattr(p, 'bust', False))
                     else (Fore.RED + f"{(h := f'Hand: {' '.join(p.hand)}'):<{get_player_hand_width(p)+4}}")
                     if p.name != "Dealer"
                     else "" 
@@ -285,7 +285,7 @@ def printplayerinfo(players):
                 )
                 money_line = " ".join(
                     Fore.WHITE + f"{'Money: ' + str(p.money):<{get_player_hand_width(p)+4}}" 
-                    if (p.name != "Dealer" and not bust) 
+                    if (p.name != "Dealer" and not getattr(p, 'bust', False))
                     else (Fore.RED +f"{'Money: ' + str(p.money):<{get_player_hand_width(p)+4}}")
                     if p.name != "Dealer"
                     else ""
@@ -293,7 +293,7 @@ def printplayerinfo(players):
                 )
                 bet_line = " ".join(
                     Fore.WHITE + f"{'Bet Amount: ' + str(p.bet):<{get_player_hand_width(p)+4}}"  
-                    if (p.name != "Dealer" and not bust) 
+                    if (p.name != "Dealer" and not getattr(p, 'bust', False))
                     else (Fore.RED +f"{'Bet Amount: ' + str(p.bet):<{get_player_hand_width(p)+4}}")
                     if p.name != "Dealer"
                     else "" 
