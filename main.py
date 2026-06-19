@@ -354,8 +354,9 @@ def BJturn(player):
             for hand in player.hand:
                 playerhand.append(hand[:-1])
                 print(playerhand)
-                print(hand[:-1])
+                print(hand[:-1])    
                 convertplayerhand.append(rankvaluepair[hand[:-1]])
+                print(convertplayerhand)
                 for cardvalue in convertplayerhand:
                     convertedplayerhand.append(int(cardvalue))
             sumofcards = sum(convertedplayerhand)
@@ -374,7 +375,7 @@ def BJturn(player):
                 print(sumofcards)
                 print(convertplayerhand)
                 print(convertedplayerhand)
-                sleep(10)
+                sleep(100)
                 bust = True
                 player.bust = True
             else:
