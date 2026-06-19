@@ -268,7 +268,7 @@ def printplayerinfo(players):
             if p_width != None:
                 names_line = " ".join(
                     Fore.WHITE + f"{f'Player {i}: '}{p.name:<{get_player_hand_width(p)-6}}" 
-                    if p.name != "Dealer" and not bust
+                    if p.name != "Dealer" and not getattr(p, 'bust', False)
                     else (Fore.RED + f"{f'Player {i}: '}{p.name:<{get_player_hand_width(p)-6}}")
                     if p.name != "Dealer" 
                     else ""
@@ -333,6 +333,7 @@ def createDealer():
 def BJturn(player):
     if player.name != "Dealer":
         bust = False
+        player.bust = False
         BlackJack = False
         at21 = False
         stand = False
