@@ -296,7 +296,7 @@ def printplayerinfo(players):
                     if (pl.name != "Dealer" and not getattr(pl, 'bust', False))
                     else (Fore.RED +f"{'Bet Amount: ' + str(pl.bet):<{get_player_hand_width(pl)+4}}")
                     if pl.name != "Dealer"
-                    else "" 
+                    else ""     
                     for pl in players
                 )
                 print(names_line)
