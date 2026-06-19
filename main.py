@@ -267,15 +267,15 @@ def printplayerinfo(players):
                 print("     ".join(line))
             if p_width != None:
                 names_line = " ".join(
-                    (Fore.WHITE if not getattr(pl, 'bust', False) else Fore.RED) +
-                    f"{f'Player {i}: '}{pl.name:<{get_player_hand_width(pl)-6}}" + Style.RESET_ALL
-                    if pl.name != "Dealer" else ""
+                    f"{f'Player {i}: '}{pl.name:<{get_player_hand_width(pl)-6}}"
+                    if pl.name != "Dealer" 
+                    else " "* (get_player_hand_width(p) + len(f"Player {i}: ") - 6)
                     for i, pl in enumerate(players)
                 )
                 
                 hands_line = " ".join(
                     (Fore.WHITE if not getattr(pl, 'bust', False) else Fore.RED) +
-                    f"{(h := f'Hand: {' '.join(pl.hand)}'):<{get_player_hand_width(pl)+4}}" + Style.RESET_ALL 
+                    f"{(h := f'Hand: {' '.join(pl.hand)}'):<{get_player_hand_width(pl)+4}}"
                     if pl.name != "Dealer" else ""
                     for pl in players
                 )
@@ -372,7 +372,7 @@ def BJturn(player):
             for b in range(player.bet):
                 player.bet -= 1
                 printplayerinfo(players)
-                sleep(0.001//(b+1))
+                sleep(0.05)
             sleep(0.2)
             # if at21:
             #     print("21!!")
