@@ -268,7 +268,7 @@ def printplayerinfo(players):
             if p_width != None:
                 names_line = " ".join(
                     f"{f'Player {i}: '}{p.name:<{get_player_hand_width(p)-6}}"
-                    if p.name != "Dealer" 
+                    if p.name != "Dealer" and not getattr(p, 'bust', False)
                     else " "* (get_player_hand_width(p) + len(f"Player {i}: ") - 6)
                     if p.name != "Dealer" 
                     else ""
