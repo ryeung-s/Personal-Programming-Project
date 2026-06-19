@@ -40,8 +40,9 @@ class Player:
         self.hand = []
         self.money = 1000
         self.bet = 0
+        self.bust = False
     def __str__(self):
-        return f"{self.name} (Money: {self.money}, Hand: {self.hand}, Bet: {self.bet})"
+        return f"{self.name} (Money: {self.money}, Hand: {self.hand}, Bet: {self.bet}, Bust: {self.bust}"
 
 def clear_screen():
     if os.name == 'nt':
@@ -369,6 +370,7 @@ def BJturn(player):
                     BlackJack = False
             elif optimal_score > 21:
                 bust = True
+                player.bust = True
             else:
                 stand = turnprint(player)
             printplayerinfo(players)
