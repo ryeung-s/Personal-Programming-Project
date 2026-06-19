@@ -363,7 +363,7 @@ def BJturn(player):
                 
             sumofcards = sum(convertedplayerhand)
             optimal_score = sumofcards + 10 if ("A" in playerhand and sumofcards + 10 <= 21) else sumofcards
-            print("Optimal Score: " + str(optimal_score))
+            
             if optimal_score == 21:
                 if len(playerhand) == 2:
                     BlackJack = True
@@ -375,14 +375,20 @@ def BJturn(player):
                 bust = True
                 player.bust = True
             else:
-                stand = turnprint(player)
+                stand = turnprint(player, optimal_score)
             printplayerinfo(players)
         if bust:
             print("BUST")
             sleep(2)
+            total_bet = player.bet
+            sleepdelay = 1/total_bet if total_bet > 0 else 0
+            for b in range(player.bet):
+                player.bet -= 1
+                print(printplayerinfo(players))
+                sleep(sleepdelay)
             player.bet = 0
             sleep(0.2)
-            # if at21:
+        #if at21:
             #     print("21!!")
             #     sleep(0.2)
                 
@@ -394,16 +400,20 @@ def BJturn(player):
             #     print(f"+{player.bet}")
             #     player.bet = 0
             #     sleep(0.2)
-            # if BlackJack:
-            #     print("BLACKJACK!!!")
-            #     sleep(0.2)
-            #     newmoney = player.money + player.bet + math.floor(((3/2) * player.bet))
-            #     while newmoney != player.money:
-            #         player.money += 1
-            #         printplayerinfo(players) 
-            #     player.money = newmoney
-            #     print(f"+{math.floor(((3/2) * player.bet))}")
-def turnprint(player):
+        if BlackJack:
+            print("BLACKJACK!!!")
+            sleep(0.2)
+            total_bet = player.bet
+            newmoney = player.money + player.bet + math.floor(((3/2) * player.bet))
+            sleepdelay = 1/total_bet if total_bet > 0 else 0
+            while newmoney != player.money:
+                player.money += 1
+                printplayerinfo(players) 
+            player.money = newmoney
+            print(f"+{math.floor(((3/2) * player.bet))}")
+def turnprint(player, optimal_score):
+    print("")
+    print("Optimal Score: " + str(optimal_score))
     stand = False    
     print(f"Player {players.index(player)}: {player.name}'s turn")
     print("1. Hit")
