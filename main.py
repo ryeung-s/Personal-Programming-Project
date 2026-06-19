@@ -270,7 +270,7 @@ def printplayerinfo(players):
                     if p.name != "Dealer" and not bust
                     else (Fore.RED + f"{f'Player {i}: '}{p.name:<{get_player_hand_width(p)-6}}")
                     if p.name != "Dealer" 
-                    else f"Dealer: {p.name}"
+                    else ""
                     for i, p in enumerate(players)
                 )
                 
@@ -279,7 +279,7 @@ def printplayerinfo(players):
                     if (p.name != "Dealer" and not bust) 
                     else (Fore.RED + f"{(h := f'Hand: {' '.join(p.hand)}'):<{get_player_hand_width(p)+4}}")
                     if p.name != "Dealer"
-                    else f"Dealer: {p.name}"  
+                    else "" 
                     for p in players
                 )
                 money_line = " ".join(
@@ -287,7 +287,7 @@ def printplayerinfo(players):
                     if (p.name != "Dealer" and not bust) 
                     else (Fore.RED +f"{'Money: ' + str(p.money):<{get_player_hand_width(p)+4}}")
                     if p.name != "Dealer"
-                    else f"Dealer: {p.name}"  
+                    else ""
                     for p in players
                 )
                 bet_line = " ".join(
@@ -295,7 +295,7 @@ def printplayerinfo(players):
                     if (p.name != "Dealer" and not bust) 
                     else (Fore.RED +f"{'Bet Amount: ' + str(p.bet):<{get_player_hand_width(p)+4}}")
                     if p.name != "Dealer"
-                    else f"Dealer: {p.name}"   
+                    else "" 
                     for p in players
                 )
                 print(names_line)
