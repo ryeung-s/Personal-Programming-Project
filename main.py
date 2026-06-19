@@ -299,10 +299,10 @@ def printplayerinfo(players):
                     else ""     
                     for pl in players
                 )
-                print(names_line)
-                print(money_line)
-                print(bet_line)
-                print(hands_line)
+                print(Fore.WHITE + names_line)
+                print(Fore.WHITE + money_line)
+                print(Fore.WHITE + bet_line)
+                print(Fore.WHITE + hands_line)
 def get_player_hand_width(p):
     if len(p.hand) > 0:
         card_width = len(deck[p.hand[0]].splitlines()[1])
