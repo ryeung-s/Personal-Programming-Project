@@ -372,7 +372,7 @@ def BJturn(player):
             for b in range(player.bet):
                 player.bet -= 1
                 printplayerinfo(players)
-                sleep(0.05)
+                sleep(b//100)
             sleep(0.2)
             # if at21:
             #     print("21!!")
