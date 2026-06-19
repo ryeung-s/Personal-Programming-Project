@@ -364,13 +364,16 @@ def BJturn(player):
                     at21 = True
                     BlackJack = False
             elif optimal_score > 21:
+                print(optimal_score)
+                print(sumofcards)
+                print(convertedplayerhand)
+                sleep(10)
                 bust = True
                 player.bust = True
             else:
                 stand = turnprint(player)
             printplayerinfo(players)
         if bust:
-            optimal_score = sumofcards + 10 if ("A" in playerhand and sumofcards + 10 <= 21) else sumofcards
             print("BUST")
             sleep(2)
             player.bet = 0
