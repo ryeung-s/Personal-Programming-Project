@@ -267,30 +267,37 @@ def printplayerinfo(players):
                 print("     ".join(line))
             if p_width != None:
                 names_line = " ".join(
-                    f"{f'Player {i}: '}{pl.name:<{get_player_hand_width(pl)-6}}"
-                    if pl.name != "Dealer" 
+                    f"{f'Player {i}: '}{p.name:<{get_player_hand_width(p)-6}}"
+                    if p.name != "Dealer" 
                     else " "* (get_player_hand_width(p) + len(f"Player {i}: ") - 6)
                     if p.name != "Dealer" 
                     else ""
-                    for i, pl in enumerate(players)
+                    for i, p in enumerate(players)
                 )
                 
                 hands_line = " ".join(
-                    f"{(h := f'Hand: {' '.join(pl.hand)}'):<{get_player_hand_width(pl)+4}}"
-                    if pl.name != "Dealer" else ""
-                    for pl in players
+                    f"{(h := f'Hand: {' '.join(p.hand)}'):<{get_player_hand_width(p)+4}}"
+                    if (p.name != "Dealer" and not getattr(p, 'bust', False)) 
+                    else " " * (get_player_hand_width(p) + 4)
+                    if p.name != "Dealer"
+                    else "" 
+                    for p in players
                 )
                 money_line = " ".join(
-                    (Fore.WHITE if not getattr(pl, 'bust', False) else Fore.RED) +
-                    f"{'Money: ' + str(pl.money):<{get_player_hand_width(pl)+4}}" + Style.RESET_ALL
-                    if pl.name != "Dealer" else ""
-                    for pl in players
+                    f"{'Money: ' + str(p.money):<{get_player_hand_width(p)+4}}" + Style.RESET_ALL
+                    if (p.name != "Dealer" and not getattr(p, 'bust', False)) 
+                    else " " * (get_player_hand_width(p) + 4)
+                    if p.name != "Dealer"
+                    else ""
+                    for p in players
                 )
                 bet_line = " ".join(
-                    (Fore.WHITE if not getattr(pl, 'bust', False) else Fore.RED) +
-                    f"{'Bet Amount: ' + str(pl.bet):<{get_player_hand_width(pl)+4}}" + Style.RESET_ALL  
-                    if pl.name != "Dealer" else ""   
-                    for pl in players
+                    f"{'Bet Amount: ' + str(p.bet):<{get_player_hand_width(p)+4}}" + Style.RESET_ALL  
+                    if (p.name != "Dealer" and not getattr(p, 'bust', False)) 
+                    else " " * (get_player_hand_width(p) + 4)
+                    if p.name != "Dealer"
+                    else "" 
+                    for p in players
                 )
                 print(Fore.WHITE + names_line)
                 print(Fore.WHITE + money_line)
