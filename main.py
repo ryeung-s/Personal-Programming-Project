@@ -376,7 +376,7 @@ def BJturn(player):
             else:
                 stand = turnprint(player, optimal_score)
             printplayerinfo(players)
-        sleepdelay = 1/player.bet if player.bet > 0 else 0
+        
         if bust:
             print("BUST")
             sleep(2)
@@ -401,10 +401,12 @@ def BJturn(player):
             sleep(0.2)
             
             newmoney = player.money + player.bet + math.floor(((3/2) * player.bet))
+            sleepdelay = 1/(newmoney-player.money)
             total_bet = player.bet
             while newmoney != player.money:
                 player.money += 1
-                player.bet -= 1
+                if player.bet > 0:
+                    player.bet -= 1
                 printplayerinfo(players)
                 sleep(sleepdelay) 
             player.money = newmoney
