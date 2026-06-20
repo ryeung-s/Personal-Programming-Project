@@ -380,7 +380,6 @@ def BJturn(player):
         if bust:
             print("BUST")
             sleep(2)
-            player.bet
             player.bust = True
             player.bet = 0
             sleep(0.2)
