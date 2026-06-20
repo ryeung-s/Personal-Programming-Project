@@ -246,7 +246,7 @@ def create_players(num_players):
 
 
     i = 1      
-def printplayerinfo(players,dealer_reveaL_true):
+def printplayerinfo(players,dealer_reveaL_true=False):
     clear_screen()
 
     display_players = [p for p in players if p.name != "Dealer"]
@@ -445,17 +445,14 @@ def dealer_reveal(players):
                 newmoney = player.money + (2 * player.bet)
                 player.bet = 0
                 player.money = newmoney
-                printplayerinfo(players)
                 print(f"+{(total_bet)}")
             else:
                 print("")
-                print(f"Player {player_no}: {player.name} - LOSE")
+                print(f"Player {player_no}: {player.name} - LOST")
                 sleep(2)
-                total_bet = player.bet
-                newmoney = player.money + (2 * player.bet)
                 player.bet = 0
 
-                printplayerinfo(players)
+            printplayerinfo(players, True)
                 
 
 def turnprint(player, optimal_score):
