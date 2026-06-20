@@ -417,8 +417,8 @@ def BJturn(player, players):
             newmoney = player.money + player.bet + math.floor(((3/2) * player.bet))
             player.bet = 0
             player.money = newmoney
-            printplayerinfo(players)
             print(f"+{math.floor(((3/2) * total_bet))}")
+            sleep(1)
         printplayerinfo(players)
 def dealer_reveal(players):
     cards = players[0].hand
