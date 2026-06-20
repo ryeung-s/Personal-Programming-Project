@@ -447,13 +447,13 @@ def dealer_reveal(players):
                     player.bet = 0
                     player.money = newmoney
                     print(f"+{(total_bet)}")
-                else:
+                elif optimal_score < dealersumofcards:
                     print("")
                     print(f"Player {player_no}: {player.name} - LOST")
                     sleep(2)
                     player.bet = 0
 
-                printplayerinfo(players, True)
+    # printplayerinfo(players, True)
                 
 
 def turnprint(player, optimal_score):
