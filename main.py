@@ -422,12 +422,13 @@ def dealer_reveal(player,players):
     for row_i in range(card_height):
         phand = "  ".join(deck[c].splitlines()[row_i] for c in cards)
         print(phand)
+    CLEAR_SCREEN
     print(f"Dealer: {' '.join(players[0].hand)} ")
     optimal_score, dealersumofcards, playerhand = optimal_scores(player[0])
     while dealersumofcards <= 16:
         optimal_score, dealersumofcards, playerhand = optimal_scores(player[0])
         deal_card(player[0])
-    printplayerinfo(players)
+        printplayerinfo(players)
 def turnprint(player, optimal_score):
     print("")
     print("Optimal Score: " + str(optimal_score))
