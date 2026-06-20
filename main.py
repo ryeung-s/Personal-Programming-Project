@@ -415,7 +415,7 @@ def dealer_reveal(player,players):
     dealerhand = list(zip(CARD_BACK.splitlines(), deck[players[0].hand[0]].splitlines()))
     for row in dealerhand:
         print(" ".join(row))
-    print(f"Dealer: {players[0].hand[0]} ")
+    print(f"Dealer: {' '.join(players[0].hand)} ")
     printplayerinfo(players)
 def turnprint(player, optimal_score):
     print("")
