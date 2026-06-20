@@ -412,10 +412,11 @@ def dealer_reveal(player,players):
     cards = players[0].hand
     card_height = len(deck[cards[0]].splitlines())
     
-    dealerhand = list(zip(CARD_BACK.splitlines(), deck[players[0].hand[0]].splitlines()))
-    for row in dealerhand:
-        print(" ".join(row))
+    for row_i in range(card_height):
+        phand = "  ".join(deck[c].splitlines()[row_i] for c in player.hand)
+        print(phand)
     print(f"Dealer: {' '.join(players[0].hand)} ")
+    deal_card(player[0])
     printplayerinfo(players)
 def turnprint(player, optimal_score):
     print("")
