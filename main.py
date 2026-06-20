@@ -246,12 +246,12 @@ def create_players(num_players):
 
 
     i = 1      
-def printplayerinfo(players,dealer_reveaL_true=False):
+def printplayerinfo(players,dealer_reveal_true=False):
     clear_screen()
 
     display_players = [p for p in players if p.name != "Dealer"]
     dealer = next((p for p in players if p.name == 'Dealer'), None)
-    if dealer_reveaL_true:
+    if dealer_reveal_true:
         dealer_reveal(players)
     elif dealer:
         printDealerInfo(players)
