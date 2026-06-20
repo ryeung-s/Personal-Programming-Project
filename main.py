@@ -432,7 +432,9 @@ def dealer_reveal(players):
     if dealersumofcards <= 16:
         optimal_score, dealersumofcards, playerhand = optimal_scores(players[0])
         deal_card(players[0])
+        sleep(0.5)
         printplayerinfo(players,True)
+    
     for player in players:
         if player.name != "Dealer":
             optimal_score, sumofcards, playerhand = optimal_scores(player)
