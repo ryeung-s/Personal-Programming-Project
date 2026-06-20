@@ -325,14 +325,8 @@ def createDealer():
     Dealer = Player("Dealer")
     players.append(Dealer)
     Dealer.money = 100000000000000000000000000000000
-def BJturn(player, players):
-    if player.name != "Dealer":
-        bust = False
-        player.bust = False
-        BlackJack = False
-        at21 = False
-        stand = False
-        rankvaluepair = {"A" : "1",
+def optimal_scores(player):
+    rankvaluepair = {"A" : "1",
                         "2" : "2",
                         "3" : "3",
                         "4" : "4",
@@ -344,25 +338,38 @@ def BJturn(player, players):
                         "10": "10",
                         "J" : "10",
                         "Q" : "10",
-                        "K" : "10",}
+                        "K" : "10",
+                        }
         
         
         
+        
+        
+    playerhand = []
+    convertplayerhand = []
+    convertedplayerhand = []
+    for hand in player.hand:
+        playerhand.append(hand[:-1])
+        
+    for card in playerhand:
+        
+        convertedplayerhand.append(int(rankvaluepair[card]))
+            
+        
+    sumofcards = sum(convertedplayerhand)
+    optimal_score = sumofcards + 10 if ("A" in playerhand and sumofcards + 10 <= 21) else sumofcards
+    return optimal_score, sumofcards, playerhand
+def BJturn(player, players):
+    if player.name != "Dealer":
+        bust = False
+        player.bust = False
+        BlackJack = False
+        at21 = False
+        stand = False
+    
         
         while not bust and not BlackJack and not at21 and not stand:
-            playerhand = []
-            convertplayerhand = []
-            convertedplayerhand = []
-            for hand in player.hand:
-                playerhand.append(hand[:-1])
-                
-            for card in playerhand:
-                
-                convertedplayerhand.append(int(rankvaluepair[card]))
-                    
-                
-            sumofcards = sum(convertedplayerhand)
-            optimal_score = sumofcards + 10 if ("A" in playerhand and sumofcards + 10 <= 21) else sumofcards
+            optimal_score, sumofcards, playerhand = optimal_scores(player)
             
             if optimal_score == 21:
                 if len(playerhand) == 2:
@@ -413,10 +420,13 @@ def dealer_reveal(player,players):
     card_height = len(deck[cards[0]].splitlines())
     
     for row_i in range(card_height):
-        phand = "  ".join(deck[c].splitlines()[row_i] for c in player.hand)
+        phand = "  ".join(deck[c].splitlines()[row_i] for c in cards)
         print(phand)
     print(f"Dealer: {' '.join(players[0].hand)} ")
-    deal_card(player[0])
+    optimal_score, dealersumofcards, playerhand = optimal_scores(player[0])
+    while dealersumofcards <= 16:
+        optimal_score, dealersumofcards, playerhand = optimal_scores(player[0])
+        deal_card(player[0])
     printplayerinfo(players)
 def turnprint(player, optimal_score):
     print("")
