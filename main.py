@@ -416,6 +416,7 @@ def dealer_reveal(player,players):
     for row in dealerhand:
         print(" ".join(row))
     print(f"Dealer: {players[0].hand[0]} ")
+    printplayerinfo(players)
 def turnprint(player, optimal_score):
     print("")
     print("Optimal Score: " + str(optimal_score))
