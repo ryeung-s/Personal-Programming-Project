@@ -254,7 +254,7 @@ def printplayerinfo(players,dealer_reveaL_true=False):
     if dealer_reveaL_true:
         dealer_reveal(players)
     elif dealer:
-        printDealerInfo(players,dealer_reveal_true)
+        printDealerInfo(players)
     if display_players:
         if len(display_players[0].hand) > 0:
             first_card = display_players[0].hand[0]
