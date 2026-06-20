@@ -434,25 +434,26 @@ def dealer_reveal(players):
         deal_card(players[0])
         printplayerinfo(players,True)
     for player in players:
-        optimal_score, sumofcards, playerhand = optimal_scores(player)
-        if not player.bust and not player.blackjack:
-            player_no = players.index(player)
-            if optimal_score > dealersumofcards:
-                print("")
-                print(f"Player {player_no}: {player.name} - WIN!")
-                sleep(2)
-                total_bet = player.bet
-                newmoney = player.money + (2 * player.bet)
-                player.bet = 0
-                player.money = newmoney
-                print(f"+{(total_bet)}")
-            else:
-                print("")
-                print(f"Player {player_no}: {player.name} - LOST")
-                sleep(2)
-                player.bet = 0
+        if player.name != "Dealer":
+            optimal_score, sumofcards, playerhand = optimal_scores(player)
+            if not player.bust and not player.blackjack:
+                player_no = players.index(player)
+                if optimal_score > dealersumofcards:
+                    print("")
+                    print(f"Player {player_no}: {player.name} - WIN!")
+                    sleep(2)
+                    total_bet = player.bet
+                    newmoney = player.money + (2 * player.bet)
+                    player.bet = 0
+                    player.money = newmoney
+                    print(f"+{(total_bet)}")
+                else:
+                    print("")
+                    print(f"Player {player_no}: {player.name} - LOST")
+                    sleep(2)
+                    player.bet = 0
 
-            printplayerinfo(players, True)
+                printplayerinfo(players, True)
                 
 
 def turnprint(player, optimal_score):
