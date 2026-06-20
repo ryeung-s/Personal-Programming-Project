@@ -378,7 +378,7 @@ def BJturn(player, players):
             printplayerinfo(players)
         player_no = players.index(player)
         if bust:
-            
+            print("")
             print(f"Player {player_no}: {player.name} - BUST")
             sleep(2)
             player.bust = True
@@ -397,6 +397,7 @@ def BJturn(player, players):
             #     player.bet = 0
             #     sleep(0.2)
         if BlackJack:
+            print("")
             print(f"Player {player_no}: {player.name} - BLACKJACK!!!")
             sleep(2)
             total_bet = player.bet
