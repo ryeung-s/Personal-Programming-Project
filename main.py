@@ -42,8 +42,9 @@ class Player:
         self.money = 1000
         self.bet = 0
         self.bust = False
+        self.blackjack = False
     def __str__(self):
-        return f"{self.name} (Money: {self.money}, Hand: {self.hand}, Bet: {self.bet}, Bust: {self.bust}"
+        return f"{self.name} (Money: {self.money}, Hand: {self.hand}, Bet: {self.bet}, Bust: {self.bust}, Blackjack : {self.blackjack}"
 
 def clear_screen():
     if os.name == 'nt':
@@ -309,7 +310,7 @@ def get_player_hand_width(p):
     
 def printBJinfo():
     pass
-def printDealerInfo(players, dealer_reveal_true = False):
+def printDealerInfo(players):
     cards = players[0].hand
     card_height = len(deck[cards[0]].splitlines())
     if len(cards) > 2:
@@ -365,6 +366,7 @@ def BJturn(player, players):
     if player.name != "Dealer":
         bust = False
         player.bust = False
+        player.blackjack = False
         BlackJack = False
         at21 = False
         stand = False
@@ -376,6 +378,7 @@ def BJturn(player, players):
             if optimal_score == 21:
                 if len(playerhand) == 2:
                     BlackJack = True
+                    player.blackjack = True
                     at21 = False
                 else:
                     at21 = True
@@ -426,10 +429,35 @@ def dealer_reveal(players):
         print(phand)
     print(f"Dealer: {' '.join(players[0].hand)} ")
     optimal_score, dealersumofcards, playerhand = optimal_scores(players[0])
-    while dealersumofcards <= 16:
+    if dealersumofcards <= 16:
         optimal_score, dealersumofcards, playerhand = optimal_scores(players[0])
         deal_card(players[0])
         printplayerinfo(players,True)
+    for player in players:
+        optimal_score, sumofcards, playerhand = optimal_scores(player)
+        if not player.bust and not player.blackjack:
+            player_no = players.index(player)
+            if optimal_score > dealersumofcards:
+                print("")
+                print(f"Player {player_no}: {player.name} - WIN!")
+                sleep(2)
+                total_bet = player.bet
+                newmoney = player.money + (2 * player.bet)
+                player.bet = 0
+                player.money = newmoney
+                printplayerinfo(players)
+                print(f"+{(total_bet)}")
+            else:
+                print("")
+                print(f"Player {player_no}: {player.name} - LOSE")
+                sleep(2)
+                total_bet = player.bet
+                newmoney = player.money + (2 * player.bet)
+                player.bet = 0
+
+                printplayerinfo(players)
+                
+
 def turnprint(player, optimal_score):
     print("")
     print("Optimal Score: " + str(optimal_score))
