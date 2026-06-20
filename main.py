@@ -417,20 +417,19 @@ def BJturn(player, players):
             printplayerinfo(players)
             print(f"+{math.floor(((3/2) * total_bet))}")
         printplayerinfo(players)
-def dealer_reveal(player,players):
+def dealer_reveal(players):
     cards = players[0].hand
     card_height = len(deck[cards[0]].splitlines())
     
     for row_i in range(card_height):
         phand = "  ".join(deck[c].splitlines()[row_i] for c in cards)
         print(phand)
-    CLEAR_SCREEN
     print(f"Dealer: {' '.join(players[0].hand)} ")
-    optimal_score, dealersumofcards, playerhand = optimal_scores(player[0])
+    optimal_score, dealersumofcards, playerhand = optimal_scores(players[0])
     while dealersumofcards <= 16:
-        optimal_score, dealersumofcards, playerhand = optimal_scores(player[0])
-        deal_card(player[0])
-        printplayerinfo(players)
+        optimal_score, dealersumofcards, playerhand = optimal_scores(players[0])
+        deal_card(players[0])
+        printplayerinfo(players,True)
 def turnprint(player, optimal_score):
     print("")
     print("Optimal Score: " + str(optimal_score))
