@@ -225,7 +225,7 @@ def PlayBlackjack():
             printplayerinfo(players)
             sleep(0.5)
     for player in players:
-        BJturn(player)           
+        BJturn(player, players)           
 def create_players(num_players):
     global players
     players = []
@@ -324,7 +324,7 @@ def createDealer():
     Dealer = Player("Dealer")
     players.append(Dealer)
     Dealer.money = 100000000000000000000000000000000
-def BJturn(player):
+def BJturn(player, players):
     if player.name != "Dealer":
         bust = False
         player.bust = False
@@ -376,9 +376,10 @@ def BJturn(player):
             else:
                 stand = turnprint(player, optimal_score)
             printplayerinfo(players)
-        
+        player_no = players.index(player)
         if bust:
-            print("BUST")
+            
+            print(f"Player {player_no}: {player.name} - BUST")
             sleep(2)
             player.bust = True
             player.bet = 0
@@ -396,7 +397,7 @@ def BJturn(player):
             #     player.bet = 0
             #     sleep(0.2)
         if BlackJack:
-            print("BLACKJACK!!!")
+            print(f"Player {player_no}: {player.name} - BLACKJACK!!!")
             sleep(2)
             total_bet = player.bet
             newmoney = player.money + player.bet + math.floor(((3/2) * player.bet))
