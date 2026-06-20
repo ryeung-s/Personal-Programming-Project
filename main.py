@@ -30,6 +30,7 @@ PlayingBJ = False
 PlayingPoker = False
 PlayingRoulette = False
 openSettings = False
+dealer_reveal_true = False
 typing_speed = 500
 previous_menu = ""
 finalhands = []
@@ -226,7 +227,7 @@ def PlayBlackjack():
             sleep(0.5)
     for player in players:
         BJturn(player, players)
-    dealer_reveal(player, players)           
+    printplayerinfo(players, True)           
 def create_players(num_players):
     global players
     players = []
@@ -244,14 +245,15 @@ def create_players(num_players):
 
 
     i = 1      
-def printplayerinfo(players):
+def printplayerinfo(players,dealer_reveaL_true):
     clear_screen()
 
     display_players = [p for p in players if p.name != "Dealer"]
     dealer = next((p for p in players if p.name == 'Dealer'), None)
-
-    if dealer:
-        printDealerInfo(players)
+    if dealer_reveaL_true:
+        dealer_reveal(players)
+    elif dealer:
+        printDealerInfo(players,dealer_reveal_true)
     if display_players:
         if len(display_players[0].hand) > 0:
             first_card = display_players[0].hand[0]
@@ -307,7 +309,7 @@ def get_player_hand_width(p):
     
 def printBJinfo():
     pass
-def printDealerInfo(players):
+def printDealerInfo(players, dealer_reveal_true = False):
     cards = players[0].hand
     card_height = len(deck[cards[0]].splitlines())
     if len(cards) > 2:
