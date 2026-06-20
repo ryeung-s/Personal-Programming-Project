@@ -372,7 +372,7 @@ def BJturn(player):
                     BlackJack = False
             elif optimal_score > 21:
                 bust = True
-                player.bust = True
+                
             else:
                 stand = turnprint(player, optimal_score)
             printplayerinfo(players)
@@ -381,7 +381,7 @@ def BJturn(player):
             print("BUST")
             sleep(2)
             player.bet
-            
+            player.bust = True
             player.bet = 0
             sleep(0.2)
         #if at21:
@@ -398,19 +398,14 @@ def BJturn(player):
             #     sleep(0.2)
         if BlackJack:
             print("BLACKJACK!!!")
-            sleep(0.2)
-            
-            newmoney = player.money + player.bet + math.floor(((3/2) * player.bet))
-            sleepdelay = 1/(newmoney-player.money)
+            sleep(2)
             total_bet = player.bet
-            while newmoney != player.money:
-                player.money += 1
-                if player.bet > 0:
-                    player.bet -= 1
-                printplayerinfo(players)
-                sleep(sleepdelay) 
+            newmoney = player.money + player.bet + math.floor(((3/2) * player.bet))
+            player.bet = 0
             player.money = newmoney
+            printplayerinfo(players)
             print(f"+{math.floor(((3/2) * total_bet))}")
+        printplayerinfo(players)
 def turnprint(player, optimal_score):
     print("")
     print("Optimal Score: " + str(optimal_score))
