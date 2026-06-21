@@ -309,10 +309,15 @@ def get_player_hand_width(p):
 def printBJinfo(player):
     cards = player.hand
     card_height = len(deck[cards[0]].splitlines())
-    
-    for row_i in range(card_height):
-        phand = "  ".join(deck[c].splitlines()[row_i] for c in cards)
-        print(phand)
+
+    animatedcards = []
+    for c in animatedcards:
+        animatedcards.append(c)
+        for row_i in range(card_height):
+            phand = "  ".join(deck[c].splitlines()[row_i] for c in animatedcards)
+            print(phand)
+            sleep(0.5)
+        clear_screen()
     pass
 def printDealerInfo(players):
     cards = players[0].hand
