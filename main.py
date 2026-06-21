@@ -507,7 +507,7 @@ def dealer_reveal(players):
                     player.money += player.bet
                     player.bet = 0
                     sleep(2)
-
+    sleep(5)
     printplayerinfo(players, True)
                 
 
