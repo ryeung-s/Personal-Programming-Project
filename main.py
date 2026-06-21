@@ -273,6 +273,7 @@ def printplayerinfo(players, dealer_reveal_true=False):
     else:
         count_color = Fore.WHITE
     print("\n" + "=" * 50)
+    print(f"   Count: {count_color}{current_count}{Style.RESET_ALL}")
     print(f"   True Count: {count_color}{current_true_count}{Style.RESET_ALL}")
     print("=" * 50 + "\n")
     if dealer:
