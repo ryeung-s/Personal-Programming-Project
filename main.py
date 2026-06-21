@@ -428,8 +428,8 @@ def dealer_reveal(players):
         phand = "  ".join(deck[c].splitlines()[row_i] for c in cards)
         print(phand)
     print(f"Dealer: {' '.join(players[0].hand)} ")
+    optimal_score, dealersumofcards, playerhand = optimal_scores(players[0])
     if dealersumofcards <= 16:
-        optimal_score, dealersumofcards, playerhand = optimal_scores(players[0])
         deal_card(players[0])
         sleep(0.5)
         printplayerinfo(players,True)
