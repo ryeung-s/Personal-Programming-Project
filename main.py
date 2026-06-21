@@ -317,7 +317,7 @@ def printBJinfo(player):
             phand = "  ".join(deck[c].splitlines()[row_i] for c in animatedcards)
             print(phand)
             sleep(0.5)
-        clear_screen()
+            clear_screen()
     pass
 def printDealerInfo(players):
     cards = players[0].hand
@@ -450,6 +450,7 @@ def dealer_reveal(players):
                     printBJinfo(player)
                     print(f"Player {player_no}: {player.name} - WIN!")
                     print(f"+{(player.bet)}") 
+                    print(f"{player.money}")
                     sleep(2)
                     newmoney = player.money + (2 * player.bet)
                     player.bet = 0
@@ -458,12 +459,14 @@ def dealer_reveal(players):
                     print("")
                     printBJinfo(player)
                     print(f"Player {player_no}: {player.name} - LOST")
+                    print(f"{player.money}")
                     sleep(2)
                     player.bet = 0
                 elif optimal_score == dealersumofcards:
                     print("")
                     printBJinfo(player)
                     print(f"Player {player_no}: {player.name} - PUSH")
+                    print(f"{player.money}")
                     sleep(2)
                     player.money += player.bet
                     player.bet = 0
