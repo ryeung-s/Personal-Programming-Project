@@ -211,7 +211,10 @@ def PlayBlackjack():
     create_players(num_players)
     while option.upper() != "N": 
         betamnt = 0
-        
+        for p in players:
+            p.hand = []
+            p.bust = False
+            p.blackjack = False
         for c, player in enumerate(players):
             if player.name != "Dealer":
                 print(f"Player {c}: {player.name}")
@@ -438,7 +441,9 @@ def BJturn(player, players):
         player_no = players.index(player)
         if bust:
             print("")
-            print(f"Player {player_no}: {player.name} - BUST")
+            print(f"Player {player_no}: {player.name}")
+            sleep(0.3)
+            print(Fore.RED + "BUST")
             sleep(2)
             player.bust = True
             player.bet = 0
@@ -457,7 +462,9 @@ def BJturn(player, players):
             #     sleep(0.2)
         if BlackJack:
             print("")
-            print(f"Player {player_no}: {player.name} - BLACKJACK!!!")
+            print(f"Player {player_no}: {player.name}")
+            sleep(0.3)
+            print(Fore.GREEN + "BLACKJACK!!!")
             sleep(2)
             total_bet = player.bet
             newmoney = player.money + player.bet + math.floor(((3/2) * player.bet))
@@ -483,7 +490,7 @@ def dealer_reveal(players):
                     print("")
                     print(f"Player {player_no}: {player.name}")
                     sleep(0.3)
-                    print(("WIN!"))
+                    print(Fore.GREEN + ("WIN!"))
                     print(f"+{(player.bet)}") 
                     player.money +=  (2 * player.bet)
                     print(f"Money: {player.money}")
@@ -493,7 +500,7 @@ def dealer_reveal(players):
                     print("")
                     print(f"Player {player_no}: {player.name}")
                     sleep(0.3)
-                    print(("LOST"))
+                    print(Fore.RED + "LOST")
                     #print(f"{player.money}")
                     player.bet = 0
                     sleep(2)
