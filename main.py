@@ -430,11 +430,9 @@ def dealer_reveal(players):
     optimal_score, dealersumofcards, playerhand = optimal_scores(players[0])
     while dealersumofcards <= 16:
         deal_card(players[0])
-        printBJinfo(players[0])
-        print(f"Dealer: {' '.join(players[0].hand)} ")
         sleep(0.5)
         optimal_score, dealersumofcards, playerhand = optimal_scores(players[0])
-    
+    printplayerinfo(players, dealer_reveal_true=True)
     for player in players:
         clear_screen()
         printBJinfo(players[0])
