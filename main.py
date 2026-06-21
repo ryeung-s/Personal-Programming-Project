@@ -457,8 +457,8 @@ def dealer_reveal(players):
                     sleep(0.3)
                     print(("WIN!"))
                     print(f"+{(player.bet)}") 
-                    print(f"{player.money}")
                     player.money +=  (2 * player.bet)
+                    print(f"Money: {player.money}")
                     player.bet = 0
                     sleep(2)
                 elif optimal_score < dealersumofcards:
