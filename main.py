@@ -265,7 +265,16 @@ def printplayerinfo(players, dealer_reveal_true=False):
 
     display_players = [p for p in players if p.name != "Dealer"]
     dealer = next((p for p in players if p.name == 'Dealer'), None)
-
+    current_true_count = int(updateCount())
+    if current_true_count > 0:
+        count_color = Fore.GREEN
+    elif current_true_count < 0:
+        count_color = Fore.RED
+    else:
+        count_color = Fore.WHITE
+    print("\n" + "=" * 50)
+    print(f"   True Count: {count_color}{current_true_count}{Style.RESET_ALL}")
+    print("=" * 50 + "\n")
     if dealer:
         if dealer_reveal_true:
             cards = dealer.hand
@@ -278,14 +287,7 @@ def printplayerinfo(players, dealer_reveal_true=False):
         else:
             printDealerInfo(players)
             print("     ".join("-" * get_player_hand_width(p) for p in display_players if get_player_hand_width(p) != None )) 
-    current_true_count = updateCount()
     
-    if current_true_count > 0:
-        count_color = Fore.GREEN
-    elif current_true_count < 0:
-        count_color = Fore.RED
-    else:
-        count_color = Fore.WHITE
     if display_players:
         if len(display_players[0].hand) > 0:
             first_card = display_players[0].hand[0]
