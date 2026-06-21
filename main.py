@@ -247,6 +247,7 @@ def create_players(num_players):
         
 
 def updateCount(card="", reset=False):
+    global count, truecount
     if reset:
         count = 0
         truecount = 0
@@ -255,7 +256,8 @@ def updateCount(card="", reset=False):
             count+=1
         elif optimal_scores(card, True) == 10:
             count -= 1
-        truecount = count//(len(decks)/52)
+        deck_ratio = (len(decks)/52) if len(decks) > 0 else 1
+        truecount = count//deck_ratio
     return truecount     
 def printplayerinfo(players, dealer_reveal_true=False):
     clear_screen()
@@ -374,7 +376,7 @@ def optimal_scores(pl, cardcheck=False):
         
         
     if cardcheck:
-        return int(rankvaluepair[pl])   
+        return int(rankvaluepair[pl[:-1]])   
         
     playerhand = []
     convertplayerhand = []
