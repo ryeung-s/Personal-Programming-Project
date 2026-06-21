@@ -311,7 +311,7 @@ def printplayerinfo(players, dealer_reveal_true=False):
                 print(bet_line)
                 print(hands_line)
 def get_player_hand_width(p):
-    if len(p.hand) > 0:
+    if len(p.hand) > 0 and not p.bust and not p.blackjack:
         card_width = len(deck[p.hand[0]].splitlines()[1])
         cards_width = (len(p.hand)*card_width) + 2*(len(p.hand)-1)
         name_info_width = len(p.name)+16
