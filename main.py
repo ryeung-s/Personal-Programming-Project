@@ -245,11 +245,11 @@ def create_players(num_players):
         players.append(Player(name))
         
 
-def updateCount(card, reset=False):
+def updateCount(card="", reset=False):
     if reset:
         count = 0
         truecount = 0
-    else:
+    elif card != "":
         if optimal_scores(card, True) <= 6:
             count+=1
         elif optimal_scores(card, True) == 10:
@@ -525,12 +525,12 @@ def deal_card(player):
     reset = False
     if len(decks) == 0:
         decks = makeBJcards()
-        reset = True
+        updateCount(card, True)
     if len(decks) > 0:
         card = decks[0]
         decks.pop(0)
         player.hand.append(card)
-    updateCount(card, reset)
+        updateCount(card, False)
 
 def makeBJcards():
     global decks
