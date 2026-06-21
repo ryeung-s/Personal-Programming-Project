@@ -508,6 +508,7 @@ def turnprint(player, optimal_score):
     print("2. Stand")
     if player.money >= (2* player.bet):
         print("3. Double down")
+    print(f"True count: {truecount}")
     option = input()
     choice = validinput(option, "option in '123'")
     choice = int(choice)
