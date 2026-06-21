@@ -454,7 +454,7 @@ def dealer_reveal(players):
                     print("")
                     print(f"Player {player_no}: {player.name}")
                     sleep(0.3)
-                    ("WIN!")
+                    print(("WIN!"))
                     #print(f"+{(player.bet)}") 
                     #print(f"{player.money}")
                     player.money +=  (2 * player.bet)
@@ -464,7 +464,7 @@ def dealer_reveal(players):
                     print("")
                     print(f"Player {player_no}: {player.name}")
                     sleep(0.3)
-                    ("LOST")
+                    print(("LOST"))
                     #print(f"{player.money}")
                     player.bet = 0
                     sleep(2)
@@ -474,7 +474,7 @@ def dealer_reveal(players):
                     print(f"Player {player_no}: {player.name}")
                     #print(f"{player.money}")
                     sleep(0.3)
-                    ("PUSH")
+                    print(("PUSH"))
                     player.money += player.bet
                     player.bet = 0
                     sleep(2)
@@ -498,7 +498,10 @@ def turnprint(player, optimal_score):
     elif choice == 2:
         stand = True
     elif choice == 3:
-        pass
+        player.moey -= player.bet
+        player.bet += player.bet
+        deal_card(player)
+        stand = True
     return stand
 def deal_card(player):
     global decks
