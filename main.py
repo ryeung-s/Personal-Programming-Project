@@ -323,7 +323,7 @@ def printplayerinfo(players, dealer_reveal_true=False):
             print(money_line)
             print(bet_line)
             print(hands_line)
-            print(f"True count: {print(updateCount())}")
+            print(f"True count: {updateCount()}")
 def get_player_hand_width(p):
     if len(p.hand) > 0 and not p.bust and not p.blackjack:
         card_width = len(deck[p.hand[0]].splitlines()[1])
