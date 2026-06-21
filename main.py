@@ -259,13 +259,13 @@ def updateCount(card="", reset=False):
             count -= 1
         deck_ratio = (len(decks)/52) if len(decks) > 0 else 1
         truecount = count//deck_ratio
-    return truecount     
+    return int(count), int(truecount)     
 def printplayerinfo(players, dealer_reveal_true=False):
     clear_screen()
 
     display_players = [p for p in players if p.name != "Dealer"]
     dealer = next((p for p in players if p.name == 'Dealer'), None)
-    current_true_count = int(updateCount())
+    current_count,current_true_count = updateCount()
     if current_true_count > 0:
         count_color = Fore.GREEN
     elif current_true_count < 0:
