@@ -501,7 +501,7 @@ def turnprint(player, optimal_score):
         player.money -= player.bet
         player.bet += player.bet
         deal_card(player)
-        stand = True
+        doubledown = True
     return stand
 def deal_card(player):
     global decks
