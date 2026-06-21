@@ -34,7 +34,7 @@ dealer_reveal_true = False
 typing_speed = 500
 previous_menu = ""
 finalhands = []
-
+count = 0
 class Player:
     def __init__(self, name):
         self.name = name
@@ -245,9 +245,17 @@ def create_players(num_players):
         players.append(Player(name))
         
 
-
-
-    i = 1      
+def updateCount(card, reset=False):
+    if reset:
+        count = 0
+        truecount = 0
+    else:
+        if optimal_scores(card, True) <= 6:
+            count+=1
+        elif optimal_scores(card, True) == 10:
+            count -= 1
+        truecount = count//(len(decks)/52)
+    return truecount     
 def printplayerinfo(players, dealer_reveal_true=False):
     clear_screen()
 
@@ -346,7 +354,7 @@ def createDealer():
     Dealer = Player("Dealer")
     players.append(Dealer)
     Dealer.money = 100000000000000000000000000000000
-def optimal_scores(player):
+def optimal_scores(pl, cardcheck=False):
     rankvaluepair = {"A" : "1",
                         "2" : "2",
                         "3" : "3",
@@ -364,12 +372,13 @@ def optimal_scores(player):
         
         
         
-        
+    if cardcheck:
+        return int(rankvaluepair[pl])   
         
     playerhand = []
     convertplayerhand = []
     convertedplayerhand = []
-    for hand in player.hand:
+    for hand in pl.hand:
         playerhand.append(hand[:-1])
         
     for card in playerhand:
