@@ -308,7 +308,13 @@ def get_player_hand_width(p):
         name_info_width = len(p.name)+16
         return max(cards_width, name_info_width)
     
-def printBJinfo():
+def printBJinfo(player):
+    cards = player.hand
+    card_height = len(deck[cards[0]].splitlines())
+    
+    for row_i in range(card_height):
+        phand = "  ".join(deck[c].splitlines()[row_i] for c in cards)
+        print(phand)
     pass
 def printDealerInfo(players):
     cards = players[0].hand
@@ -442,6 +448,7 @@ def dealer_reveal(players):
                 player_no = players.index(player)
                 if optimal_score > dealersumofcards:
                     print("")
+                    printBJinfo(player)
                     print(f"Player {player_no}: {player.name} - WIN!")
                     sleep(2)
                     total_bet = player.bet
@@ -451,8 +458,16 @@ def dealer_reveal(players):
                     print(f"+{(total_bet)}")    
                 elif optimal_score < dealersumofcards:
                     print("")
+                    printBJinfo(player)
                     print(f"Player {player_no}: {player.name} - LOST")
                     sleep(2)
+                    player.bet = 0
+                elif optimal_score == dealersumofcards:
+                    print("")
+                    printBJinfo(player)
+                    print(f"Player {player_no}: {player.name} - PUSH")
+                    sleep(2)
+                    player.money += player.bet
                     player.bet = 0
 
     # printplayerinfo(players, True)
@@ -494,7 +509,7 @@ def makeBJcards():
     return decks
 def createCards():
     suits = ['♠', '♥', '♦', '♣']
-    rank = ["9","10", "J", "Q", "K", "A"]
+    rank = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]
     cards = []
     for suit in suits:
         for r in rank:
