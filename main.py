@@ -208,9 +208,10 @@ def PlayBlackjack():
     num_players = validinput(num_players, "option.isdigit() and 1 <= int(option) <= 4")
     decks = makeBJcards()
     option = ""
+    create_players(num_players)
     while option.upper() != "N": 
         betamnt = 0
-        create_players(num_players)
+        
         for c, player in enumerate(players):
             if player.name != "Dealer":
                 print(f"Player {c}: {player.name}")
