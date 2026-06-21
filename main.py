@@ -515,12 +515,12 @@ def deal_card(player):
     global decks
     if len(decks) == 0:
         decks = makeBJcards()
-        updateCount(reset=True)
+        reset = True
     if len(decks) > 0:
         card = decks[0]
         decks.pop(0)
         player.hand.append(card)
-    
+    updateCount(card, reset)
 
 def makeBJcards():
     global decks
