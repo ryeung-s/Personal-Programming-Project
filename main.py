@@ -246,14 +246,12 @@ def create_players(num_players):
 
 
     i = 1      
-def printplayerinfo(players,dealer_reveal_true=False):
+def printplayerinfo(players):
     clear_screen()
 
     display_players = [p for p in players if p.name != "Dealer"]
     dealer = next((p for p in players if p.name == 'Dealer'), None)
-    if dealer_reveal_true:
-        dealer_reveal(players)
-    elif dealer:
+    if dealer:
         printDealerInfo(players)
     if display_players:
         if len(display_players[0].hand) > 0:
