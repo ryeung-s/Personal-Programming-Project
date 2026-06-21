@@ -427,21 +427,17 @@ def BJturn(player, players):
             sleep(1)
         printplayerinfo(players)
 def dealer_reveal(players):
-    cards = players[0].hand
-    card_height = len(deck[cards[0]].splitlines())
-    
-    for row_i in range(card_height):
-        phand = "  ".join(deck[c].splitlines()[row_i] for c in cards)
-        print(phand)
-    print(f"Dealer: {' '.join(players[0].hand)} ")
     optimal_score, dealersumofcards, playerhand = optimal_scores(players[0])
-    if dealersumofcards <= 16:
+    while dealersumofcards <= 16:
         deal_card(players[0])
         sleep(0.5)
-        printplayerinfo(players,True)
-        return
+        printBJinfo(players[0])
+        print(f"Dealer: {' '.join(players[0].hand)} ")
+        optimal_score, dealersumofcards, playerhand = optimal_scores(players[0])
     
     for player in players:
+        clear_screen()
+        printBJinfo(players[0])
         if player.name != "Dealer":
             optimal_score, sumofcards, playerhand = optimal_scores(player)
             if not player.bust and not player.blackjack:
