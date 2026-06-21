@@ -206,7 +206,7 @@ def PlayBlackjack():
     num_players = input("Enter number of players (1-4): ")
     num_players = validinput(num_players, "option.isdigit() and 1 <= int(option) <= 4")
     decks = makeBJcards()
-    while option.upper() != "n": 
+    while option.upper() != "N": 
         betamnt = 0
         create_players(num_players)
         for c, player in enumerate(players):
@@ -230,7 +230,7 @@ def PlayBlackjack():
         for player in players:
             BJturn(player, players)
         dealer_reveal(players)
-        option = input("Play another round? Y/N")         
+        option = input("Play another round? Y/N: ")         
 def create_players(num_players):
     global players
     players = []
@@ -513,6 +513,7 @@ def turnprint(player, optimal_score):
     return stand
 def deal_card(player):
     global decks
+    reset = False
     if len(decks) == 0:
         decks = makeBJcards()
         reset = True
