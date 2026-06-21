@@ -439,10 +439,10 @@ def BJturn(player, players):
 def dealer_reveal(players):
     optimal_score, dealersumofcards, playerhand = optimal_scores(players[0])
     while dealersumofcards <= 16:
+        printplayerinfo(players, dealer_reveal_true=True)
         deal_card(players[0])
         sleep(0.5)
         optimal_score, dealersumofcards, playerhand = optimal_scores(players[0])
-    printplayerinfo(players, dealer_reveal_true=True)
     for player in players:
         if player.name != "Dealer":
             optimal_score, sumofcards, playerhand = optimal_scores(player)
@@ -478,7 +478,7 @@ def dealer_reveal(players):
                     player.bet = 0
                     sleep(2)
 
-    # printplayerinfo(players, True)
+    printplayerinfo(players, True)
                 
 
 def turnprint(player, optimal_score):
