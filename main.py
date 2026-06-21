@@ -68,7 +68,7 @@ def display_logo():
  ▒▒█████████  █████   █████▒▒█████████  █████ █████  ▒▒█████ ▒▒▒███████▒  
   ▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒   ▒▒▒▒▒  ▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒ ▒▒▒▒▒    ▒▒▒▒▒    ▒▒▒▒▒▒▒    
 
-
+*Actually just blackjack for now
 
 CTRL-C to skip animation             CTRL-C to skip animation                      
 """
@@ -137,19 +137,11 @@ def menuprint():
         4. Settings
         5. Exit
         """
-    elif openSettings:
-        menuoptions = """
-        1. Back
-        2. Music
-        3. Reset settings
-        4. Exit
-        """
     else:
         menuoptions = """
         1. Play Blackjack
-        2. Play Poker
+        2. Play Poker 
         3. Play Roulette
-        4. Settings
         5. Exit
         """
     
@@ -653,4 +645,4 @@ def main():
     print(CLEAR_SCREEN + CURSOR_HOME)
     display_logo()
 
-PlayBlackjack()
+main()
