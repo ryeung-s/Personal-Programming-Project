@@ -253,10 +253,10 @@ def updateCount(card="", reset=False):
         count = 0
         truecount = 0
     elif card != "":
-        if optimal_scores(card, True) <= 6:
-            count+=1
-        elif optimal_scores(card, True) == 10:
+        if optimal_scores(card, True) == 10 or optimal_scores(card, True) == 1:
             count -= 1
+        elif optimal_scores(card, True) <= 6:
+            count+=1
         deck_ratio = (len(decks)/52) if len(decks) > 0 else 1
         truecount = count//deck_ratio
     return int(count), int(truecount)     
