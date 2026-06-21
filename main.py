@@ -206,29 +206,31 @@ def PlayBlackjack():
     num_players = input("Enter number of players (1-4): ")
     num_players = validinput(num_players, "option.isdigit() and 1 <= int(option) <= 4")
     decks = makeBJcards()
-    betamnt = 0
-    create_players(num_players)
-    for c, player in enumerate(players):
-        if player.name != "Dealer":
-            print(f"Player {c}: {player.name}")
-            print(f"Money: {player.money}")
-            betamnt = input("Bet amount: ")
-            betamnt = validinput(betamnt, "option != '' and option.isdigit() and int(option) <= player.money", player)
-            player.bet = int(betamnt)
-            player.money = player.money - player.bet
-    for player in players:      
-        for i in range(2):
-            print(CURSOR_HOME)
-            clear_screen()
-            deal_card(player)
-            print()
-            print()
-            print()
-            printplayerinfo(players)
-            sleep(0.5)
-    for player in players:
-        BJturn(player, players)
-    dealer_reveal(players)         
+    while option.upper() != "n": 
+        betamnt = 0
+        create_players(num_players)
+        for c, player in enumerate(players):
+            if player.name != "Dealer":
+                print(f"Player {c}: {player.name}")
+                print(f"Money: {player.money}")
+                betamnt = input("Bet amount: ")
+                betamnt = validinput(betamnt, "option != '' and option.isdigit() and int(option) <= player.money", player)
+                player.bet = int(betamnt)
+                player.money = player.money - player.bet
+        for player in players:      
+            for i in range(2):
+                print(CURSOR_HOME)
+                clear_screen()
+                deal_card(player)
+                print()
+                print()
+                print()
+                printplayerinfo(players)
+                sleep(0.5)
+        for player in players:
+            BJturn(player, players)
+        dealer_reveal(players)
+        option = input("Play another round? Y/N")         
 def create_players(num_players):
     global players
     players = []
@@ -511,9 +513,15 @@ def turnprint(player, optimal_score):
     return stand
 def deal_card(player):
     global decks
-    card = decks[0]
-    decks.pop(0)
-    player.hand.append(card)   
+    if len(decks) == 0:
+        decks = makeBJcards()
+        updateCount(reset=True)
+    if len(decks) > 0:
+        card = decks[0]
+        decks.pop(0)
+        player.hand.append(card)
+    
+
 def makeBJcards():
     global decks
     deck = draw_cards()
