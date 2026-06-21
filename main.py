@@ -434,17 +434,17 @@ def dealer_reveal(players):
         optimal_score, dealersumofcards, playerhand = optimal_scores(players[0])
     printplayerinfo(players, dealer_reveal_true=True)
     for player in players:
-        clear_screen()
-        printBJinfo(players[0])
         if player.name != "Dealer":
             optimal_score, sumofcards, playerhand = optimal_scores(player)
             if not player.bust and not player.blackjack:
                 player_no = players.index(player)
-                if optimal_score > dealersumofcards or dealersumofcards > 21:
+                printplayerinfo(players, dealer_reveal_true=True)
+                if dealersumofcards > 21 or optimal_score > dealersumofcards:
                     print("")
-                    printBJinfo(player)
-                    print(f"Player {player_no}: {player.name} - WIN!")
-                    print(f"+{(player.bet)}") 
+                    print(f"Player {player_no}: {player.name}")
+                    sleep(0.3)
+                    ("WIN!")
+                    #print(f"+{(player.bet)}") 
                     print(f"{player.money}")
                     sleep(2)
                     newmoney = player.money + (2 * player.bet)
