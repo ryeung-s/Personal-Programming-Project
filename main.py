@@ -498,7 +498,7 @@ def turnprint(player, optimal_score):
     elif choice == 2:
         stand = True
     elif choice == 3:
-        player.moey -= player.bet
+        player.money -= player.bet
         player.bet += player.bet
         deal_card(player)
         stand = True
