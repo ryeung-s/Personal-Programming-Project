@@ -251,7 +251,16 @@ def printplayerinfo(players, dealer_reveal_true=False):
 
     display_players = [p for p in players if p.name != "Dealer"]
     dealer = next((p for p in players if p.name == 'Dealer'), None)
+
     if dealer:
+        if dealer_reveal_true:
+            cards = dealer.hand
+            card_height = len(deck[cards[0]].splitlines())
+            for row_i in range(card_height):
+                print("  ".join(deck[c].splitlines()[row_i] for c in cards))
+                print(f"Dealer Hand Score: {optimal_scores(dealer)[0]}")
+                print("-" * 40) 
+            sleep(0.5)
         printDealerInfo(players)
     if display_players:
         if len(display_players[0].hand) > 0:
@@ -446,24 +455,27 @@ def dealer_reveal(players):
                     ("WIN!")
                     #print(f"+{(player.bet)}") 
                     #print(f"{player.money}")
-                    sleep(2)
-                    newmoney = player.money + (2 * player.bet)
+                    player.money +=  (2 * player.bet)
                     player.bet = 0
-                    player.money = newmoney   
+                    sleep(2)
                 elif optimal_score < dealersumofcards:
                     print("")
-                    print(f"Player {player_no}: {player.name} - LOST")
-                    print(f"{player.money}")
-                    sleep(2)
+                    print(f"Player {player_no}: {player.name}")
+                    sleep(0.3)
+                    ("LOST")
+                    #print(f"{player.money}")
                     player.bet = 0
+                    sleep(2)
                 elif optimal_score == dealersumofcards:
                     print("")
                     printBJinfo(player)
-                    print(f"Player {player_no}: {player.name} - PUSH")
-                    print(f"{player.money}")
-                    sleep(2)
+                    print(f"Player {player_no}: {player.name}")
+                    #print(f"{player.money}")
+                    sleep(0.3)
+                    ("PUSH")
                     player.money += player.bet
                     player.bet = 0
+                    sleep(2)
 
     # printplayerinfo(players, True)
                 
