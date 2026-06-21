@@ -330,7 +330,7 @@ def get_player_hand_width(p):
         cards_width = (len(p.hand)*card_width) + 2*(len(p.hand)-1)
         name_info_width = len(p.name)+16
         return max(cards_width, name_info_width)
-    
+    return len(p.name) + 16 
 def printBJinfo(player):
     cards = player.hand
     card_height = len(deck[cards[0]].splitlines())
