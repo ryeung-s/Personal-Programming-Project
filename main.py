@@ -404,6 +404,8 @@ def BJturn(player, players):
                 
             else:
                 stand = turnprint(player, optimal_score)
+                if getattr(player, 'bust', False):
+                    bust = True 
             printplayerinfo(players)
         player_no = players.index(player)
         if bust:
