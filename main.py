@@ -488,7 +488,8 @@ def turnprint(player, optimal_score):
     print(f"Player {players.index(player)}: {player.name}'s turn")
     print("1. Hit")
     print("2. Stand")
-    print("3. Double down")
+    if player.money >= (2* player.bet):
+        print("3. Double down")
     option = input()
     choice = validinput(option, "option in '123'")
     choice = int(choice)
