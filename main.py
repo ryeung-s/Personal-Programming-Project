@@ -259,9 +259,11 @@ def printplayerinfo(players, dealer_reveal_true=False):
             for row_i in range(card_height):
                 print("  ".join(deck[c].splitlines()[row_i] for c in cards))
                 print(f"Dealer Hand Score: {optimal_scores(dealer)[0]}")
-                print("-" * 40) 
+                print("-" * 1000) 
             sleep(0.5)
-        printDealerInfo(players)
+        else:
+            printDealerInfo(players)
+            print("-" * 300)
     if display_players:
         if len(display_players[0].hand) > 0:
             first_card = display_players[0].hand[0]
