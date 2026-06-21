@@ -494,7 +494,7 @@ def makeBJcards():
     return decks
 def createCards():
     suits = ['♠', '♥', '♦', '♣']
-    rank = ["10", "J", "Q", "K", "A"]
+    rank = ["9","10", "J", "Q", "K", "A"]
     cards = []
     for suit in suits:
         for r in rank:
