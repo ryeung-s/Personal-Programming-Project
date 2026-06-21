@@ -311,13 +311,13 @@ def printBJinfo(player):
     card_height = len(deck[cards[0]].splitlines())
 
     animatedcards = []
-    for c in animatedcards:
+    for c in cards:
         animatedcards.append(c)
         for row_i in range(card_height):
             phand = "  ".join(deck[c].splitlines()[row_i] for c in animatedcards)
             print(phand)
-            sleep(0.5)
-            clear_screen()
+        sleep(0.5)
+        clear_screen()
     pass
 def printDealerInfo(players):
     cards = players[0].hand
