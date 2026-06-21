@@ -278,6 +278,14 @@ def printplayerinfo(players, dealer_reveal_true=False):
         else:
             printDealerInfo(players)
             print("     ".join("-" * get_player_hand_width(p) for p in display_players if get_player_hand_width(p) != None )) 
+    current_true_count = updateCount()
+    
+    if current_true_count > 0:
+        count_color = Fore.GREEN
+    elif current_true_count < 0:
+        count_color = Fore.RED
+    else:
+        count_color = Fore.WHITE
     if display_players:
         if len(display_players[0].hand) > 0:
             first_card = display_players[0].hand[0]
@@ -508,7 +516,6 @@ def turnprint(player, optimal_score):
     print("2. Stand")
     if player.money >= (2* player.bet):
         print("3. Double down")
-    print(f"True count: {truecount}")
     option = input()
     choice = validinput(option, "option in '123'")
     choice = int(choice)
@@ -537,7 +544,6 @@ def deal_card(player):
         decks.pop(0)
         player.hand.append(card)
         updateCount(card, False)
-    print(f"True Count: {updateCount()}")
 def makeBJcards():
     global decks
     deck = draw_cards()
