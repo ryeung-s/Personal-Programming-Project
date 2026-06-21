@@ -503,7 +503,7 @@ def turnprint(player, optimal_score):
         deal_card(player)
         optimal_score, sumofcards, playerhand = optimal_scores(player)
         if optimal_score > 21:
-            bust = True  
+            player.bust = True
         
         stand = True
     return stand
