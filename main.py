@@ -278,38 +278,37 @@ def printplayerinfo(players, dealer_reveal_true=False):
                     if p_width != None and not getattr(p, 'bust', False):
                         line.append(f"{phand:<{p_width}}")
                 print("     ".join(line))
-            if p_width != None:
-                names_line = " ".join(
-                    f"{f'Player {i}: '}{p.name:<{get_player_hand_width(p)-6}}"
-                    
-                    for i, p in enumerate(players)
-                    if p.name != "Dealer" and not getattr(p, 'bust', False)
-                )
+            names_line = " ".join(
+                f"{f'Player {i}: '}{p.name:<{get_player_hand_width(p)-6}}"
                 
-                hands_line = " ".join(
-                    f"{(h := f'Hand: {' '.join(p.hand)}'):<{get_player_hand_width(p)+4}}"
-                    
-                    for p in players
-                    if (p.name != "Dealer" and not getattr(p, 'bust', False)) 
-                )
-                money_line = " ".join(
-                    f"{'Money: ' + str(p.money):<{get_player_hand_width(p)+4}}"
-                    
-                    
-                    for p in players
-                    if (p.name != "Dealer" and not getattr(p, 'bust', False)) 
-                )
-                bet_line = " ".join(
-                    f"{'Bet Amount: ' + str(p.bet):<{get_player_hand_width(p)+4}}" 
-                    
-                    
-                    for p in players
-                    if (p.name != "Dealer" and not getattr(p, 'bust', False)) 
-                )
-                print(names_line)
-                print(money_line)
-                print(bet_line)
-                print(hands_line)
+                for i, p in enumerate(players)
+                if p.name != "Dealer" and not getattr(p, 'bust', False) and len(phand) > 0
+            )
+            
+            hands_line = " ".join(
+                f"{(h := f'Hand: {' '.join(p.hand)}'):<{get_player_hand_width(p)+4}}" 
+                
+                for p in players
+                if (p.name != "Dealer" and not getattr(p, 'bust', False))  and len(phand) > 0
+            )
+            money_line = " ".join(
+                f"{'Money: ' + str(p.money):<{get_player_hand_width(p)+4}}"
+                
+                
+                for p in players
+                if (p.name != "Dealer" and not getattr(p, 'bust', False))  and len(phand) > 0
+            )
+            bet_line = " ".join(
+                f"{'Bet Amount: ' + str(p.bet):<{get_player_hand_width(p)+4}}" 
+                
+                
+                for p in players
+                if (p.name != "Dealer" and not getattr(p, 'bust', False)) and len(phand) > 0
+            )
+            print(names_line)
+            print(money_line)
+            print(bet_line)
+            print(hands_line)
 def get_player_hand_width(p):
     if len(p.hand) > 0 and not p.bust and not p.blackjack:
         card_width = len(deck[p.hand[0]].splitlines()[1])
