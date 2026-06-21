@@ -515,6 +515,7 @@ def dealer_reveal(players):
                     player.money += player.bet
                     player.bet = 0
                     sleep(2)
+            print(Style.RESET_ALL)
     sleep(5)
     printplayerinfo(players, True)
                 
