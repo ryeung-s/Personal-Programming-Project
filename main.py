@@ -220,12 +220,13 @@ def PlayBlackjack():
             for i in range(2):
                 print(CURSOR_HOME)
                 clear_screen()
-                deal_card(player)
-                print()
-                print()
-                print()
-                printplayerinfo(players)
-                sleep(0.5)
+                if player.money != 0:
+                    deal_card(player)
+                    print()
+                    print()
+                    print()
+                    printplayerinfo(players)
+                    sleep(0.5)
         for player in players:
             BJturn(player, players)
         dealer_reveal(players)
