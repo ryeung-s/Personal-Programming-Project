@@ -208,13 +208,14 @@ def PlayBlackjack():
             p.bust = False
             p.blackjack = False
         for c, player in enumerate(players):
-            if player.name != "Dealer":
-                print(f"Player {c}: {player.name}")
-                print(f"Money: {player.money}")
-                betamnt = input("Bet amount: ")
-                betamnt = validinput(betamnt, "option != '' and option.isdigit() and int(option) <= player.money", player)
-                player.bet = int(betamnt)
-                player.money = player.money - player.bet
+            if player.money != 0:
+                if player.name != "Dealer":
+                    print(f"Player {c}: {player.name}")
+                    print(f"Money: {player.money}")
+                    betamnt = input("Bet amount: ")
+                    betamnt = validinput(betamnt, "option != '' and option.isdigit() and int(option) <= player.money", player)
+                    player.bet = int(betamnt)
+                    player.money = player.money - player.bet
         for player in players:      
             for i in range(2):
                 print(CURSOR_HOME)
