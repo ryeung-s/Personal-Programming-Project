@@ -220,7 +220,7 @@ def PlayBlackjack():
             for i in range(2):
                 print(CURSOR_HOME)
                 clear_screen()
-                if player.money != 0:
+                if player.money != 0 and player.bet != 0:
                     deal_card(player)
                     print()
                     print()
