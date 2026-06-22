@@ -370,6 +370,7 @@ def createDealer():
     Dealer = Player("Dealer")
     players.append(Dealer)
     Dealer.money = 100000000000000000000000000000000
+    Dealer.bet = 1
 def optimal_scores(pl, cardcheck=False):
     rankvaluepair = {"A" : "1",
                         "2" : "2",
