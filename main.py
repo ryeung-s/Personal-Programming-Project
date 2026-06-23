@@ -208,9 +208,7 @@ def PlayBlackjack():
             p.bust = False
             p.blackjack = False
         for c, player in enumerate(players):
-            if player.money == 0:
-                players.remove(player)
-                print("Removed")
+            players = [player for player in players if player.money > 0]
             if player.name != "Dealer":
                 print(f"Player {c}: {player.name}")
                 print(f"Money: {player.money}")
