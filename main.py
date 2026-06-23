@@ -208,7 +208,9 @@ def PlayBlackjack():
             p.bust = False
             p.blackjack = False
         for c, player in enumerate(players):
-            players = [player for player in players if player.money > 0]
+            if player.money == 0:
+                players.remove(player)
+                print("Removed")
             if player.name != "Dealer":
                 print(f"Player {c}: {player.name}")
                 print(f"Money: {player.money}")
@@ -473,7 +475,6 @@ def dealer_reveal(players):
     while dealersumofcards <= 16:
         printDealerInfo(players)
         deal_card(players[0])
-
         sleep(0.5)
         optimal_score, dealersumofcards, playerhand = optimal_scores(players[0])
     printplayerinfo(players, dealer_reveal_true=True)
