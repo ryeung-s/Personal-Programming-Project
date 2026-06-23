@@ -210,6 +210,7 @@ def PlayBlackjack():
         for c, player in enumerate(players):
             if player.money == 0:
                 players.remove(player)
+                print("Removed")
             if player.name != "Dealer":
                 print(f"Player {c}: {player.name}")
                 print(f"Money: {player.money}")
