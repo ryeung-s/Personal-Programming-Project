@@ -303,7 +303,7 @@ def printplayerinfo(players, dealer_reveal_true=False):
                     if p_width != None and not getattr(p, 'bust', False):
                         line.append(f"{phand:<{p_width}}")
                 print("     ".join(line))
-            
+
             names_line = " ".join(
                 f"{f'Player {i}: '}{p.name:<{get_player_hand_width(p)-6}}"
                 
@@ -342,7 +342,7 @@ def get_player_hand_width(p):
         cards_width = (len(p.hand)*card_width) + 2*(len(p.hand)-1)
         name_info_width = len(p.name)+16
         return max(cards_width, name_info_width)
-    return len(p.name) + 16
+    return 0
 def printBJinfo(player):
     cards = player.hand
     card_height = len(deck[cards[0]].splitlines())
