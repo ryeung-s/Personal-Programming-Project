@@ -621,7 +621,8 @@ def PlayRoulette():
     for player in players:
         player.betROULETTE = []
         player.sector = []
-    print("Playing Roulette")
+    print("Playing SIMPLIFIED Roulette")
+    
     betamnt = 0
     players = [p for p in players if p.money > 0]
     players.pop(0)
