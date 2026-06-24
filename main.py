@@ -661,7 +661,14 @@ def PlayRoulette():
     time_pass = 0.0
     while time_pass < spin_duration:
         randnum = randint(0,36)
-        
+        if randnum == 0:
+            colour = Fore.GREEN
+        elif randnum % 2 == 0:
+            colour = Fore.BLACK
+        elif randnum % 2 == 1:
+            colour = Fore.RED
+        print(f"Spinning... [ {randnum} ]")
+
 
 
 
