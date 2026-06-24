@@ -678,7 +678,8 @@ def PlayRoulette():
 
         if time_pass > (spin_duration * 0.6):
             interval *= 1.05
-
+        if interval > 0.30:
+            interval *= 1.35
 
 
     pass
