@@ -636,10 +636,11 @@ def PlayRoulette():
                     betamnt = input("Bet amount: ")
                     betamnt = validinput(betamnt, "option != '' and option.isdigit() and int(option) <= player.money", player)
                     player.betROULETTE.append(int(betamnt))
-                    player.money = player.money - betamnt
-                    option = (input("What section of the table? "))
-                    option = validinput(option, "option != ' ' and option.upper() in []")
+                    player.money = player.money - int(betamnt)
 
+                    option = input("What section of the table? (COLOUR, NUMBER, THIRD):  ") 
+                    option = validinput(option, "option != ' ' and option.upper() in ['COLOUR', 'NUMBER', 'THIRD']")
+                    
 
 
 
