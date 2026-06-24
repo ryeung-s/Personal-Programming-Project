@@ -640,7 +640,19 @@ def PlayRoulette():
 
                     option = input("What section of the table? (COLOUR, NUMBER, THIRD):  ") 
                     option = validinput(option, "option != ' ' and option.upper() in ['COLOUR', 'NUMBER', 'THIRD']")
-                    
+                    specific_choice = ""
+
+                    if option == "COLOUR":
+                        specific_choice = input("Choose color (RED, BLACK): ").upper()
+                        specific_choice = validinput(specific_choice, "option.upper() in ['RED', 'BLACK']").upper()
+
+                    elif option == "THIRD":
+                        specific_choice = input("Choose third (1, 2, 3): ")
+                        specific_choice = validinput(specific_choice, "option in ['1', '2', '3']")
+
+                    elif option == "NUMBER":
+                        specific_choice = input("Pick an exact number (0-36): ")
+                        specific_choice = validinput(specific_choice, "option.isdigit() and 0 <= int(option) <= 36")
 
 
 
