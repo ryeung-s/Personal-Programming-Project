@@ -685,7 +685,7 @@ def PlayRoulette():
             
         winnernum = randnum
 
-        if winnernum % 2 == 0:
+        if winnernum % 2 == 1:
                 colour = "RED"
         else:
             colour = "BLACK"
