@@ -616,7 +616,7 @@ def PlayPoker():
     print("Playing Poker")
     pass
 def PlayRoulette():
-    global PlayingRoulette
+    global PlayingRoulette, players, player
     PlayingRoulette = True
     for player in players:
         player.betROULETTE = []
@@ -633,7 +633,7 @@ def PlayRoulette():
         print(f"Player {c+1}: {player.name}")
         print(f"Money: {player.money}")
         num_bets = input("Number of bets 1-5: ")
-        num_bets = validinput(num_bets, "option != ' ' and option.isdigit() and option >= 1 and option <= 5")
+        num_bets = int(validinput(num_bets, "option != ' ' and option.isdigit() and int(option) >= 1 and int(option) <= 5"))
         for i in range(num_bets):
             betamnt = input("Bet amount: ")
             betamnt = validinput(betamnt, "option != '' and option.isdigit() and int(option) <= player.money", player)
