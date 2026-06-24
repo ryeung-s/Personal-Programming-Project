@@ -656,7 +656,13 @@ def PlayRoulette():
                 specific_choice = validinput(specific_choice, "option.isdigit() and 0 <= int(option) <= 36")
             player.sector.append(specific_choice)
     print("BETS CLOSED")
-    
+    spin_duration = 3.0
+    interval = 0.05
+    time_pass = 0.0
+    while time_pass < spin_duration:
+        randnum = randint(0,36)
+        
+
 
 
 
