@@ -204,6 +204,8 @@ def PlayBlackjack():
     while option.upper() != "N": 
         betamnt = 0
         players = [p for p in players if p.money > 0]
+        if len(players) == 0:
+            exit()
         for p in players:
             p.hand = []
             p.bust = False
