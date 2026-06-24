@@ -618,8 +618,9 @@ def PlayPoker():
 def PlayRoulette():
     global PlayingRoulette
     PlayingRoulette = True
-    player.betROULETTE = []
-    player.sector = []
+    for player in players:
+        player.betROULETTE = []
+        player.sector = []
     print("Playing Roulette")
     betamnt = 0
     players = [p for p in players if p.money > 0]
