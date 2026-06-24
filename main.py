@@ -629,11 +629,14 @@ def PlayRoulette():
     for c, player in enumerate(players):
                 print(f"Player {c+1}: {player.name}")
                 print(f"Money: {player.money}")
-                betamnt = input("Bet amount: ")
-                betamnt = validinput(betamnt, "option != '' and option.isdigit() and int(option) <= player.money", player)
-                player.bet = int(betamnt)
-                player.money = player.money - player.bet
-                player.sector = input("What section of the table? ")
+                num_bets = input("Number of bets 1-5: ")
+                num_bets = validinput(num_bets, "option != ' ' and option.isdigit() and option >= 1 and option <= 5")
+                for i in range(num_bets):
+                    betamnt = input("Bet amount: ")
+                    betamnt = validinput(betamnt, "option != '' and option.isdigit() and int(option) <= player.money", player)
+                    player.bet = int(betamnt)
+                    player.money = player.money - player.bet
+                    player.sector = input("What section of the table? ")
 
 
 
