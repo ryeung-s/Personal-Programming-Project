@@ -655,6 +655,8 @@ def PlayRoulette():
                 specific_choice = input("Pick an exact number (0-36): ")
                 specific_choice = validinput(specific_choice, "option.isdigit() and 0 <= int(option) <= 36")
             player.sector.append(specific_choice)
+    print("BETS CLOSED")
+    
 
 
 
