@@ -44,9 +44,10 @@ class Player:
         self.bet = 0
         self.bust = False
         self.blackjack = False
-        self.sector = "Red"
+        self.sector = ["Red"]
+        self.BetROULETTE = []
     def __str__(self):
-        return f"{self.name} (Money: {self.money}, Hand: {self.hand}, Bet: {self.bet}, Bust: {self.bust}, Blackjack : {self.blackjack}, Sector : {self.sector}"
+        return f"{self.name} (Money: {self.money}, Hand: {self.hand}, Bet: {self.bet}, Bust: {self.bust}, Blackjack : {self.blackjack}, Sector : {self.sector}, BetROULETTE: {self.BetROULETTE}"
 
 def clear_screen():
     if os.name == 'nt':
@@ -634,9 +635,10 @@ def PlayRoulette():
                 for i in range(num_bets):
                     betamnt = input("Bet amount: ")
                     betamnt = validinput(betamnt, "option != '' and option.isdigit() and int(option) <= player.money", player)
-                    player.bet = int(betamnt)
-                    player.money = player.money - player.bet
-                    player.sector = input("What section of the table? ")
+                    player.betROULETTE.append(int(betamnt))
+                    player.money = player.money - betamnt
+                    option = (input("What section of the table? "))
+                    option = validinput(option, "option != ' ' and option.upper() in []")
 
 
 
