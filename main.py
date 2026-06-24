@@ -110,7 +110,12 @@ CTRL-C to skip animation             CTRL-C to skip animation
         print("STOPPED")
         sleep(1)
         clear_screen()
+        intialise_players()
         menu()
+def intialise_players():
+    num_players = input("Enter number of players (1-4): ")
+    num_players = validinput(num_players, "option.isdigit() and 1 <= int(option) <= 4")
+    create_players(num_players)
 def menuprint():
     global PlayingBJ, PlayingPoker, PlayingRoulette, openSettings
     if PlayingBJ:
@@ -196,11 +201,8 @@ def PlayBlackjack():
     global PlayingBJ, decks, players
     PlayingBJ = True
     print("Playing Blackjack")
-    num_players = input("Enter number of players (1-4): ")
-    num_players = validinput(num_players, "option.isdigit() and 1 <= int(option) <= 4")
     decks = makeBJcards()
     option = ""
-    create_players(num_players)
     while option.upper() != "N": 
         betamnt = 0
         players = [p for p in players if p.money > 0]
@@ -614,7 +616,15 @@ def PlayPoker():
 def PlayRoulette():
     global PlayingRoulette
     PlayingRoulette = True
+
     print("Playing Roulette")
+    betamnt = 0
+    players = [p for p in players if p.money > 0]
+    if len(players) == 1:
+        print("No more players with money... you lot are bad gamblers")
+        sleep(1)
+        exit()
+
 
     pass
 def Settings():
