@@ -700,14 +700,14 @@ def PlayRoulette():
         for c, p in enumerate(players):
             for bet in p.betROULETTE:
                 oldmoney = p.money
-                if colour == p.sector or third == p.sector[c]:
+                if colour == p.sector or third == p.sector:
                     p.money += 2*bet
                 elif winnernum == p.sector:
                     p.money += 35*bet
                 print("")
                 print(f"Player {c+1}: {p.name}")
                 print(f"Bet: {bet}")
-                print(f"Sector {p.sector}")
+                print(f"Sector {p.sector[c]}")
                 print(f"Money: {oldmoney} +{p.money-oldmoney}")
             p.betROULETTE.clear()
         choice = input("Play another round? Y/N")
