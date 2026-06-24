@@ -658,7 +658,7 @@ def PlayRoulette():
                 specific_choice = validinput(specific_choice, "option.isdigit() and 0 <= int(option) <= 36")
             player.sector.append(specific_choice)
     print("BETS CLOSED")
-    spin_duration = 10.0
+    spin_duration = randint(8,15)
     interval = 0.05
     time_pass = 0.0
     while time_pass < spin_duration:
@@ -679,7 +679,7 @@ def PlayRoulette():
         if time_pass > (spin_duration * 0.6):
             interval *= 1.05
         if interval > 0.30:
-            interval *= 1.35
+            interval *= 1.55
 
 
     pass
