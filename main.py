@@ -668,7 +668,7 @@ def PlayRoulette():
             colour = Fore.BLACK
         elif randnum % 2 == 1:
             colour = Fore.RED
-        print(f"Spinning... [ {colour+randnum:02d+Fore.RESET} ]", end="")
+        print(f"Spinning... [ {colour}{randnum:02d}{Fore.RESET} ]", end="")
         sys.stdout.flush()
 
         sleep(interval)
