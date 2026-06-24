@@ -646,7 +646,7 @@ def PlayRoulette():
                 option = input("What section of the table? (COLOUR, NUMBER, THIRD):  ") 
                 option = validinput(option, "option != ' ' and option.upper() in ['COLOUR', 'NUMBER', 'THIRD']")
                 specific_choice = ""
-
+                option = option.upper()
                 if option == "COLOUR":
                     specific_choice = input("Choose color (RED, BLACK): ").upper()
                     specific_choice = validinput(specific_choice, "option.upper() in ['RED', 'BLACK']").upper()
