@@ -623,85 +623,93 @@ def PlayRoulette():
         player.sector = []
     print("Playing SIMPLIFIED Roulette")
     
-    betamnt = 0
+
     players = [p for p in players if p.money > 0]
     players.pop(0)
-    if len(players) == 0:
-        print("No more players with money... you lot are bad gamblers")
-        sleep(1)
-        exit()
-    for c, player in enumerate(players):
-        print(f"Player {c+1}: {player.name}")
-        print(f"Money: {player.money}")
-        num_bets = input("Number of bets 1-5: ")
-        num_bets = int(validinput(num_bets, "option != ' ' and option.isdigit() and int(option) >= 1 and int(option) <= 5"))
-        for i in range(num_bets):
-            betamnt = input("Bet amount: ")
-            betamnt = validinput(betamnt, "option != '' and option.isdigit() and int(option) <= player.money", player)
-            player.betROULETTE.append(int(betamnt))
-            player.money = player.money - int(betamnt)
+    choice = ""
+    while choice != "N":
+        if len(players) == 0:
+            print("No more players with money... you lot are bad gamblers")
+            sleep(1)
+            exit()
+        for c, player in enumerate(players):
+            print(f"Player {c+1}: {player.name}")
+            print(f"Money: {player.money}")
+            num_bets = input("Number of bets 1-5: ")
+            num_bets = int(validinput(num_bets, "option != ' ' and option.isdigit() and int(option) >= 1 and int(option) <= 5"))
+            for i in range(num_bets):
+                betamnt = input("Bet amount: ")
+                betamnt = validinput(betamnt, "option != '' and option.isdigit() and int(option) <= player.money", player)
+                player.betROULETTE.append(int(betamnt))
+                player.money = player.money - int(betamnt)
 
-            option = input("What section of the table? (COLOUR, NUMBER, THIRD):  ") 
-            option = validinput(option, "option != ' ' and option.upper() in ['COLOUR', 'NUMBER', 'THIRD']")
-            specific_choice = ""
+                option = input("What section of the table? (COLOUR, NUMBER, THIRD):  ") 
+                option = validinput(option, "option != ' ' and option.upper() in ['COLOUR', 'NUMBER', 'THIRD']")
+                specific_choice = ""
 
-            if option == "COLOUR":
-                specific_choice = input("Choose color (RED, BLACK): ").upper()
-                specific_choice = validinput(specific_choice, "option.upper() in ['RED', 'BLACK']").upper()
+                if option == "COLOUR":
+                    specific_choice = input("Choose color (RED, BLACK): ").upper()
+                    specific_choice = validinput(specific_choice, "option.upper() in ['RED', 'BLACK']").upper()
 
-            elif option == "THIRD":
-                specific_choice = input("Choose third (1, 2, 3): ")
-                specific_choice = validinput(specific_choice, "option in ['1', '2', '3']")
+                elif option == "THIRD":
+                    specific_choice = input("Choose third (1, 2, 3): ")
+                    specific_choice = validinput(specific_choice, "option in ['1', '2', '3']")
 
-            elif option == "NUMBER":
-                specific_choice = input("Pick an exact number (0-36): ")
-                specific_choice = int(validinput(specific_choice, "option.isdigit() and 0 <= int(option) <= 36"))
-            player.sector.append(specific_choice)
-    print("BETS CLOSED")
-    spin_duration = randint(8,15)
-    interval = 0.05
-    time_pass = 0.0
-    while time_pass < spin_duration:
-        randnum = randint(0,36)
-        if randnum == 0:
-            colour = Fore.GREEN
-        elif randnum % 2 == 0:
-            colour = Fore.BLACK
-        elif randnum % 2 == 1:
-            colour = Fore.RED
-        print(f"\rSpinning... [ {colour}{randnum:02d}{Fore.RESET} ]", end="")
-        sys.stdout.flush()
+                elif option == "NUMBER":
+                    specific_choice = input("Pick an exact number (0-36): ")
+                    specific_choice = int(validinput(specific_choice, "option.isdigit() and 0 <= int(option) <= 36"))
+                player.sector.append(specific_choice)
+        print("BETS CLOSED")
+        spin_duration = randint(8,15)
+        interval = 0.05
+        time_pass = 0.0
+        while time_pass < spin_duration:
+            randnum = randint(0,36)
+            if randnum == 0:
+                colour = Fore.GREEN
+            elif randnum % 2 == 0:
+                colour = Fore.BLACK
+            elif randnum % 2 == 1:
+                colour = Fore.RED
+            print(f"\rSpinning... [ {colour}{randnum:02d}{Fore.RESET} ]", end="")
+            sys.stdout.flush()
 
-        sleep(interval)
-        time_pass += interval
-        
+            sleep(interval)
+            time_pass += interval
+            
 
-        if time_pass > (spin_duration * 0.5):
-            interval *= 1.05
-        if interval > 0.30:
-            interval *= 1.85
-        
-    winnernum = randnum
+            if time_pass > (spin_duration * 0.5):
+                interval *= 1.05
+            if interval > 0.30:
+                interval *= 1.85
+            
+        winnernum = randnum
 
-    if winnernum % 2 == 0:
-            colour = "RED"
-    else:
-        colour = "BLACK"
-    if winnernum == 0:
-        colour = "GREEN"
-    if winnernum >= 1 and winnernum <= 12:
-        third = "1"
-    elif winnernum >= 13 and winnernum <= 24:
-        third = "2"
-    elif winnernum >= 25 and winnernum <= 36:
-        third = "3"
-    for p in players:
-        for bet in p.betROULETTE:
-            if colour == p.sector or third == p.sector:
-                player.money += 2*bet
-            elif winnernum == p.sector:
-                player.money += 35*bet
-            bet = 0
+        if winnernum % 2 == 0:
+                colour = "RED"
+        else:
+            colour = "BLACK"
+        if winnernum == 0:
+            colour = "GREEN"
+        if winnernum >= 1 and winnernum <= 12:
+            third = "1"
+        elif winnernum >= 13 and winnernum <= 24:
+            third = "2"
+        elif winnernum >= 25 and winnernum <= 36:
+            third = "3"
+        for c, p in enumerate(players):
+            for bet in p.betROULETTE:
+                oldmoney = p.money
+                if colour == p.sector or third == p.sector:
+                    p.money += 2*bet
+                elif winnernum == p.sector:
+                    p.money += 35*bet
+                print(f"Player {c+1}: {p.name}")
+                print(f"Bet: {bet}")
+                print(f"Sector {p.sector}")
+                print(f"Money: {oldmoney} +{p.money-oldmoney}")
+            p.betROULETTE.clear()
+        choice = input("Play another round? Y/N")
     pass
 def Settings():
     global openSettings
