@@ -620,10 +620,20 @@ def PlayRoulette():
     print("Playing Roulette")
     betamnt = 0
     players = [p for p in players if p.money > 0]
+    players.pop(0)
     if len(players) == 1:
         print("No more players with money... you lot are bad gamblers")
         sleep(1)
         exit()
+    for c, player in enumerate(players):
+                print(f"Player {c+1}: {player.name}")
+                print(f"Money: {player.money}")
+                betamnt = input("Bet amount: ")
+                betamnt = validinput(betamnt, "option != '' and option.isdigit() and int(option) <= player.money", player)
+                player.bet = int(betamnt)
+                player.money = player.money - player.bet
+                
+
 
 
     pass
