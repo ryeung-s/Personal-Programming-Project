@@ -628,31 +628,32 @@ def PlayRoulette():
         sleep(1)
         exit()
     for c, player in enumerate(players):
-                print(f"Player {c+1}: {player.name}")
-                print(f"Money: {player.money}")
-                num_bets = input("Number of bets 1-5: ")
-                num_bets = validinput(num_bets, "option != ' ' and option.isdigit() and option >= 1 and option <= 5")
-                for i in range(num_bets):
-                    betamnt = input("Bet amount: ")
-                    betamnt = validinput(betamnt, "option != '' and option.isdigit() and int(option) <= player.money", player)
-                    player.betROULETTE.append(int(betamnt))
-                    player.money = player.money - int(betamnt)
+        print(f"Player {c+1}: {player.name}")
+        print(f"Money: {player.money}")
+        num_bets = input("Number of bets 1-5: ")
+        num_bets = validinput(num_bets, "option != ' ' and option.isdigit() and option >= 1 and option <= 5")
+        for i in range(num_bets):
+            betamnt = input("Bet amount: ")
+            betamnt = validinput(betamnt, "option != '' and option.isdigit() and int(option) <= player.money", player)
+            player.betROULETTE.append(int(betamnt))
+            player.money = player.money - int(betamnt)
 
-                    option = input("What section of the table? (COLOUR, NUMBER, THIRD):  ") 
-                    option = validinput(option, "option != ' ' and option.upper() in ['COLOUR', 'NUMBER', 'THIRD']")
-                    specific_choice = ""
+            option = input("What section of the table? (COLOUR, NUMBER, THIRD):  ") 
+            option = validinput(option, "option != ' ' and option.upper() in ['COLOUR', 'NUMBER', 'THIRD']")
+            specific_choice = ""
 
-                    if option == "COLOUR":
-                        specific_choice = input("Choose color (RED, BLACK): ").upper()
-                        specific_choice = validinput(specific_choice, "option.upper() in ['RED', 'BLACK']").upper()
+            if option == "COLOUR":
+                specific_choice = input("Choose color (RED, BLACK): ").upper()
+                specific_choice = validinput(specific_choice, "option.upper() in ['RED', 'BLACK']").upper()
 
-                    elif option == "THIRD":
-                        specific_choice = input("Choose third (1, 2, 3): ")
-                        specific_choice = validinput(specific_choice, "option in ['1', '2', '3']")
+            elif option == "THIRD":
+                specific_choice = input("Choose third (1, 2, 3): ")
+                specific_choice = validinput(specific_choice, "option in ['1', '2', '3']")
 
-                    elif option == "NUMBER":
-                        specific_choice = input("Pick an exact number (0-36): ")
-                        specific_choice = validinput(specific_choice, "option.isdigit() and 0 <= int(option) <= 36")
+            elif option == "NUMBER":
+                specific_choice = input("Pick an exact number (0-36): ")
+                specific_choice = validinput(specific_choice, "option.isdigit() and 0 <= int(option) <= 36")
+            player.sector.append(specific_choice)
 
 
 
