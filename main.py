@@ -698,18 +698,18 @@ def PlayRoulette():
         elif winnernum >= 25 and winnernum <= 36:
             third = "3"
         for c, p in enumerate(players):
-            for bet in p.betROULETTE:
+            for bet,chosen_sector in zip(p.betROULETTE, p.sector):
                 oldmoney = p.money
-                if colour == p.sector or third == p.sector:
+                if colour == chosen_sector or third == chosen_sector:
                     p.money += 2*bet
-                elif winnernum == p.sector:
+                elif winnernum == chosen_sector:
                     p.money += 35*bet
                 print("")
                 print(f"Player {c+1}: {p.name}")
                 print(f"Bet: {bet}")
-                print(f"Sector {p.sector[c]}")
+                print(f"Sector {chosen_sector}")
                 print(f"Money: {oldmoney} +{p.money-oldmoney}")
-            p.betROULETTE.clear()
+
         choice = input("Play another round? Y/N")
     pass
 def Settings():
