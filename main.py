@@ -655,7 +655,7 @@ def PlayRoulette():
 
             elif option == "NUMBER":
                 specific_choice = input("Pick an exact number (0-36): ")
-                specific_choice = validinput(specific_choice, "option.isdigit() and 0 <= int(option) <= 36")
+                specific_choice = int(validinput(specific_choice, "option.isdigit() and 0 <= int(option) <= 36"))
             player.sector.append(specific_choice)
     print("BETS CLOSED")
     spin_duration = randint(8,15)
@@ -682,8 +682,26 @@ def PlayRoulette():
             interval *= 1.85
         
     winnernum = randnum
-    
 
+    if winnernum % 2 == 0:
+            colour = "RED"
+    else:
+        colour = "BLACK"
+    if winnernum == 0:
+        colour = "GREEN"
+    if winnernum >= 1 and winnernum <= 12:
+        third = "1"
+    elif winnernum >= 13 and winnernum <= 24:
+        third = "2"
+    elif winnernum >= 25 and winnernum <= 36:
+        third = "3"
+    for p in players:
+        for bet in p.betROULETTE:
+            if colour == p.sector or third == p.sector:
+                player.money += 2*bet
+            elif winnernum == p.sector:
+                player.money += 35*bet
+            bet = 0
     pass
 def Settings():
     global openSettings
