@@ -680,6 +680,7 @@ def PlayRoulette():
             interval *= 1.05
         if interval > 0.30:
             interval *= 1.85
+        
 
 
     pass
