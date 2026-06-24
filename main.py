@@ -625,7 +625,7 @@ def PlayRoulette():
     betamnt = 0
     players = [p for p in players if p.money > 0]
     players.pop(0)
-    if len(players) == 1:
+    if len(players) == 0:
         print("No more players with money... you lot are bad gamblers")
         sleep(1)
         exit()
