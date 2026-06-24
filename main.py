@@ -704,6 +704,7 @@ def PlayRoulette():
                     p.money += 2*bet
                 elif winnernum == p.sector:
                     p.money += 35*bet
+                print("")
                 print(f"Player {c+1}: {p.name}")
                 print(f"Bet: {bet}")
                 print(f"Sector {p.sector}")
