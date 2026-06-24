@@ -203,14 +203,11 @@ def PlayBlackjack():
     create_players(num_players)
     while option.upper() != "N": 
         betamnt = 0
+        players = [p for p in players if p.money > 0]
         for p in players:
             p.hand = []
             p.bust = False
             p.blackjack = False
-        for c, player in enumerate(players):
-            if player.money == 0:
-                players.remove(player)
-                print("Removed")
             if player.name != "Dealer":
                 print(f"Player {c}: {player.name}")
                 print(f"Money: {player.money}")
