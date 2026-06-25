@@ -6,7 +6,7 @@ from time import sleep
 import sys
 from random import randint, random, shuffle
 import math
-from colorama import Fore, Back, Style
+from colorama import init, Fore, Back, Style
 ESC = "\x1b"
 
 CLEAR_SCREEN = f"{ESC}[2J"
@@ -627,6 +627,24 @@ def PlayRoulette():
     players = [p for p in players if p.money > 0]
     players.pop(0)
     choice = ""
+    init(autoreset=True)
+
+    R_BOX = Back.RED + Fore.WHITE
+    B_BOX = Back.BLACK + Fore.WHITE
+    G_BOX = Back.GREEN + Fore.WHITE
+    W = Style.RESET_ALL
+
+    print(f" _________________________________________________________________ ")
+    print(f"|       | {R_BOX} 3 {W} | {B_BOX} 6 {W} | {R_BOX} 9 {W} | {B_BOX}12 {W} | {R_BOX}15 {W} | {B_BOX}18 {W} | {R_BOX}21 {W} | {B_BOX}24 {W} | {R_BOX}27 {W} | {B_BOX}30 {W} | {R_BOX}33 {W} | {B_BOX}36 {W} | 2to1 |")
+    print(f"|  {G_BOX} 0   {W} |--'--|--'--|--'--|--'--|--'--|--'--|--'--|--'--|--'--|--'--|--'--|--'--|------|")
+    print(f"|  {G_BOX} (G) {W} | {B_BOX} 2 {W} | {R_BOX} 5 {W} | {B_BOX} 8 {W} | {R_BOX}11 {W} | {B_BOX}14 {W} | {R_BOX}17 {W} | {B_BOX}20 {W} | {R_BOX}23 {W} | {B_BOX}26 {W} | {R_BOX}29 {W} | {B_BOX}32 {W} | {R_BOX}35 {W} | 2to1 |")
+    print(f"|       |--.--|--.--|--.--|--.--|--.--|--.--|--.--|--.--|--.--|--.--|--.--|--.--|------|")
+    print(f"|       | {R_BOX} 1 {W} | {B_BOX} 4 {W} | {R_BOX} 7 {W} | {B_BOX}10 {W} | {R_BOX}13 {W} | {B_BOX}16 {W} | {R_BOX}19 {W} | {B_BOX}22 {W} | {R_BOX}25 {W} | {B_BOX}28 {W} | {R_BOX}31 {W} | {B_BOX}34 {W} | 2to1 |")
+    print(f"|_______|_____|_____|_____|_____|_____|_____|_____|_____|_____|_____|_____|_____|______|")
+    print(f"        |          1st 12         |          2nd 12         |          3rd 12         |")
+    print(f"        |_________________________|_________________________|_________________________|")
+    print(f"        |    1-18    |    EVEN    |   {R_BOX} RED {W}   |   BLACK    |    ODD     |   19-36    |")
+    print(f"        |____________|____________|____________|____________|____________|____________|")
     while choice != "N":
         if len(players) == 0:
             print("No more players with money... you lot are bad gamblers")
