@@ -1,660 +1,523 @@
-## Personal Programming Project John Tjiu
-import time
-from colorist import rgb, ColorRGB
-import random
+## Personal Programming Project - Alvin Lee
+
+from colorama import Fore, Back, Style ## pip install colorama
 from time import sleep
+import random
+import copy
+from freedictionaryapi.clients.sync_client import DictionaryApiClient
+client = DictionaryApiClient()
 import os
-import pygame
 
-#useful functions
-def betterprint(text):
-    for character in text:
-        print(character, end = "",flush = True,)
-        sleep(0.02)
+# pip install python-freeDictionaryAPI
+# pip install httpx
 
+# hi
 
-def clear():
-    os.system('cls' if os.name == 'nt' else 'clear')
+# constants and configurations
 
-#Colours
-def color_text(text, r, g, b):
-    return f"{ColorRGB(r, g, b)}{text}{ColorRGB(255, 255, 255)}"
+# letters frequency
+letter_freq = {"E": 12, "A": 9, "I": 9, "O": 8, "N": 6, "R": 6, "T": 6, "L": 4, "S": 4, "U": 4, "D": 4, "G": 3, "B": 2, "C": 2, "M": 2, "P": 2, "F": 2, "H": 2, "V": 2, "W": 2, "Y": 2, "K": 1, "J": 1, "X": 1, "Q": 1, "Z": 1, " ": 2}
 
-def gold(text):
-    return color_text(text, 255, 204, 0)
+# avaliables letters to give
+aval_letters = []
+for letter in letter_freq:
+    for i in range(letter_freq[letter]):
+        aval_letters.append(letter)
 
-def red(text):
-    return color_text(text, 255, 0, 0)
+# letter points
+points = {1: ["E", "A", "I", "O", "N", "R", "T", "L", "S", "U"],
+         2: ["D", "G"],
+         3: ["B", "C", "M", "P"],
+         4: ["F", "H", "V", "W", "Y"],
+         5: ["K"],
+         8: ["J", "X"],
+         10: ["Q", "Z"]}
 
-def green(text):
-    return color_text(text, 0, 255, 0)
+used_positions = []
+used_letter_and_positions = []
 
-def cyan(text):
-    return color_text(text, 0, 255, 255)
 
-def magenta(text):
-    return color_text(text, 255, 0, 255)
-
-def blue(text):
-    return color_text(text, 0, 150, 255)
-
-def orange(text):
-    return color_text(text, 255, 165, 0)
-
-def pink(text):
-    return color_text(text, 255, 105, 180)
-
-def bright(text):
-    return color_text(text, 255, 255, 100)
-
-def dim(text):
-    return color_text(text, 150, 150, 150)
-
-
-def announce_look_away():
-    print("\n" + "="*50)
-    print("🔒 OTHER PLAYERS: PLEASE LOOK AWAY NOW! 🔒")
-    print("="*50)
-    for i in range(3, 0, -1):
-        print(f"👀 Looking away in {i}...")
-        sleep(1)
-    clear()
-
-def announce_players_can_look():
-    clear()
-    print("\n" + "="*50)
-    print("👁️ OTHER PLAYERS: YOU CAN LOOK BACK NOW! 👁️")
-    print("="*50)
-    sleep(3)
-    clear()
-
-def announce_private_action(current_player, action_name):
-    clear()
-    print("\n" + "🔒"*25)
-    print(f"🔒 {current_player.name} is using {action_name} - PRIVATE ACTION 🔒")
-    print("🔒"*25)
-    announce_look_away()
-
-def announce_public_action(player, action_name):
-    """Announce a public action that everyone can see"""
-    clear()
-    print("\n" + "⭐"*30)
-    print(f"⭐ {player.name} played {action_name}! ⭐")
-    print("⭐"*30)
-    sleep(1)
-
-
-
-
-# Definitions
-players = []
-
-
-#Capitalised all cat cards + definitions of cards
-DEFUSE = "🛡️•⩊•(defuse)"
-NOPE = "🚫(nope)"
-ATTACK = "⚔️(attack)"
-SHUFFLE = "🔀(shuffle)"
-SKIP = "🏃(skip)"
-FAVOR = "🖤(favor)"
-SEE = "👀(See the future)"
-KITTEN = "💣"
-
-CATS = ["🍉🐱", "🥔🐱", "🌈🐱"]
-
-#Way of defining players
-class Player:
-    def __init__(self,name):
-        self.name = name
-        self.hand = []
-        self.alive = True
-        self.extra_turns = 0
-        self.has_played_attack = False
-        self.has_played_skip = False
-
-    def show_hand(self):
-        i = 0
-        print(f"{self.name}, Here are your cards: ")
-        for i,item in enumerate(self.hand,1):
-            print(f"{i}. {item}")
-
-def select_target(current_player, players):
-    available = [p for p in players if p.alive and p != current_player]
-    # checks if the list is empty
-    if not available:
-        betterprint("No other players available!")
-        return None
-    betterprint("Choose a target player\n")
-    for i,player in enumerate(available):
-        print(f"{i+1} {player.name}")
-
-
-    while True:
-        try:
-            choice = int(input("Enter player number: ")) 
-            if 1 <= choice <= len(available):
-                return available[choice - 1]
-            else:
-                print(f"Enter a number between 1 and {len(available)}")
-        except ValueError:
-            print(f"Enter a number between 1 and {len(available)}")
-
-
-
-def create_deck():
-    deck =([ATTACK] * 4 + [NOPE]*5 + [SHUFFLE]*4 + [SEE] * 5 + [FAVOR] * 4 + [SKIP] * 4 + CATS * 4)
-    random.shuffle(deck)
-    return deck
-
-def show_cards():
-    for player in players:
-        player.show_hand()
-        print("")
-        input("Press enter when done... ")
-        clear()
-
-def deal_card(players,deck):
-    for player in players:
-        player.hand.append(DEFUSE)
-        while len(player.hand) < 8:
-            card = deck.pop()
-            player.hand.append(card)
-        
-
-def getting_card():
-    print("Wait")
-    select = "Getting card..."
-    for i in range(3):
-        sleep(0.5)
-        print(".", end="", flush=True)
-    print()
-    sleep(0.5)
-    clear()
-
-
-
-def player_turn(player):
-    clear()
-    while True:
-        if player.extra_turns > 0:
-            betterprint(f" {player.name} has {player.extra_turns} extra turn(s) remaining!\n")
-            print("🔴" * player.extra_turns + " TURNS REMAINING\n")
-
-    
-        betterprint(f"{player.name}, what would you like to do?\n")
-        print("1) Play a card")
-        print("2) End your turn and draw a card")
-        print("3) Display your cards")
-        choice = input("")
-        if choice in ["1","2","3"]:
-            return choice
-        else:
-            print("Not an option\n")
-
-
-
-
-
-
-def draw_card(player,deck):
-    announce_private_action(player, "DRAWING A CARD")
-    card = deck.pop(0)
-    player.hand.append(card)
-    getting_card()
-    betterprint(f"You drew a {card}!!!\n")
-    sleep(2)
-    player.show_hand()
-    input("Done reading? Press Enter to move on...")
-    announce_players_can_look()
-    clear()
-    return check(player)
-
-
-def use_card(player):
-    clear()
-    betterprint("Which card would you like to use? (enter a number)\n")
-    player.show_hand()
-    while True:
-        try:
-            playerinput = int(input())
-            if 1 <= playerinput <= len(player.hand):
-                break
-            betterprint(f"Enter a number between 1 and {len(player.hand)}")
-        except ValueError:
-            betterprint(f"Enter a number between 1 and {len(player.hand)}")
-    card_selected = player.hand[playerinput - 1]
-    player.hand.pop(playerinput - 1)
-    return card_selected
-
-last_action = None
-last_action_player = None
-last_action_target = None
-favor_cancelled = False
-
-
-def card_played(card_selected, player, players, deck):
-    global last_action, last_action_player, last_action_target
-    
-    if card_selected == DEFUSE:
-        betterprint("You can't use a defuse, you didn't pull an exploding kitten...")
-        sleep(1)
-        clear()
-        return None
-    elif card_selected in CATS:
-        return cat_combos(player, players)
-    elif card_selected == ATTACK:
-        last_action = "attack"
-        last_action_player = player
-        last_action_target = None
-        announce_public_action(player, "ATTACK")
-        player.has_played_attack = True
-        return attack(player, players)
-    elif card_selected == NOPE:
-        announce_public_action(player, "NOPE")
-        return nope()
-    elif card_selected == SKIP:
-        announce_public_action(player, "SKIP")
-        player.has_played_skip = True
-        return skip(player)
-    elif card_selected == SHUFFLE:
-        announce_public_action(player, "SHUFFLE")
-        return shuffle(deck)
-    elif card_selected == FAVOR:
-        last_action = "favor"
-        last_action_player = player
-        last_action_target = None
-        announce_private_action(player, "FAVOR")
-        return favor(player, players) 
-    elif card_selected == SEE:
-        announce_private_action(player, "SEE THE FUTURE")
-        return seethefuture(deck)
-    return None
-
-
-def attack(player,players):
-    betterprint(f"{player.name} played ATTACK! Next player takes 2 turns\n")
-    sleep(1)
-    current_index = players.index(player)
-    #loops through every player starting with the next player
-    for i in range(1,len(players)):
-        #calculates index of next player (wraps around)
-        next_player = players[(current_index + i) % len(players)]
-        if next_player.alive:
-            next_player.extra_turns += 2
-            betterprint(f" {next_player.name} now has {next_player.extra_turns} total turns to take! \n")
-            break
-
-    return "attack"
-    #handle in main loop
-
-def nope():
-    global last_action, last_action_player, last_action_target, players, favor_cancelled
-    
-    if last_action is None:
-        betterprint("There's no action to NOPE!\n")
-        sleep(1)
-        return "nope_failed"
-    
-    betterprint(f"NOPE! The {last_action} by {last_action_player.name} is cancelled!\n")
-    sleep(1)
-    
-    if last_action == "attack":
-        current_index = players.index(last_action_player)
-        for i in range(1, len(players)):
-            next_player = players[(current_index + i) % len(players)]
-            if next_player.alive:
-                if next_player.extra_turns >= 2:
-                    next_player.extra_turns -= 2
-                else:
-                    next_player.extra_turns = 0
-                betterprint(f"Removed 2 extra turns from {next_player.name}\n")
-                break
-    
-    elif last_action == "favor":
-
-        favor_cancelled = True
-        betterprint("The favor has been cancelled! No cards will be stolen.\n")
-
-    
-
-    if last_action != "favor":
-        last_action = None
-        last_action_player = None
-        last_action_target = None
-    
-    return "nope_success"
-
-def skip(player):
-    betterprint(f"{player.name} used SKIP! Their turn is skipped\n")
-    sleep(1)
-    return "skipped"
-    #handle in main loop
-
-def shuffle(deck):
-    betterprint("Shuffling the deck...\n")
-    random.shuffle(deck)
-    sleep(1)
-    betterprint("Deck shuffled\n")
-    return "shuffled"
-    #should work
-
-
-def favor(current_player, players):
-    global last_action, last_action_target, favor_cancelled
-    
-    # Check if this favor was cancelled BEFORE doing anything
-    if favor_cancelled:
-        favor_cancelled = False
-        last_action = None
-        last_action_player = None
-        last_action_target = None
-        betterprint("The favor was cancelled! No cards were stolen.\n")
-        return "favor_cancelled"
-
-    target = select_target(current_player, players)
-    if target is None:
-        return "favor_failed"
-
-    last_action_target = target
-    betterprint(f"{current_player.name} is asking for a card from {target.name}!")
-
-    sleep(1)
-    clear()
-    print(f"{target.name}'s hand (only {target.name} should see this):")
-    sleep(5)
-    target.show_hand()
-
-    while True:
-        try:
-            card_input = input(f"{target.name}, which card would you give to {current_player.name}? (enter number): ")
-            card_index = int(card_input)
-            if 1 <= card_index <= len(target.hand):
-                break
-            else:
-                print(f"Invalid choice!!! Choose a number between 1 and {len(target.hand)}")
-        except ValueError:
-            print(f"Invalid choice!!! Choose a number between 1 and {len(target.hand)}")
-
-    stolen_card = target.hand.pop(card_index - 1)
-    current_player.hand.append(stolen_card)
-    clear()
-    betterprint(f"{current_player.name} has received {stolen_card} from {target.name}! \n")
-    sleep(3)
-    announce_players_can_look()
-    
-    last_action = None
-    last_action_player = None
-    last_action_target = None
-    
-    return "favor_done"
-    #should work
-
-
-def seethefuture(deck):
-    betterprint("You see the future! Here are the next three cards in the deck:\n")
-    top_cards = deck[:3]
-    for i,card in enumerate(top_cards,1):
-        print(f"{i}: {card}")
-    sleep(2)
-    input("Press enter to continue...")
-    clear()
-    announce_players_can_look()
-    return "Seen_the_future"
-    #should work
-
-def cat_combos(player,players):
-    #basically adds all cards in players hand that are in the list CATS into a new list
-    cat_cards_in_hand = [card for card in player.hand if card in CATS]
-    
-    if len(cat_cards_in_hand) <2:
-        betterprint("You don't have enough cat cards to make a combo! You need at least 2 cat cards.")
-        return "cat_failed"
-
-    cats = []
-    for cat in CATS:#stupid
-        if cat_cards_in_hand.count(cat) >= 2:
-            cats.append(cat)
-    
-    if not cats:
-        betterprint("You don't have two of the same cat cards to make a combo!!!")
-        betterprint("You have:\n")
-        for cat in CATS:
-            count = cat_cards_in_hand.count(cat)
-            if count > 0:
-                print(f"- {cat}: {count}")
-        sleep(2)
-        return "cat_failed"
-
-    betterprint("You have these cats with 2 or more copies:\n")
-
-    for i,cat in enumerate(cats,1): #not dry coding
-        count = cat_cards_in_hand.count(cat)
-        print(f"{i}: {cat} (x{count})")
-    
-    while True:
-        try:
-            choice = int(input("Choose a cat card to pair(enter number)"))
-            if 1 <= choice <= len(cats):
-                break
-            print(f"Enter a number between 1 and {len(cats)}")
-        except ValueError:
-            print(f"Enter a number between 1 and {len(cats)}")
-        
-    chosen_cat = cats[choice - 1]
-
-    removed_count = 0
-    for i in range(len(player.hand) -1, -1, -1):
-        if player.hand[i] == chosen_cat:
-            player.hand.pop(i)
-            removed_count += 1
-            if removed_count == 2:
-                break
-
-    target = select_target(player, players)
-    if target is None:
-        for i in range(2):
-            player.hand.append(chosen_cat)
-        return "cat_failed"
-    
-    announce_private_action(player, "CAT COMBO")
-    print(f"📋 {target.name}'s hand (only {player.name} should see this):")
-    sleep(3)
-    target.show_hand()
-    
-
-    while True:
-        try:
-            card = int(input(f"{target.name}, which card will you give to {player.name}? (enter number): "))
-            if 1 <= card <= len(target.hand):
-                break
-            print(f"Enter a number between 1 and {len(target.hand)}")
-        except ValueError:
-            print(f"Enter a number between 1 and {len(target.hand)}")
-    stolencard = target.hand.pop(card-1)
-    player.hand.append(stolencard)
-    betterprint(f"{player.name} stole {stolencard} from {target.name}!\n")
-    sleep(2)
-    announce_players_can_look()
-    return "cat_done"
-    
-
-
-    
-
-
-def check(player):
-    if KITTEN in player.hand:
-        betterprint("YOU PULLED AN EXPLODING KITTEN!!! 💣💣💣 \n")
-        sleep(1)
-        if DEFUSE in player.hand:
-            reply = input("You have a defuse!! Do you wanna use it? (yes or no) ")
-            if reply.lower() == "yes":
-                player.hand.remove(DEFUSE)
-                player.hand.remove(KITTEN)
-                betterprint("DEFUSE is used! You survived!")
-                return True
-            else:
-                player.hand.remove(KITTEN)
-                player.alive = False
-                betterprint(f"{player.name} has exploded 💥 , They're out of the game!!")
-                sleep(1)
-                return False
-        else:
-            player.hand.remove(KITTEN)
-            player.alive = False
-            betterprint(f"{player.name} has exploded 💥 , They're out of the game!!")
-            sleep(1)
-            return False
-    return True
-
-
-def intro():
-    clear()
-    betterprint("-Welcome to EXPLODDDINGGG KITTTEEENNNSSSS 💣💣💣-\n")
-    betterprint("Do you know how to play?? (yes or no) ")
-    play = input("")
-    if play.lower() == "yes":
-        pass
+def clear_screen():
+    # 'nt' is the internal name for Windows
+    if os.name == 'nt':
+        os.system('cls')
     else:
-        print("In this game, the goal is to be the last player standing.\n")
-        print("Each player starts with 8 cards including a defuse. \n")
-        print("""On your turn you can:
-- Draw a card (risky!)
-- Play a card with special effects:
-• ATTACK: Next player takes 2 turns
-• SKIP: End your turn without drawing
-• FAVOR: Steal a card from another player
-• SHUFFLE: Randomize the deck
-• SEE THE FUTURE: Look at top 3 cards
-• CAT CARDS: Combine to steal from others
-• NOPE: Cancel the previous action
+        os.system('clear')
 
-If you draw the EXPLODING KITTEN, you need a defuse to survive!
-Good luck and have fun!!!""")
-        sleep(5)
-        input("Done reading? Press Enter to move on...")
-        clear()
+def create_letters(letters, n):
+    wordlists = [[] for _ in range(n)]
+    for i in range(n):
+        word = wordlists[i]
+        for i in range(7):
+            random.shuffle(letters)
+            l = letters.pop()
+            word.append(l)
 
+    return wordlists
+        
+def create_board():
+    board = []
+    for i in range(15):
+        board.append("-"*61)
+        board.append("|   "*15 + "|")
+    board.append("-"*61)
+
+    return board
+
+def display_board(b):
+    # displays board with letter and numbers
+    disboard = []
+    disboard.append("     A   B   C   D   E   F   G   H   I   J   K   L   M   N   O")
+    for row in range(len(b)):
+        if row % 2 == 1:
+            front = str((row+1)//2)
+            if len(front) == 1:
+                front += "  "
+            else:
+                front += " "
+        else:
+            front = "   "
+
+        disboard.append(front + b[row]) ### play lankybox neighbourhood roleplay
+
+    for row in disboard:
+        print(row)
+
+def choose_first_player():
+    pass
+
+def update_letters(letters, p):
+    n = 7 - len(p)
+    for i in range(n):
+        random.shuffle(letters)
+        l = letters.pop()
+        p.append(l)
+    return p
+
+def is_connected_to_word(positions):
+        if not used_positions:
+            return True
+        for pos in positions:
+            if pos in used_positions:
+                return True
+            col, row = position(pos)
+            row = int(row)
+            col_ord = ord(col)
+            neighbors = [
+                f"{chr(col_ord - 1)}{row}",
+                f"{chr(col_ord + 1)}{row}",
+                f"{col}{row - 1}",
+                f"{col}{row + 1}"
+            ]
+            for neighbor in neighbors:
+                if neighbor in used_positions:
+                    return True
+        return False
+
+def position(s):
+    col = s[0]
+    row = int(s[1:])
+    return col, row
+
+def enter_letters(words, n, first, board):
+    print("Turn: Player", n)
+    tempwords = words.copy()
+    createword = []
+    temporary_position = []
+    flag = True
+
+    if first:
+        print("Place one letter in the centre position H8\n")
+
+    while flag and len(words) > 0:
+        
+
+        print("Your letters:", ", ".join(word for word in tempwords))
+
+        pp = False
+        while not pp:
+
+            line = input("Enter placement:\n> ").strip()
+            print("\n")
+            if line == "":
+                if not createword:
+                    print(Back.RED + "You must enter a letter." + Style.RESET_ALL)
+                    continue
+                flag = False
+                return createword, tempwords
+
+            place = line.split()
+            if len(place) < 2:
+                print("Enter letter and position (e.g. J B1)")
+                continue
+
+            let = place[0].upper()
+            cord = place[1].upper()
+            use_existing = len(place) >= 3
+
+            if len(cord) < 2:
+                print("Enter a valid position (e.g. B1)")
+                continue
+
+            x = cord[0]
+            y = cord[1:]
+            if x not in "ABCDEFGHIJKLMNO" or not y.isdigit() or not (1 <= int(y) <= 15):
+                print(Back.RED + f"{cord} is not a valid position!\n" + Style.RESET_ALL)
+                continue
+
+            if use_existing:
+                if cord not in used_positions:
+                    print(Back.RED + f"{cord} isn't being used!" + Style.RESET_ALL + "\n")
+                    continue
+                letter = find_letter_from_pos(cord)
+                if letter != let:
+                    print(Back.RED + f"{letter} is in position {cord}!" + Style.RESET_ALL)
+                    continue
+                else:
+                    print(f"{letter} successfully found in {cord}")
+            else:
+                if cord in used_positions:
+                    print(Back.RED + f"{cord} is in use!" + Style.RESET_ALL + "\n")
+                    continue
+                if let not in tempwords:
+                    print(Back.RED + "You don't have this letter!" + Style.RESET_ALL + "\n")
+                    continue
+                tempwords.remove(let)
+
+            createword.append([let, cord])
+            temporary_position.append(cord)
+
+
+            board_copy = copy.deepcopy(board)
+
+            board_copy = add_to_board(createword, board_copy)
+
+            display_board(board_copy)
+            
+            pp = True
+
+            con = input("Continue? (y/n): ").strip().lower()
+            print("\n")
+            if con == "n":
+                flag = False
+                if first and "H8" not in temporary_position:
+                    print("First player must place one letter in middle position H8 during the first turn")
+                    tempwords = words.copy()
+                    createword = []
+                    temporary_position = []
+                    flag = True
+                    sleep(1)
+                    print("\n")
+                    display_board(board)
+
+                    break
+
+                if not first and not is_connected_to_word(temporary_position):
+                    print(Back.RED + "Your words must be connected to others on the board!" + Style.RESET_ALL)
+                    tempwords = words.copy()
+                    createword = []
+                    temporary_position = []
+                    flag = True
+                    sleep(1)
+                    print("\n")
+                    display_board(board)
+
+                    break
+
+                return createword, tempwords
+
+    return createword, tempwords
+
+
+def check_valid(letters): # input [['E', 'B1'], ['T', 'C1'], ['I', 'D1'], ['D', 'E1’]]
+    cord = letters[0][1]
+    ref_column = cord[0] # letter
+    ref_row = cord[1:] # number
+    same_row = True
+    same_column = True
+
+    for pos in letters:
+        if ref_column != pos[1][0]: # row
+            same_row = False
+        if ref_row != pos[1][1:]: # column
+            same_column = False
+
+    if same_row or same_column:
+        if same_row:
+            return True, True
+        else:
+            return True, False
+    else:
+        print(Back.RED + "Word positions not valid! Try again" + Style.RESET_ALL)
+        return False, False
+
+def check_adjacent(words, ori):
+    lettter_list = []
+    valid = True
+
+    for set in words:
+        pos = set[1]
+
+        if ori:
+            lettter_list.append(pos[1:])
+        else:
+            lettter_list.append(pos[0])
+
+
+    for i in range(len(lettter_list)):
+        if ori:
+            x = int(lettter_list[i]) ## numbers increase
+            y = i + int(lettter_list[0])
+        else:
+            x = ord(lettter_list[i])
+            y = i + ord(lettter_list[0])  ## letters increase
+
+        if x != y:
+            valid = False
+                
+    return valid
+
+def position(s):
+    col = s[0]
+    row = int(s[1:])
+    return col, row
+
+
+def check_word(ori, words): ## bubble sort
+    n = len(words)
+    for i in range(n):
+        for i in range(n - 1):
+            c1, r1 = position(words[i][1])
+            c2, r2 = position(words[i + 1][1])
+
+            if ori:  # same column -> sort by row number
+                if r1 > r2:
+                    words[i], words[i+1] = words[i+1], words[i]
+            else:    # same row -> sort by column letter
+                if c1 > c2:
+                    words[i], words[i+1] = words[i+1], words[i]
+
+    valid = check_adjacent(words, ori)
+    if not valid:
+        print(Back.RED + "Letters are not adjacent" + Style.RESET_ALL)
+    return valid
+
+
+def check_possible_word(words):
+    final_word = ""
+    for let in words:
+        final_word += let[0][0]
+    try:
+        word = client.fetch_word(final_word)
+    except:
+        return False, final_word, words
+    else:
+        return True, final_word, words
+    
+
+def add_to_board(pos, board):
+    for set in pos:
+        l = set[1][0]
+        n = set[1][1:]
+
+        target_index = 2 + (ord(l) - ord("A")) * 4
+        
+        row = board[2*int(n)-1]
+        
+        row = row[:target_index] + set[0] + row[target_index+1:]
+        
+        board[2*int(n)-1] = row
+        
+    return board
+
+def player_first_turn():
+    pass
+
+def display_score(score):
+    print("Score")
+    for i in range(len(score)):
+        print(f"Player {i+1}: {score[i]}")
+    print("\n")
+
+def introduction():
+    print("WELCOME TO SCRABBLE!!")
+
+    while True:
+        try:
+            players = int(input("Enter number of players (1-4): "))
+            if players <= 4 and players >= 1:
+                break
+            else:
+                print("Please enter valid number of numbers from 1-4")
+        except ValueError:
+            print("Please enter valid number of numbers from 1-4")
+
+    sleep(1)
+
+    clear_screen()
+
+    print("\nEnter turn with letter and position of letter (e.g. J B1)")
+    print("Enter in this format to extend a word with a letter already on the board (J B1 x)")
+    print("Press enter to stop entering letters\n")
+
+    # sleep(3)
+
+    # print("Colour multiplier:")
+    # print(Back.RED + "-" + Style.RESET_ALL + " 3x word score")
+    # print(Back.YELLOW + "-" + Style.RESET_ALL + " 2x word score")
+    # print(Back.BLUE + "-" + Style.RESET_ALL + " 3x letter score")
+    # print(Back.CYAN + "-" + Style.RESET_ALL + " 2x letter score\n")
+
+    sleep(3)
+    
+    return players
+
+def calculate_score(word, p, s):
+    score = s
+    for let in word:
+        for i in p:
+            if let in p[i]:
+                score += i
+    return score
+
+def create_variables(n):
+    score = [0 for _ in range(n)]
+    round = 1
+    count = 1
+
+    return score, round, count
+
+def find_letter_from_pos(cord):
+    for i in range(len(used_letter_and_positions)):
+        set = used_letter_and_positions[i]
+        if set[1] == cord:
+            return set[0]
+
+def taken_positions(wordslist):
+    for set in wordslist:
+        used_positions.append(set[1])
+
+def store_letter_and_positions(wordslist):
+    for set in wordslist:
+        used_letter_and_positions.append(set)
+
+
+ascii_logo = """⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀
+⡀⡀⡀⡀⡀⡀⢀⣠⣤⣄⣀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⣀⣤⣤⣄⣀⡀⡀⡀⡀⡀⡀⡀⣀⣀⣀⣀⣀⣀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⣀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⢀⣀⣀⣀⣀⣀⣀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⣀⣀⣀⣀⣀⣀⣀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⣀⣀⣀⣀⣀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⢀⣀⣀⣀⣀⣀⣀⣀⣀⣀⡀⡀⡀⡀⡀
+⡀⡀⡀⡀⡀⣾⠋⡀⡀⡀⢹⣿⡀⡀⡀⡀⡀⡀⡀⡀⡀⢀⣾⠟⠁⡀⡀⡀⠈⣿⡀⡀⡀⡀⡀⡀⡀⢸⣿⡀⡀⡀⠈⠻⣷⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⢰⣿⡆⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⣿⣿⡀⡀⡀⠙⣿⡄⡀⡀⡀⡀⡀⡀⡀⡀⡀⣿⡇⡀⡀⠈⠻⣷⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⢸⣿⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⣿⣿⡀⡀⡀⡀⡀⣿⡀⡀⡀⡀⡀
+⡀⡀⡀⡀⢸⣿⡀⡀⡀⡀⡀⠟⡀⡀⡀⡀⡀⡀⡀⡀⢠⣿⠃⡀⡀⡀⡀⡀⡀⣿⡀⡀⡀⡀⡀⡀⡀⢸⣿⡀⡀⡀⡀⡀⣿⡇⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡏⠸⣿⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⣿⣿⡀⡀⡀⡀⢸⣿⡀⡀⡀⡀⡀⡀⡀⡀⡀⣿⡇⡀⡀⡀⡀⣿⡇⡀⡀⡀⡀⡀⡀⡀⡀⡀⢸⣿⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⣿⣿⡀⡀⡀⡀⡀⠿⡀⡀⡀⡀⡀
+⡀⡀⡀⡀⠈⣿⣦⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⣿⡟⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⢸⣿⡀⡀⡀⡀⢀⣿⠃⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⣸⡀⡀⣿⣇⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⣿⣿⡀⡀⡀⢀⣿⠋⡀⡀⡀⡀⡀⡀⡀⡀⡀⣿⡇⡀⡀⡀⣠⣿⠁⡀⡀⡀⡀⡀⡀⡀⡀⡀⢸⣿⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⣿⣿⡀⡀⡀⣶⡀⡀⡀⡀⡀⡀⡀
+⡀⡀⡀⡀⡀⡀⠛⢿⣿⣶⣄⡀⡀⡀⡀⡀⡀⡀⡀⡀⣿⡇⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⢸⣿⣤⣤⣤⣶⠛⠁⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡏⡀⡀⠘⣿⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⣿⣿⠶⠶⠿⣭⣀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⣿⡷⠶⠶⠿⣥⣀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⢸⣿⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⣿⣿⠶⠶⠶⣿⡀⡀⡀⡀⡀⡀⡀
+⡀⡀⡀⡀⡀⡀⡀⡀⡀⠙⢿⣷⡀⡀⡀⡀⡀⡀⡀⡀⣿⣇⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⢸⣿⡀⡀⡀⠙⣿⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⣼⣤⣤⣤⣤⣿⣧⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⣿⣿⡀⡀⡀⡀⠙⣿⡄⡀⡀⡀⡀⡀⡀⡀⡀⣿⡇⡀⡀⡀⡀⢻⣷⡀⡀⡀⡀⡀⡀⡀⡀⡀⢸⣿⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⣿⣿⡀⡀⡀⣿⡀⡀⡀⡀⡀⡀⡀
+⡀⡀⡀⡀⣤⡀⡀⡀⡀⡀⡀⣿⡆⡀⡀⡀⡀⡀⡀⡀⠹⣿⡀⡀⡀⡀⡀⡀⡀⣰⡀⡀⡀⡀⡀⡀⡀⢸⣿⡀⡀⡀⡀⢿⣷⡀⡀⡀⡀⡀⡀⡀⡀⡀⢀⠇⡀⡀⡀⡀⠘⣿⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⣿⣿⡀⡀⡀⡀⡀⣿⡇⡀⡀⡀⡀⡀⡀⡀⡀⣿⡇⡀⡀⡀⡀⢠⣿⡀⡀⡀⡀⡀⡀⡀⡀⡀⢸⣿⡀⡀⡀⡀⡀⢠⡀⡀⡀⡀⡀⡀⡀⡀⡀⣿⣿⡀⡀⡀⡀⡀⢠⡀⡀⡀⡀⡀
+⡀⡀⡀⡀⣿⡀⡀⡀⡀⡀⣠⡿⡀⡀⡀⡀⡀⡀⡀⡀⡀⠹⣿⣀⡀⡀⡀⡀⡀⣿⡀⡀⡀⡀⡀⡀⡀⢸⣿⡀⡀⡀⡀⠘⣿⡀⡀⡀⡀⡀⡀⡀⡀⡀⣾⡀⡀⡀⡀⡀⡀⢿⣷⡀⡀⡀⡀⡀⡀⡀⡀⡀⣿⣿⡀⡀⡀⡀⣴⡿⡀⡀⡀⡀⡀⡀⡀⡀⡀⣿⡇⡀⡀⡀⢀⣾⠟⡀⡀⡀⡀⡀⡀⡀⡀⡀⢸⣿⡀⡀⡀⡀⡀⣿⡀⡀⡀⡀⡀⡀⡀⡀⡀⣿⣿⡀⡀⡀⡀⡀⣾⡀⡀⡀⡀⡀
+⡀⡀⡀⡀⠈⠛⠳⠶⠶⠛⠉⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⠉⠛⠶⠶⠶⠛⠉⡀⡀⡀⡀⡀⡀⠛⠛⠛⠛⠛⡀⡀⡀⠙⠛⠛⡀⡀⡀⡀⡀⠘⠛⠛⠛⠂⡀⡀⠐⠛⠛⠛⠛⠛⡀⡀⡀⡀⡀⠘⠛⠛⠛⠛⠛⠛⠋⠁⡀⡀⡀⡀⡀⡀⡀⡀⠛⠛⠛⠛⠛⠛⠛⠉⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⠛⠛⠛⠛⠛⠛⠛⠛⠛⡀⡀⡀⡀⡀⡀⡀⠘⠛⠛⠛⠛⠛⠛⠛⠛⠛⡀⡀⡀⡀⡀
+⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀⡀
+""".splitlines()
+
+def logo_animation(logo):
+    word_list = []
+    for i in range(8):
+        letter_list = []
+        for line in logo:
+            pos = i * 17
+            letter_list.append(line[pos:pos+16])
+        word_list.append(letter_list)
+
+    master_canvas = [[" " * 16 for _ in range(8)] for _ in range(11)]
+
+    for index, letter in enumerate(word_list):
+        x = 1
+        for step in range(11):
+
+            temp_frame = [" " * 16 for _ in range(11)]
+            
+            for i in range(step + 1):
+                temp_frame[i] = letter[i + (10 - step)]
+                
+            for r in range(11):
+                master_canvas[r][index] = temp_frame[r]
+                
+            clear_screen()
+            for row in master_canvas:
+                print(" ".join(row))
+                
+            sleep(0.05/x)
+            x = x * 1.4
 
 def main():
-    current = 0
-    intro()
-    while True:
-        try:
-            numplayer = int(input("How many players are there? (2-4)  "))
-            if 2<= numplayer <= 4:
-                break
-        except ValueError:
-            print("Invalid input! please enter a number")
-    for i in range(numplayer):
-        name = input(f"Player {i+1}, what should I call you?  ")
-        players.append(Player(name))
-    clear()
-    
-    deck = create_deck()
-    deal_card(players,deck)
-    show_cards()
 
-    #add exploding kittens to deck after players recieved cards 
-    for i in range(numplayer-1):
-        deck.append(KITTEN)
-    random.shuffle(deck)
+    logo_animation(ascii_logo)
+    print()
 
+    sleep(0.5)
+    plr_num = introduction()
+    board = create_board()
+    plr_letters = create_letters(aval_letters, plr_num)
+    score, round, count = create_variables(plr_num)
 
-    while sum(player.alive for player in players) > 1:
-        player = players[current]
+    # print(score)
 
-        if not player.alive:
-            current = (current + 1) % len(players)
-            continue
-            
-        player.has_played_attack = False
-        player.has_played_skip = False
+    while len(aval_letters) > 0:
 
-        if player.extra_turns > 0:
-            betterprint(f"🔴🔴🔴 {player.name} has {player.extra_turns} turn(s) remaining! 🔴🔴🔴\n")
-            sleep(1)
+        p_letters = plr_letters[count-1]
+        p_score = score[count-1]
 
+        display_board(board)
+        display_score(score)
 
-        turn_ended = False
+        sleep(1)
 
-        while not turn_ended:
-            choice = player_turn(player)
-            if choice == "1":
-                card_selected = use_card(player)
-                if card_selected:
-                    result = card_played(card_selected,player,players,deck)
-                    if result == "skipped":
-                        betterprint(f"{player.name}'s turn is over!\n")
-                        sleep(2)
-                        turn_ended = True
-                        break
-                    elif result == "attack":
-                        betterprint(f"{player.name}'s turn is over!\n")
-                        sleep(2)
-                        turn_ended = True
-                        attack_played = True
-                        break
-                    elif result == "nope_success":
-                        betterprint("The action was cancelled by NOPE!\n")
-                        sleep(1)
-                        break
-
-                    elif result =="nope_failed":
-                        continue
-
-                    elif result == "favor_cancelled":
-                        betterprint("The favor was cancelled!\n")
-                        sleep(1)
-                        continue
-
-                    else:
-                        betterprint("You can play another card or end your turn!\n")
-                        sleep(1)
-                        continue
-                else:
-                    continue
-        
-            elif choice == "2":
-                betterprint(f"{player.name} ends their turn and draws a card!\n")
-                if draw_card(player,deck) == False:
-                    turn_ended = True
-                    break
-                else:
-                    turn_ended = True
-                    break
-
-            elif choice == "3":
-                player.show_hand()
-                input("Done reading? Press Enter to move on...")
-                clear()
+        print("Round:", round)
+        valid, ori = False, False ## valid determines whether it is valid, ori detemines orientation of word
+        while not (valid or ori):
+            first_turn = False
+            if round == 1 and count == 1:
+                first_turn = True
+            letter_pos, wordsleft = enter_letters(p_letters, count, first_turn, board)
+            valid, ori = check_valid(letter_pos) ## checks if entered positions are valid
+            if not valid:
                 continue
 
-        if player.extra_turns > 0:
-            player.extra_turns -= 1
-            if player.extra_turns > 0:
+            valid1 = check_word(ori, letter_pos) ## checks if adjacent
+            # print("v1", valid1)
 
-                betterprint(f"🔄 {player.name} has {player.extra_turns} turn(s) remaining!\n")
-                sleep(1)
-                continue
+            valid2, word, letter_pos = check_possible_word(letter_pos)
+            # print("v2", valid2)
+
+            if valid1 and valid2:
+                taken_positions(letter_pos)
+                store_letter_and_positions(letter_pos)
+                # print(used_positions)
+                board = add_to_board(letter_pos, board)
+                display_board(board)
+                print("Word found: "+ word, "\n")
+                sleep(2)
             else:
+                if not valid1:
+                    print(Back.RED + f"The word '{word}' was not found" + Style.RESET_ALL)
+                
+                print()
+                display_board(board)
+                
+                valid, ori = False, False
 
-                current = (current + 1) % len(players)
-                while not players[current].alive:
-                    current = (current + 1) % len(players)
+        score[count-1] = calculate_score(word, points, p_score)
+        plr_letters[count-1] = update_letters(aval_letters, wordsleft)
+
+        if count == plr_num: ## check if all players have gone
+            count = 1
+            round += 1
         else:
-            current = (current + 1) % len(players)
-            while not players[current].alive:
-                current = (current + 1) % len(players)
-        last_action = None
-        last_action_player = None
-        last_action_target = None
+            count += 1
 
-    for player in players:
-        if player.alive:
-            betterprint(f"\n🏆 {player.name} is the winner!!! 🏆\n")
-            break
+    high_score = max(score)
+    position = score.index(high_score)
+    print(f"Player {position + 1} won with the score of {high_score}!")
+
+# # x = False
+# y = [['E', 'B1'], ['T', 'C1'], ['I', 'D1'], ['D', 'E1']]
+# # a, b = check_word(x, y)
+# # print(a, b) 
+
 main()
-        
-
-    
