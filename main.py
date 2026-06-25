@@ -70,7 +70,7 @@ def display_logo():
  ▒▒█████████  █████   █████▒▒█████████  █████ █████  ▒▒█████ ▒▒▒███████▒  
   ▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒   ▒▒▒▒▒  ▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒ ▒▒▒▒▒    ▒▒▒▒▒    ▒▒▒▒▒▒▒    
 
-*Actually just blackjack for now
+*Actually just blackjack and roulette for now
 
 CTRL-C to skip animation             CTRL-C to skip animation                      
 """
